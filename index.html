@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asscontal Assessoria Contábil</title>
+  <meta name="description" content="Tradição, inovação e responsabilidade desde 1971. Assessoria Contábil completa para sua empresa.">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="images/fundo-azul-128x128.png" type="image/x-icon">
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts (Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #0b2545;
+      --secondary-color: #134074;
+      --accent-color: #0077b6;
+      --accent-hover: #0096c7;
+      --text-main: #1d2d44;
+      --text-muted: #6c757d;
+      --bg-light: #f8f9fa;
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-main);
+      background-color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    /* Header & Navigation */
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+      padding: 0.8rem 0;
+      transition: var(--transition-smooth);
+    }
+
+    .navbar-brand img {
+      height: 70px;
+      width: auto;
+      object-fit: contain;
+      transition: var(--transition-smooth);
+    }
+
+    @media (max-width: 576px) {
+      .navbar-brand img {
+        height: 55px;
+      }
+    }
+
+    .nav-link {
+      color: var(--text-main) !important;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem !important;
+      transition: var(--transition-smooth);
+    }
+
+    .nav-link:hover, .nav-link:focus {
+      color: var(--accent-color) !important;
+    }
+
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 0.75rem;
+    }
+
+    .dropdown-item {
+      font-size: 0.9rem;
+      border-radius: 8px;
+      padding: 0.6rem 1rem;
+      color: var(--text-main);
+      font-weight: 450;
+      transition: var(--transition-smooth);
+    }
+
+    .dropdown-item:hover {
+      background-color: #f0f4f8;
+      color: var(--accent-color);
+      transform: translateX(3px);
+    }
+
+    /* Hero Banner Section com fundo de imagem */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(11, 37, 69, 0.88) 0%, rgba(19, 64, 116, 0.88) 100%), url('images/background3.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #ffffff;
+      padding: 5rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-title {
+      font-weight: 800;
+      font-size: 2.5rem;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      opacity: 0.95;
+      font-weight: 300;
+    }
+
+    .btn-hero {
+      background-color: #ffffff;
+      color: var(--primary-color);
+      font-weight: 700;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      transition: var(--transition-smooth);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-hero:hover {
+      background-color: var(--accent-hover);
+      color: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    /* Portal Access Cards */
+    .portal-section {
+      padding: 4rem 0;
+      background-color: var(--bg-light);
+    }
+
+    .portal-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid #eef2f6;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .portal-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--card-shadow);
+      border-color: transparent;
+    }
+
+    .portal-img-wrapper {
+      height: 220px;
+      overflow: hidden;
+      background-color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .portal-img-wrapper img,
+    .portal-img-wrapper svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .portal-card:hover .portal-img-wrapper img,
+    .portal-card:hover .portal-img-wrapper svg {
+      transform: scale(1.05);
+    }
+
+    .portal-body {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .portal-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .portal-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      flex-grow: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-custom {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 0.65rem 1.25rem;
+      transition: var(--transition-smooth);
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-custom:hover {
+      background-color: var(--accent-color);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* Specialties Grid */
+    .specialties-section {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+      text-align: center;
+    }
+
+    .section-header h2 {
+      font-weight: 800;
+      color: var(--primary-color);
+      font-size: 2rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .specialty-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid #eef2f6;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      transition: var(--transition-smooth);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .specialty-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--card-shadow);
+      border-color: transparent;
+    }
+
+    .specialty-img {
+      height: 180px;
+      width: 100%;
+    }
+
+    .specialty-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .specialty-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.75rem;
+    }
+
+    .specialty-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      flex-grow: 1;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Services Pills */
+    .services-section {
+      background-color: var(--bg-light);
+      padding: 4.5rem 0;
+    }
+
+    .service-box {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: var(--transition-smooth);
+      height: 100%;
+      border: 1px solid #eef2f6;
+    }
+
+    .service-box:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-shadow);
+      border-color: transparent;
+    }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #e8f1f9;
+      color: var(--accent-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+      transition: var(--transition-smooth);
+    }
+
+    .service-box:hover .service-icon {
+      background: var(--accent-color);
+      color: #ffffff;
+    }
+
+    .service-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--primary-color);
+      margin: 0;
+    }
+
+    /* Footer / Socials */
+    footer {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      padding: 3rem 0;
+    }
+
+    .social-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin: 0 8px;
+      transition: var(--transition-smooth);
+      text-decoration: none;
+    }
+
+    .social-btn:hover {
+      background: var(--accent-color);
+      color: #ffffff;
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="https://asscontal.com.br">
+        <img src="images/logo-2019-190x105.png" alt="Asscontal Assessoria Contábil">
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Alternar navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link active" href="https://asscontal.com.br">Principal</a>
+          </li>
+
+          <!-- Dropdown Serviços -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="servicosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Serviços
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="servicosDropdown">
+              <li><a class="dropdown-item" href="https://online.asscontal.com.br/intranet/rdnae.html" target="_blank"><i class="fa-solid fa-user-plus me-2 text-primary"></i>Admissão de Empregados</a></li>
+              <li><a class="dropdown-item" href="https://sal.rfb.gov.br/PortalSalInternet/faces/pages/index.xhtml" target="_blank"><i class="fa-solid fa-calculator me-2 text-primary"></i>Cálculo de INSS</a></li>
+              <li><a class="dropdown-item" href="https://online.asscontal.com.br/intranet/nfse/nfse.html" target="_blank"><i class="fa-solid fa-file-invoice me-2 text-primary"></i>NF de Prestação de Serviços</a></li>
+              <li><a class="dropdown-item" href="https://sicalc.receita.economia.gov.br/sicalc/principal" target="_blank"><i class="fa-solid fa-globe me-2 text-primary"></i>Sicalc Online</a></li>
+              <li><a class="dropdown-item" href="http://www.sintegra.gov.br/" target="_blank"><i class="fa-solid fa-network-wired me-2 text-primary"></i>Sintegra</a></li>
+            </ul>
+          </li>
+
+          <!-- Dropdown Consultas -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="consultasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Consultas
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="consultasDropdown">
+              <li><a class="dropdown-item" href="https://concla.ibge.gov.br/estrutura/ocupacao-estrutura" target="_blank">CBO (Ocupações)</a></li>
+              <li><a class="dropdown-item" href="https://online.asscontal.com.br/intranet/certidoes/index.html" target="_blank">Certidões Negativas (CND)</a></li>
+              <li><a class="dropdown-item" href="https://www.freenfe.com.br/busca-de-cfop/" target="_blank">Busca de CFOP</a></li>
+              <li><a class="dropdown-item" href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm" target="_blank">CLT (Legislação Trabalhista)</a></li>
+              <li><a class="dropdown-item" href="https://online.asscontal.com.br/index.php/s/rCxA2r7tczjkJSj" target="_blank">Convenções Coletivas</a></li>
+              <li><a class="dropdown-item" href="https://www.planalto.gov.br/ccivil_03/leis/l8078.htm" target="_blank">Código Defesa do Consumidor</a></li>
+              <li><a class="dropdown-item" href="https://servicos.receita.fazenda.gov.br/Servicos/CPF/ConsultaSituacao/ConsultaPublica.asp" target="_blank">Consulta Situação CPF</a></li>
+              <li><a class="dropdown-item" href="http://www4.planalto.gov.br/legislacao/" target="_blank">Legislação Brasileira</a></li>
+              <li><a class="dropdown-item" href="https://portalunico.siscomex.gov.br/classif/#/sumario?perfil=publico" target="_blank">Consulta NCM</a></li>
+              <li><a class="dropdown-item" href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/formularios" target="_blank">Formulários Receita Federal</a></li>
+              <li><a class="dropdown-item" href="https://www.planalto.gov.br/ccivil_03/decreto/2002/D4544.htm" target="_blank">Regulamento IPI</a></li>
+              <li><a class="dropdown-item" href="https://www.gov.br/receitafederal/pt-br/acesso-a-informacao/legislacao/documentos-e-arquivos/tipi.pdf" target="_blank">Tabela TIPI</a></li>
+            </ul>
+          </li>
+
+          <!-- Dropdown Downloads -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="downloadsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Downloads
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="downloadsDropdown">
+              <li><a class="dropdown-item" href="https://online.asscontal.com.br/index.php/s/6B5A2xfFD4jxgZk" target="_blank"><i class="fa-solid fa-file-pdf me-2 text-primary"></i>Cartazes Informativos</a></li>
+              <li><a class="dropdown-item" href="https://anydesk.com/pt/downloads/windows?os=win" target="_blank"><i class="fa-solid fa-desktop me-2 text-primary"></i>AnyDesk (Suporte Remoto)</a></li>
+              <li><a class="dropdown-item" href="https://sebrae.com.br/sites/PortalSebrae/produtoseservicos/emissornfe" target="_blank"><i class="fa-solid fa-receipt me-2 text-primary"></i>Emissor de NFe Gratuito</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link ms-lg-2 btn btn-outline-primary px-3 rounded-pill" href="contato.html">Contato</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PORTALS / ACCESS CARDS SECTION -->
+  <section class="portal-section">
+    <div class="container">
+      <div class="row g-4">
+        
+        <!-- Área do Cliente -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="portal-card">
+            <div class="portal-img-wrapper">
+              <img src="images/cliente-500x500.png" alt="Área do Cliente Asscontal">
+            </div>
+            <div class="portal-body">
+              <h3 class="portal-title">Área do Cliente</h3>
+              <p class="portal-text">Canal Exclusivo para Clientes e Parceiros. Acesse documentos, solicitações e relatórios em tempo real.</p>
+              <a href="https://online.asscontal.com.br" class="btn-custom" target="_blank">
+                Acesse aqui <i class="fa-solid fa-arrow-right ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portal do Colaborador -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="portal-card">
+            <div class="portal-img-wrapper">
+              <img src="images/athenas-site-500x500.png" alt="Portal do Colaborador Athenas">
+            </div>
+            <div class="portal-body">
+              <h3 class="portal-title">Portal do Colaborador</h3>
+              <p class="portal-text">Imprima seu contra-cheque e informe de rendimento anual. Exclusivo para colaboradores de clientes.</p>
+              <a href="https://asscontal.athenas.online" class="btn-custom" target="_blank">
+                Acesse aqui <i class="fa-solid fa-arrow-right ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog (SVG Ilustrativo Vetorial 100% Embutido) -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="portal-card">
+            <div class="portal-img-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+                <defs>
+                  <linearGradient id="bgBlog" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#0077b6"/>
+                    <stop offset="100%" stop-color="#0b2545"/>
+                  </linearGradient>
+                  <linearGradient id="accentG" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#00b4d8"/>
+                    <stop offset="100%" stop-color="#90e0ef"/>
+                  </linearGradient>
+                </defs>
+
+                <rect width="500" height="500" fill="url(#bgBlog)"/>
+                <circle cx="70" cy="90" r="90" fill="#ffffff" opacity="0.05"/>
+                <circle cx="430" cy="410" r="110" fill="#ffffff" opacity="0.05"/>
+
+                <!-- Tablet / Document Container -->
+                <rect x="70" y="70" width="360" height="360" rx="20" fill="#ffffff"/>
+                <path d="M 70 90 A 20 20 0 0 1 90 70 L 410 70 A 20 20 0 0 1 430 90 L 430 200 L 70 200 Z" fill="#f0f4f8"/>
+                
+                <!-- Post Card Preview -->
+                <rect x="110" y="95" width="280" height="85" rx="10" fill="#ffffff"/>
+                <rect x="130" y="115" width="100" height="12" rx="6" fill="#0b2545"/>
+                <rect x="130" y="135" width="160" height="8" rx="4" fill="#94a3b8"/>
+                <rect x="130" y="149" width="130" height="8" rx="4" fill="#cbd5e1"/>
+                
+                <rect x="305" y="113" width="65" height="20" rx="10" fill="#0077b6"/>
+                <text x="337" y="127" font-family="'Inter', sans-serif" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">BLOG</text>
+
+                <!-- Lines of Article Content -->
+                <rect x="100" y="230" width="260" height="16" rx="8" fill="#0b2545"/>
+                <rect x="100" y="256" width="170" height="16" rx="8" fill="#0b2545"/>
+
+                <!-- Author Tag -->
+                <circle cx="112" cy="298" r="12" fill="#0077b6"/>
+                <rect x="134" y="291" width="90" height="8" rx="4" fill="#64748b"/>
+                <rect x="134" y="303" width="50" height="6" rx="3" fill="#94a3b8"/>
+
+                <!-- Paragraph Lines -->
+                <rect x="100" y="330" width="300" height="8" rx="4" fill="#cbd5e1"/>
+                <rect x="100" y="346" width="280" height="8" rx="4" fill="#cbd5e1"/>
+                <rect x="100" y="362" width="220" height="8" rx="4" fill="#cbd5e1"/>
+
+                <!-- Lightbulb Badge -->
+                <circle cx="375" cy="260" r="30" fill="url(#accentG)"/>
+                <path d="M 365 253 C 365 247, 385 247, 385 253 C 385 262, 378 260, 375 267 H 375 V 270" stroke="#0b2545" stroke-width="3" stroke-linecap="round" fill="none"/>
+                <circle cx="375" cy="275" r="2" fill="#0b2545"/>
+              </svg>
+            </div>
+            <div class="portal-body">
+              <h3 class="portal-title">Blog Asscontal</h3>
+              <p class="portal-text">Confira notícias, novidades tributárias, trabalhistas e dicas estratégicas para a sua empresa.</p>
+              <a href="https://asscontal.com.br/blog/" class="btn-custom" target="_blank">
+                Acesse aqui <i class="fa-solid fa-arrow-right ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="hero-banner text-center">
+    <div class="container position-relative" style="z-index: 2;">
+      <h2 class="hero-title mb-3">Procurando soluções para sua empresa?</h2>
+      <p class="hero-subtitle mb-4">Podemos te ajudar! Tradição, inovação e responsabilidade técnica a seu serviço.</p>
+      <a href="https://linkme.bio/asscontal/" class="btn btn-hero" target="_blank">
+        <i class="fa-solid fa-comments me-2"></i> Fale com Nossos Especialistas
+      </a>
+    </div>
+  </section>
+
+  <!-- SPECIALTIES SECTION -->
+  <section class="specialties-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Somos Especialistas nas Seguintes Áreas</h2>
+        <p>Atendimento consultivo e focado no crescimento sustentável do seu segmento</p>
+      </div>
+
+      <div class="row g-4">
+        
+        <!-- Item 1 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="specialty-card">
+            <svg viewBox="0 0 400 220" class="specialty-img">
+              <rect width="400" height="220" fill="#f1f5f9"/>
+              <rect x="140" y="40" width="120" height="140" rx="8" fill="#0b2545" opacity="0.8"/>
+              <path d="M170 80 L230 80 M170 110 L230 110 M170 140 L210 140" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <div class="specialty-body">
+              <h3 class="specialty-title">Contabilidade para Confecções</h3>
+              <p class="specialty-text">Dedique-se ao seu processo produtivo e deixe a burocracia fiscal e contábil conosco.</p>
+              <a href="https://linkme.bio/asscontal/" target="_blank" class="text-primary font-weight-bold text-decoration-none">
+                Saiba mais <i class="fa-solid fa-chevron-right ms-1 text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="specialty-card">
+            <svg viewBox="0 0 400 220" class="specialty-img">
+              <rect width="400" height="220" fill="#f1f5f9"/>
+              <path d="M120 160 L160 80 L200 160 M200 160 L240 100 L280 160" stroke="#134074" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            <div class="specialty-body">
+              <h3 class="specialty-title">Contabilidade para Comércio</h3>
+              <p class="specialty-text">Ajudamos você a dar uma nova direção e máxima eficiência à gestão tributária do seu comércio.</p>
+              <a href="https://linkme.bio/asscontal/" target="_blank" class="text-primary font-weight-bold text-decoration-none">
+                Saiba mais <i class="fa-solid fa-chevron-right ms-1 text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="specialty-card">
+            <svg viewBox="0 0 400 220" class="specialty-img">
+              <rect width="400" height="220" fill="#f1f5f9"/>
+              <circle cx="200" cy="110" r="45" fill="#0077b6" opacity="0.15"/>
+              <path d="M200 80 L200 140 M170 110 L230 110" stroke="#0077b6" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+            <div class="specialty-body">
+              <h3 class="specialty-title">Contabilidade para Consultórios</h3>
+              <p class="specialty-text">Cuidamos da gestão contábil da sua clínica para que você cuide dos seus pacientes com tranquilidade.</p>
+              <a href="https://linkme.bio/asscontal/" target="_blank" class="text-primary font-weight-bold text-decoration-none">
+                Saiba mais <i class="fa-solid fa-chevron-right ms-1 text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="specialty-card">
+            <svg viewBox="0 0 400 220" class="specialty-img">
+              <rect width="400" height="220" fill="#f1f5f9"/>
+              <rect x="150" y="60" width="100" height="100" rx="10" fill="#0b2545" opacity="0.1"/>
+              <path d="M170 110 L190 130 L230 90" stroke="#0b2545" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            <div class="specialty-body">
+              <h3 class="specialty-title">Prestadores de Serviço</h3>
+              <p class="specialty-text">Especialistas preparados para gerenciar impostos, faturamento e obrigações do seu negócio.</p>
+              <a href="https://linkme.bio/asscontal/" target="_blank" class="text-primary font-weight-bold text-decoration-none">
+                Saiba mais <i class="fa-solid fa-chevron-right ms-1 text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="specialty-card">
+            <svg viewBox="0 0 400 220" class="specialty-img">
+              <rect width="400" height="220" fill="#f1f5f9"/>
+              <circle cx="170" cy="110" r="30" fill="#134074" opacity="0.3"/>
+              <circle cx="230" cy="110" r="30" fill="#0077b6" opacity="0.3"/>
+            </svg>
+            <div class="specialty-body">
+              <h3 class="specialty-title">Contabilidade para Cooperativas</h3>
+              <p class="specialty-text">Extensa experiência e conhecimento técnico aprofundado no ramo cooperativista.</p>
+              <a href="https://linkme.bio/asscontal/" target="_blank" class="text-primary font-weight-bold text-decoration-none">
+                Saiba mais <i class="fa-solid fa-chevron-right ms-1 text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="specialty-card">
+            <svg viewBox="0 0 400 220" class="specialty-img">
+              <rect width="400" height="220" fill="#f1f5f9"/>
+              <rect x="140" y="70" width="120" height="80" rx="8" fill="#0077b6" opacity="0.2"/>
+              <circle cx="200" cy="110" r="18" fill="#0077b6"/>
+            </svg>
+            <div class="specialty-body">
+              <h3 class="specialty-title">Contabilidade para MEI</h3>
+              <p class="specialty-text">Ajudamos você a estruturar seu crescimento empresarial com suporte contábil especializado.</p>
+              <a href="https://linkme.bio/asscontal/" target="_blank" class="text-primary font-weight-bold text-decoration-none">
+                Saiba mais <i class="fa-solid fa-chevron-right ms-1 text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES OVERVIEW -->
+  <section class="services-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Nossos Serviços</h2>
+        <p>Soluções completas e integradas para todas as fases da sua empresa</p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="service-box">
+            <div class="service-icon">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h4 class="service-title">Serviços Contábeis</h4>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="service-box">
+            <div class="service-icon">
+              <i class="fa-solid fa-file-pen"></i>
+            </div>
+            <h4 class="service-title">Serviços Fiscais</h4>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="service-box">
+            <div class="service-icon">
+              <i class="fa-solid fa-users-gears"></i>
+            </div>
+            <h4 class="service-title">Departamento Pessoal</h4>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="service-box">
+            <div class="service-icon">
+              <i class="fa-solid fa-building-circle-check"></i>
+            </div>
+            <h4 class="service-title">Legalização Empresas</h4>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="service-box">
+            <div class="service-icon">
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <h4 class="service-title">Consultoria</h4>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="text-center">
+    <div class="container">
+      <h3 class="fw-bold mb-4">Siga-nos nas Redes Sociais</h3>
+      <div class="d-flex justify-content-center mb-4">
+        <a class="social-btn" href="https://www.facebook.com/asscontal" target="_blank" title="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a class="social-btn" href="https://www.linkedin.com/in/asscontal-assessoria-cont%C3%A1bil-41a57b123/" target="_blank" title="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a class="social-btn" href="https://www.instagram.com/asscontal/" target="_blank" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+      <p class="copyright mb-0">&copy; Asscontal Assessoria Contábil - Desde 1971. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
