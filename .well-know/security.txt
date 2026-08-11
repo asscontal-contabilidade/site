@@ -1,0 +1,5 @@
+Contact: mailto:asscontal@asscontal.com.br
+Contact: https://www.asscontal.com.br/contato.html
+Expires: 2025-12-31T23:59:59.000Z
+Acknowledgments: https://www.asscontal.com.br/security-acknowledgments.html
+Policy: https://www.asscontal.com.br/security-policy.html

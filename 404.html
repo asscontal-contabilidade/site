@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Não Encontrada - Asscontal</title>
+  <link rel="shortcut icon" href="images/fundo-azul-128x128.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .error-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1rem;
+      min-height: calc(100vh - 230px); /* Adjust based on header/footer height */
+    }
+    .error-code {
+      font-size: 6rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      line-height: 1;
+    }
+    .error-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 1rem;
+    }
+    .error-text {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 450px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo-2019-190x105.png" alt="Asscontal Assessoria Contábil" decoding="async">
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Alternar navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Principal</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="servicosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Serviços</a>
+            <ul class="dropdown-menu" aria-labelledby="servicosDropdown">
+              <li><a class="dropdown-item" href="https://online.asscontal.com.br/intranet/rdnae.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-user-plus me-2 text-primary"></i>Admissão de Empregados</a></li>
+              <li><a class="dropdown-item" href="https://sal.rfb.gov.br/PortalSalInternet/faces/pages/index.xhtml" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-calculator me-2 text-primary"></i>Cálculo de INSS</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link ms-lg-2 btn btn-outline-primary px-3 rounded-pill" href="contato.html">Contato</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ERROR SECTION -->
+  <main class="error-section">
+    <div class="container">
+      <h1 class="error-code">404</h1>
+      <h2 class="error-title">Página Não Encontrada</h2>
+      <p class="error-text">Desculpe, a página que você está procurando não existe ou foi movida.</p>
+      <a href="index.html" class="btn btn-primary rounded-pill px-4 py-2">
+        <i class="fa-solid fa-home me-2"></i> Voltar para a Página Inicial
+      </a>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="text-center">
+    <div class="container">
+      <p class="copyright mb-0">&copy; Asscontal Assessoria Contábil - Desde 1971. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
