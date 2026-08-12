@@ -16,5 +16,15 @@
   "articleCtaTitle": "Conte com a Asscontal para cuidar da sua empresa.",
   "articleCtaText": "Informação, experiência e acompanhamento para apoiar decisões mais seguras no seu negócio.",
   "articleCtaButtonText": "Conheça a Asscontal →",
-  "articleCtaButtonUrl": "../"
+  "articleCtaButtonUrl": "../",
+  "logoUrl": "../images/logo-2019-190x105.png",
+  "primaryColor": "#0b2545",
+  "secondaryColor": "#134074",
+  "accentColor": "#00a4df",
+  "contactPhone": "",
+  "contactWhatsApp": "",
+  "contactEmail": "",
+  "contactAddress": "São Gabriel da Palha - ES",
+  "contactInstagram": "",
+  "contactLinkedIn": ""
 }
