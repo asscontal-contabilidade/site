@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": "teste-visual-asscontal",
+    "title": "Asscontal amplia seu canal de informação para empresas e empreendedores",
+    "summary": "O novo Blog Asscontal reúne conteúdos sobre contabilidade, gestão, tecnologia, legislação e temas que impactam o dia a dia das empresas.",
+    "category": "Contabilidade",
+    "author": "Redação Asscontal",
+    "date": "2026-08-12",
+    "status": "published",
+    "cover": "../images/background3.jpg",
+    "tags": ["contabilidade", "empresas", "gestão", "informação"],
+    "content": "<p>A <strong>Asscontal Contabilidade</strong> passa a contar com um novo espaço de informação voltado a empresários, gestores e empreendedores.</p><h2>Informação para decisões mais seguras</h2><p>O Blog Asscontal foi estruturado para reunir conteúdos objetivos sobre contabilidade, tributação, gestão empresarial, tecnologia e mudanças na legislação que possam afetar as empresas.</p><blockquote>Nosso objetivo é transformar informação técnica em conteúdo claro e útil para a tomada de decisão.</blockquote><h3>O que você encontrará por aqui</h3><ul><li>orientações contábeis e tributárias;</li><li>novidades sobre legislação empresarial;</li><li>conteúdos sobre gestão e tecnologia;</li><li>alertas e informações importantes para empresas.</li></ul><p><img src=\"../images/asscontal-271x95.jpg\" alt=\"Asscontal Contabilidade\"></p><h2>Um canal integrado ao site da Asscontal</h2><p>As matérias serão publicadas diretamente neste portal e poderão ser organizadas por categorias, pesquisadas por assunto e atualizadas pela equipe administrativa.</p><p>Este conteúdo foi criado como uma <strong>matéria de teste visual</strong> para validar o novo layout, imagens, títulos, listas, citações e apresentação no celular e no computador.</p>",
+    "updatedAt": "2026-08-12T16:21:30.000Z"
+  }
+]
