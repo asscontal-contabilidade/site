@@ -1,1 +1,1 @@
-/blog/materia/:slug /blog/materia 200
+/blog/materia/:slug /blog/materia?slug=:slug 200
