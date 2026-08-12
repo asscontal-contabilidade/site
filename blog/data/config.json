@@ -18,6 +18,8 @@
   "articleCtaButtonText": "Conheça a Asscontal →",
   "articleCtaButtonUrl": "../",
   "logoUrl": "../images/logo-2019-190x105.png",
+  "faviconUrl": "../images/duplafalta.ico",
+  "defaultImageUrl": "assets/img/placeholder.svg",
   "primaryColor": "#0b2545",
   "secondaryColor": "#134074",
   "accentColor": "#00a4df",
@@ -26,5 +28,10 @@
   "contactEmail": "",
   "contactAddress": "São Gabriel da Palha - ES",
   "contactInstagram": "",
-  "contactLinkedIn": ""
+  "contactLinkedIn": "",
+  "seoTitle": "Blog Asscontal — Contabilidade, Gestão e Informação Empresarial",
+  "seoDescription": "Notícias, orientações e conteúdos sobre contabilidade, tributação, gestão, tecnologia e legislação para empresas e empreendedores.",
+  "seoKeywords": "contabilidade, tributário, empresas, gestão, tecnologia, Asscontal",
+  "seoImageUrl": "../images/background3.jpg",
+  "seoSiteName": "Blog Asscontal"
 }
