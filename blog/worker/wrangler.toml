@@ -1,0 +1,9 @@
+name = "asscontal-blog-cms"
+main = "worker.js"
+compatibility_date = "2026-08-12"
+
+# Segredos NÃO devem ser gravados neste arquivo.
+# Configure no Cloudflare:
+# GITHUB_TOKEN = token fine-grained com Contents: Read and write somente no repositório site
+# ADMIN_PASSWORD = senha forte do painel
+# ALLOWED_ORIGIN = URL exata do seu GitHub Pages ou domínio do blog
