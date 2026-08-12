@@ -1,5 +1,24 @@
 [
   {
+    "id": "teste-agendamento-20260812",
+    "slug": "teste-de-publicacao-agendada",
+    "title": "Teste de publicação agendada",
+    "summary": "Matéria temporária criada para validar o agendamento automático do Blog Asscontal.",
+    "category": "Contabilidade",
+    "author": "Redação Asscontal",
+    "date": "2026-08-12",
+    "status": "scheduled",
+    "publishAt": "2026-08-12T18:12:00.000Z",
+    "cover": "../images/background3.jpg",
+    "tags": ["teste", "agendamento"],
+    "content": "<p>Esta é uma matéria temporária criada exclusivamente para testar a publicação automática por agendamento.</p><p>Se ela aparecer no blog sem intervenção manual, o Cron Trigger, o Worker e a publicação agendada estarão funcionando corretamente.</p>",
+    "seoTitle": "",
+    "seoDescription": "",
+    "seoKeyword": "",
+    "seoImage": "",
+    "updatedAt": "2026-08-12T18:05:00.000Z"
+  },
+  {
     "id": "teste-visual-asscontal",
     "slug": "asscontal-amplia-seu-canal-de-informacao-para-empresas-e-empreendedores",
     "title": "Asscontal amplia seu canal de informação para empresas e empreendedores",
