@@ -1,9 +1,37 @@
 [
-  {"label":"Início","url":"./","enabled":true},
-  {"label":"Contabilidade","url":"categoria.html?cat=Contabilidade","enabled":true},
-  {"label":"Economia","url":"categoria.html?cat=Economia","enabled":true},
-  {"label":"Empresas","url":"categoria.html?cat=Empresas","enabled":true},
-  {"label":"Tecnologia","url":"categoria.html?cat=Tecnologia","enabled":true},
-  {"label":"Buscar","url":"busca.html","enabled":true},
-  {"label":"Site Asscontal","url":"../","enabled":true}
+  {
+    "label": "Início",
+    "url": "./",
+    "enabled": true
+  },
+  {
+    "label": "Contabilidade",
+    "url": "categoria.html?cat=Contabilidade",
+    "enabled": false
+  },
+  {
+    "label": "Economia",
+    "url": "categoria.html?cat=Economia",
+    "enabled": false
+  },
+  {
+    "label": "Empresas",
+    "url": "categoria.html?cat=Empresas",
+    "enabled": false
+  },
+  {
+    "label": "Tecnologia",
+    "url": "categoria.html?cat=Tecnologia",
+    "enabled": false
+  },
+  {
+    "label": "Buscar",
+    "url": "busca.html",
+    "enabled": false
+  },
+  {
+    "label": "Site Asscontal",
+    "url": "../",
+    "enabled": false
+  }
 ]
