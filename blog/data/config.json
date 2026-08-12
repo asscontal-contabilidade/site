@@ -2,5 +2,19 @@
   "introTitle": "Blog Asscontal",
   "introText": "Informação para ajudar sua empresa a decidir melhor.",
   "introButtonText": "Conheça a Asscontal →",
-  "introButtonUrl": "../"
+  "introButtonUrl": "../",
+  "latestEyebrow": "INFORMAÇÃO EMPRESARIAL",
+  "latestTitle": "Últimas matérias",
+  "latestButtonText": "Ver todas →",
+  "latestButtonUrl": "busca.html",
+  "featuredEyebrow": "DESTAQUES",
+  "featuredTitle": "Conteúdos em destaque",
+  "footerTagline": "Contabilidade, tecnologia e informação para apoiar empresas e empreendedores.",
+  "footerContentTitle": "Conteúdo",
+  "footerCompanyTitle": "Asscontal",
+  "articleCtaEyebrow": "ASSESSORIA CONTÁBIL",
+  "articleCtaTitle": "Conte com a Asscontal para cuidar da sua empresa.",
+  "articleCtaText": "Informação, experiência e acompanhamento para apoiar decisões mais seguras no seu negócio.",
+  "articleCtaButtonText": "Conheça a Asscontal →",
+  "articleCtaButtonUrl": "../"
 }
