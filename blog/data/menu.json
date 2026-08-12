@@ -32,6 +32,6 @@
   {
     "label": "Site Asscontal",
     "url": "../",
-    "enabled": false
+    "enabled": true
   }
 ]
