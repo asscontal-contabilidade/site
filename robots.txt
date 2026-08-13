@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /blog/admin/
 
 Sitemap: https://www.asscontal.com.br/sitemap.xml
+Sitemap: https://asscontal.com.br/blog/sitemap.xml
