@@ -6,9 +6,301 @@
     <title>Editor — Asscontal Blog</title>
     <link rel="stylesheet" href="../assets/css/admin.css">
     <script src="admin-auth.js"></script>
+    <style>
+      .editor-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+      .autosave-status{font-size:12px;font-weight:800;color:#64748b;padding:8px 10px;border-radius:999px;background:#f8fafc;border:1px solid #e2e8f0;white-space:nowrap}
+      .autosave-status.saved{color:#166534;background:#f0fdf4;border-color:#bbf7d0}
+      .autosave-status.saving{color:#075985;background:#f0f9ff;border-color:#bae6fd}
+      .autosave-status.unsaved{color:#92400e;background:#fffbeb;border-color:#fde68a}
+      .autosave-status.error{color:#991b1b;background:#fef2f2;border-color:#fecaca}
+      .draft-notice{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 18px;padding:14px 16px;border:1px solid #bfdbfe;border-radius:12px;background:#eff6ff;color:#1e3a8a}
+      .draft-notice strong{display:block;margin-bottom:3px}.draft-notice small{color:#475569;line-height:1.45}.draft-notice .btn{flex:0 0 auto}
+      @media(max-width:800px){.editor-actions{width:100%;justify-content:flex-start}.draft-notice{align-items:flex-start;flex-direction:column}.draft-notice .btn{width:100%}}
+    </style>
   </head>
   <body>
-    <div class="admin-layout"><aside><div class="admin-logo">
-      <img src="../../images/logo-2019-190x105.png" alt="Asscontal"></div><nav><a href="index.html">▦ Dashboard</a><a class="active" href="editor.html">＋ Nova matéria</a><a href="categorias.html">☷ Categorias</a><a href="menu.html">☰ Menu do blog</a><a href="configuracoes.html">⚙ Configurações</a><a href="../" target="_blank">↗ Ver blog</a></nav></aside><main><div id="apiStatus" style="margin:0 0 18px;padding:12px 14px;border-radius:10px;background:#eef2ff;color:#1e3a8a;font-weight:700">Carregando editor...</div><div class="top"><div><small>ASSCONTAL BLOG • EDITOR</small><h1 id="editorTitle">Nova matéria</h1></div><div><button class="btn" id="preview">Pré-visualizar</button><button class="btn primary" id="save">Salvar matéria</button></div></div><form class="editor-grid" onsubmit="return false"><section class="panel"><label>Título<input id="title" required placeholder="Título da matéria"></label><label>URL amigável (slug)<input id="slug" placeholder="reforma-tributaria-o-que-muda"><small class="hint">Endereço: /blog/materia/<span id="slugPreview">...</span></small></label><label>Resumo<textarea id="summary" rows="3"></textarea></label><label>Conteúdo</label><div class="toolbar"><button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-cmd="underline"><u>U</u></button><button type="button" data-cmd="formatBlock" data-value="h2">H2</button><button type="button" data-cmd="formatBlock" data-value="h3">H3</button><button type="button" data-cmd="insertUnorderedList">• Lista</button><button type="button" id="linkBtn">🔗 Link</button><button type="button" id="insertImage">🖼 Imagem</button><input id="bodyImageFile" type="file" accept="image/*" hidden></div><div id="content" class="rich" contenteditable="true"></div><div style="margin-top:25px;padding-top:20px;border-top:1px solid #e5e7eb"><h2>SEO da matéria</h2><label>Título SEO<input id="seoTitle" maxlength="70"></label><label>Meta description<textarea id="seoDescription" rows="3" maxlength="180"></textarea></label><label>Palavra-chave principal<input id="seoKeyword"></label><label>Imagem social (URL)<input id="seoImage"></label></div></section><aside class="side"><label>Categoria<select id="category"></select></label><label>Autor<input id="author" value="Redação Asscontal"></label><label>Imagem de capa</label><div class="upload"><input id="coverFile" type="file" accept="image/*"><img id="coverPreview" src="../assets/img/placeholder.svg" alt=""></div><label>Tags<input id="tags"></label><label>Status<select id="status"><option value="published">Publicado agora</option><option value="draft">Rascunho</option><option value="scheduled">Agendar publicação</option></select></label><label id="scheduleWrap" style="display:none">Data e hora da publicação<input id="publishAt" type="datetime-local"><small class="hint">Use o horário local em que deseja publicar.</small></label></aside></form></main></div><script>const API='https://asscontal-blog-cms.asscontal.workers.dev',KEY='blog_admin_token',$=i=>document.getElementById(i),st=$('apiStatus');let post=null,id=new URLSearchParams(location.search).get('id'),coverFile=null;function msg(m,e=false){st.textContent=m;st.style.background=e?'#fee2e2':'#dcfce7';st.style.color=e?'#991b1b':'#166534'}function slugify(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,100)}async function call(p,o={}){const h={'content-type':'application/json'},t=sessionStorage.getItem(KEY);if(t)h.authorization='Bearer '+t;const r=await fetch(API+p,{...o,headers:h}),d=await r.json().catch(()=>({}));if(r.status===401&&t){sessionStorage.removeItem(KEY);throw new Error('Sua sessão expirou. Atualize a página e entre novamente.')}if(!r.ok)throw new Error(d.error||'Erro '+r.status);return d}async function login(){
-    return await adminAuthenticate();
-}function dataUrl(f){return new Promise((ok,no)=>{const r=new FileReader;r.onload=()=>ok(r.result);r.onerror=no;r.readAsDataURL(f)})}async function upload(f){return call('/upload',{method:'POST',body:JSON.stringify({name:f.name,data:await dataUrl(f)})})}let slugTouched=false;$('title').oninput=()=>{if(!slugTouched){$('slug').value=slugify($('title').value);$('slugPreview').textContent=$('slug').value||'...'}};$('slug').oninput=()=>{slugTouched=true;$('slug').value=slugify($('slug').value);$('slugPreview').textContent=$('slug').value||'...'};document.querySelectorAll('[data-cmd]').forEach(b=>b.onclick=()=>document.execCommand(b.dataset.cmd,false,b.dataset.value||null));$('linkBtn').onclick=()=>{const u=prompt('Endereço do link:');if(u)document.execCommand('createLink',false,u)};$('insertImage').onclick=()=>$('bodyImageFile').click();$('bodyImageFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const r=await upload(f);document.execCommand('insertImage',false,r.path)}catch(x){msg(x.message,true)}};$('coverFile').onchange=async e=>{coverFile=e.target.files[0]||null;if(coverFile)$('coverPreview').src=await dataUrl(coverFile)};function toggleSchedule(){$('scheduleWrap').style.display=$('status').value==='scheduled'?'block':'none'}$('status').onchange=toggleSchedule;$('preview').onclick=()=>{sessionStorage.setItem('preview',JSON.stringify({id:'preview',title:$('title').value,summary:$('summary').value,category:$('category').value,author:$('author').value,date:new Date().toISOString().slice(0,10),cover:$('coverPreview').src,content:$('content').innerHTML}));window.open('../materia.html?id=preview','_blank')};$('save').onclick=async()=>{if(!$('title').value.trim())return msg('Informe o título.',true);if($('status').value==='scheduled'&&!$('publishAt').value)return msg('Informe a data e hora do agendamento.',true);const b=$('save');b.disabled=true;try{let cover=post?.cover||'assets/img/placeholder.svg';if(coverFile)cover=(await upload(coverFile)).path;const x={title:$('title').value.trim(),slug:slugify($('slug').value||$('title').value),summary:$('summary').value.trim(),category:$('category').value,author:$('author').value.trim()||'Redação Asscontal',date:post?.date||new Date().toISOString().slice(0,10),status:$('status').value,publishAt:$('status').value==='scheduled'?new Date($('publishAt').value).toISOString():'',cover,tags:$('tags').value.split(',').map(v=>v.trim()).filter(Boolean),content:$('content').innerHTML,seoTitle:$('seoTitle').value.trim(),seoDescription:$('seoDescription').value.trim(),seoKeyword:$('seoKeyword').value.trim(),seoImage:$('seoImage').value.trim()};if(id)await call('/posts/'+encodeURIComponent(id),{method:'PUT',body:JSON.stringify(x)});else await call('/posts',{method:'POST',body:JSON.stringify(x)});msg(x.status==='scheduled'?'Matéria agendada com sucesso!':'Matéria salva com sucesso!');setTimeout(()=>location.href='index.html',800)}catch(e){msg(e.message,true)}finally{b.disabled=false}};(async()=>{try{if(!await login())return;const[posts,cats]=await Promise.all([call('/posts'),call('/categories')]);adminUnlock();post=posts.find(x=>String(x.id)===String(id));const sel=post?.category||cats[0]||'Geral';$('category').innerHTML=[...new Set([...cats,sel])].map(c=>`<option${c===sel?' selected':''}>${c}</option>`).join('');if(post){$('editorTitle').textContent='Editar matéria';for(const k of ['title','summary','author','seoTitle','seoDescription','seoKeyword','seoImage'])if($(k))$(k).value=post[k]||'';$('slug').value=post.slug||slugify(post.title);$('slugPreview').textContent=$('slug').value;slugTouched=true;$('tags').value=(post.tags||[]).join(', ');$('status').value=post.status||'draft';$('content').innerHTML=post.content||'';$('coverPreview').src='../'+(post.cover||'assets/img/placeholder.svg');if(post.publishAt)$('publishAt').value=new Date(post.publishAt).toISOString().slice(0,16)}toggleSchedule();msg('CMS conectado. Sessão administrativa protegida.')}catch(e){msg(e.message,true)}})();</script></body></html>
+    <div class="admin-layout">
+      <aside>
+        <div class="admin-logo"><img src="../../images/logo-2019-190x105.png" alt="Asscontal"></div>
+        <nav>
+          <a href="index.html">▦ Dashboard</a><a class="active" href="editor.html">＋ Nova matéria</a><a href="categorias.html">☷ Categorias</a><a href="menu.html">☰ Menu do blog</a><a href="configuracoes.html">⚙ Configurações</a><a href="../" target="_blank">↗ Ver blog</a>
+        </nav>
+      </aside>
+      <main>
+        <div id="apiStatus" style="margin:0 0 18px;padding:12px 14px;border-radius:10px;background:#eef2ff;color:#1e3a8a;font-weight:700">Carregando editor...</div>
+
+        <div id="draftNotice" class="draft-notice" hidden>
+          <div>
+            <strong>Rascunho local recuperado</strong>
+            <small id="draftNoticeText">Recuperamos alterações que ainda não haviam sido salvas no CMS.</small>
+          </div>
+          <button class="btn small danger" id="discardDraft" type="button">Descartar rascunho recuperado</button>
+        </div>
+
+        <div class="top">
+          <div><small>ASSCONTAL BLOG • EDITOR</small><h1 id="editorTitle">Nova matéria</h1></div>
+          <div class="editor-actions">
+            <span id="autosaveStatus" class="autosave-status">Preparando autosave...</span>
+            <button class="btn" id="preview" type="button">Pré-visualizar</button>
+            <button class="btn primary" id="save" type="button">Salvar matéria</button>
+          </div>
+        </div>
+
+        <form class="editor-grid" onsubmit="return false">
+          <section class="panel">
+            <label>Título<input id="title" required placeholder="Título da matéria"></label>
+            <label>URL amigável (slug)<input id="slug" placeholder="reforma-tributaria-o-que-muda"><small class="hint">Endereço: /blog/materia/<span id="slugPreview">...</span></small></label>
+            <label>Resumo<textarea id="summary" rows="3"></textarea></label>
+            <label>Conteúdo</label>
+            <div class="toolbar">
+              <button type="button" data-cmd="bold"><b>B</b></button>
+              <button type="button" data-cmd="italic"><i>I</i></button>
+              <button type="button" data-cmd="underline"><u>U</u></button>
+              <button type="button" data-cmd="formatBlock" data-value="h2">H2</button>
+              <button type="button" data-cmd="formatBlock" data-value="h3">H3</button>
+              <button type="button" data-cmd="insertUnorderedList">• Lista</button>
+              <button type="button" id="linkBtn">🔗 Link</button>
+              <button type="button" id="insertImage">🖼 Imagem</button>
+              <input id="bodyImageFile" type="file" accept="image/*" hidden>
+            </div>
+            <div id="content" class="rich" contenteditable="true"></div>
+
+            <div style="margin-top:25px;padding-top:20px;border-top:1px solid #e5e7eb">
+              <h2>SEO da matéria</h2>
+              <label>Título SEO<input id="seoTitle" maxlength="70"></label>
+              <label>Meta description<textarea id="seoDescription" rows="3" maxlength="180"></textarea></label>
+              <label>Palavra-chave principal<input id="seoKeyword"></label>
+              <label>Imagem social (URL)<input id="seoImage"></label>
+            </div>
+          </section>
+
+          <aside class="side">
+            <label>Categoria<select id="category"></select></label>
+            <label>Autor<input id="author" value="Redação Asscontal"></label>
+            <label>Imagem de capa</label>
+            <div class="upload"><input id="coverFile" type="file" accept="image/*"><img id="coverPreview" src="../assets/img/placeholder.svg" alt=""></div>
+            <label>Tags<input id="tags"></label>
+            <label>Status<select id="status"><option value="published">Publicado agora</option><option value="draft">Rascunho</option><option value="scheduled">Agendar publicação</option></select></label>
+            <label id="scheduleWrap" style="display:none">Data e hora da publicação<input id="publishAt" type="datetime-local"><small class="hint">Use o horário local em que deseja publicar.</small></label>
+          </aside>
+        </form>
+      </main>
+    </div>
+
+    <script>
+      const API='https://asscontal-blog-cms.asscontal.workers.dev',KEY='blog_admin_token',$=i=>document.getElementById(i),st=$('apiStatus');
+      let post=null,id=new URLSearchParams(location.search).get('id'),coverFile=null,slugTouched=false;
+      let serverState=null,baseline='',autosaveTimer=null,allowLeave=false,editorReady=false;
+      const DRAFT_KEY='asscontal_blog_editor_draft_'+(id||'new');
+
+      function msg(m,e=false){st.textContent=m;st.style.background=e?'#fee2e2':'#dcfce7';st.style.color=e?'#991b1b':'#166534'}
+      function slugify(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,100)}
+      async function call(p,o={}){const h={'content-type':'application/json'},t=sessionStorage.getItem(KEY);if(t)h.authorization='Bearer '+t;const r=await fetch(API+p,{...o,headers:h}),d=await r.json().catch(()=>({}));if(r.status===401&&t){sessionStorage.removeItem(KEY);throw new Error('Sua sessão expirou. Atualize a página e entre novamente.')}if(!r.ok)throw new Error(d.error||'Erro '+r.status);return d}
+      async function login(){return await adminAuthenticate()}
+      function dataUrl(f){return new Promise((ok,no)=>{const r=new FileReader;r.onload=()=>ok(r.result);r.onerror=no;r.readAsDataURL(f)})}
+      async function upload(f){return call('/upload',{method:'POST',body:JSON.stringify({name:f.name,data:await dataUrl(f)})})}
+
+      function setAutosaveStatus(text,type=''){
+        const el=$('autosaveStatus');
+        el.textContent=text;
+        el.className='autosave-status'+(type?' '+type:'');
+      }
+
+      function normalizedState(s){
+        return {
+          title:s.title||'',slug:s.slug||'',summary:s.summary||'',content:s.content||'',category:s.category||'',author:s.author||'',tags:s.tags||'',status:s.status||'published',publishAt:s.publishAt||'',seoTitle:s.seoTitle||'',seoDescription:s.seoDescription||'',seoKeyword:s.seoKeyword||'',seoImage:s.seoImage||'',cover:s.cover||''
+        };
+      }
+
+      function serializeState(s){return JSON.stringify(normalizedState(s))}
+
+      function captureState(){
+        return normalizedState({
+          title:$('title').value,
+          slug:$('slug').value,
+          summary:$('summary').value,
+          content:$('content').innerHTML,
+          category:$('category').value,
+          author:$('author').value,
+          tags:$('tags').value,
+          status:$('status').value,
+          publishAt:$('publishAt').value,
+          seoTitle:$('seoTitle').value,
+          seoDescription:$('seoDescription').value,
+          seoKeyword:$('seoKeyword').value,
+          seoImage:$('seoImage').value,
+          cover:post?.cover||''
+        });
+      }
+
+      function applyState(s){
+        s=normalizedState(s);
+        $('title').value=s.title;
+        $('slug').value=s.slug;
+        $('summary').value=s.summary;
+        $('content').innerHTML=s.content;
+        $('author').value=s.author||'Redação Asscontal';
+        $('tags').value=s.tags;
+        $('status').value=s.status||'published';
+        $('publishAt').value=s.publishAt;
+        $('seoTitle').value=s.seoTitle;
+        $('seoDescription').value=s.seoDescription;
+        $('seoKeyword').value=s.seoKeyword;
+        $('seoImage').value=s.seoImage;
+        if(s.category){
+          if(![...$('category').options].some(o=>o.value===s.category)) $('category').add(new Option(s.category,s.category));
+          $('category').value=s.category;
+        }
+        $('slugPreview').textContent=s.slug||'...';
+        slugTouched=!!s.slug;
+        toggleSchedule();
+        if(s.cover) $('coverPreview').src='../'+s.cover;
+        else if(!post) $('coverPreview').src='../assets/img/placeholder.svg';
+      }
+
+      function isDirty(){return editorReady&&(serializeState(captureState())!==baseline||!!coverFile)}
+
+      function clearLocalDraft(){
+        try{localStorage.removeItem(DRAFT_KEY)}catch(e){}
+      }
+
+      function saveLocalDraft(){
+        autosaveTimer=null;
+        if(!editorReady)return;
+        if(!isDirty()){
+          clearLocalDraft();
+          setAutosaveStatus('Sem alterações','');
+          return;
+        }
+        try{
+          const payload={version:1,savedAt:new Date().toISOString(),state:captureState(),hasCoverFile:!!coverFile,coverFileName:coverFile?.name||''};
+          localStorage.setItem(DRAFT_KEY,JSON.stringify(payload));
+          const time=new Date(payload.savedAt).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+          setAutosaveStatus('Salvo localmente às '+time,'saved');
+        }catch(e){
+          setAutosaveStatus('Falha no autosave local','error');
+        }
+      }
+
+      function markChanged(){
+        if(!editorReady)return;
+        if(!isDirty()){
+          clearLocalDraft();
+          setAutosaveStatus('Sem alterações','');
+          return;
+        }
+        setAutosaveStatus('Alterações não enviadas ao CMS','unsaved');
+        clearTimeout(autosaveTimer);
+        autosaveTimer=setTimeout(()=>{
+          setAutosaveStatus('Salvando localmente...','saving');
+          saveLocalDraft();
+        },700);
+      }
+
+      function recoverLocalDraft(){
+        let draft=null;
+        try{draft=JSON.parse(localStorage.getItem(DRAFT_KEY)||'null')}catch(e){clearLocalDraft()}
+        if(!draft?.state)return false;
+        applyState(draft.state);
+        const when=draft.savedAt?new Date(draft.savedAt).toLocaleString('pt-BR'):'anteriormente';
+        $('draftNoticeText').textContent='Alterações locais de '+when+' foram restauradas.'+(draft.hasCoverFile?' A imagem de capa selecionada anteriormente precisa ser escolhida novamente.':'');
+        $('draftNotice').hidden=false;
+        setAutosaveStatus('Rascunho local recuperado','saved');
+        return true;
+      }
+
+      function toggleSchedule(){$('scheduleWrap').style.display=$('status').value==='scheduled'?'block':'none'}
+
+      $('title').addEventListener('input',()=>{
+        if(!slugTouched){$('slug').value=slugify($('title').value);$('slugPreview').textContent=$('slug').value||'...'}
+        markChanged();
+      });
+      $('slug').addEventListener('input',()=>{slugTouched=true;$('slug').value=slugify($('slug').value);$('slugPreview').textContent=$('slug').value||'...';markChanged()});
+      ['summary','author','tags','publishAt','seoTitle','seoDescription','seoKeyword','seoImage'].forEach(k=>$(k).addEventListener('input',markChanged));
+      $('category').addEventListener('change',markChanged);
+      $('status').addEventListener('change',()=>{toggleSchedule();markChanged()});
+      $('content').addEventListener('input',markChanged);
+
+      document.querySelectorAll('[data-cmd]').forEach(b=>b.onclick=()=>{document.execCommand(b.dataset.cmd,false,b.dataset.value||null);markChanged()});
+      $('linkBtn').onclick=()=>{const u=prompt('Endereço do link:');if(u){document.execCommand('createLink',false,u);markChanged()}};
+      $('insertImage').onclick=()=>$('bodyImageFile').click();
+      $('bodyImageFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const r=await upload(f);document.execCommand('insertImage',false,r.path);markChanged()}catch(x){msg(x.message,true)}};
+      $('coverFile').onchange=async e=>{coverFile=e.target.files[0]||null;if(coverFile)$('coverPreview').src=await dataUrl(coverFile);markChanged()};
+
+      $('discardDraft').onclick=()=>{
+        if(!confirm('Descartar o rascunho local e voltar à última versão carregada do CMS?'))return;
+        clearTimeout(autosaveTimer);
+        coverFile=null;
+        $('coverFile').value='';
+        applyState(serverState);
+        baseline=serializeState(serverState);
+        clearLocalDraft();
+        $('draftNotice').hidden=true;
+        setAutosaveStatus('Rascunho local descartado','');
+      };
+
+      $('preview').onclick=()=>{
+        sessionStorage.setItem('preview',JSON.stringify({id:'preview',title:$('title').value,summary:$('summary').value,category:$('category').value,author:$('author').value,date:new Date().toISOString().slice(0,10),cover:$('coverPreview').src,content:$('content').innerHTML}));
+        window.open('../materia.html?id=preview','_blank');
+      };
+
+      $('save').onclick=async()=>{
+        if(!$('title').value.trim())return msg('Informe o título.',true);
+        if($('status').value==='scheduled'&&!$('publishAt').value)return msg('Informe a data e hora do agendamento.',true);
+        const b=$('save');b.disabled=true;
+        try{
+          clearTimeout(autosaveTimer);
+          let cover=post?.cover||'assets/img/placeholder.svg';
+          if(coverFile)cover=(await upload(coverFile)).path;
+          const x={title:$('title').value.trim(),slug:slugify($('slug').value||$('title').value),summary:$('summary').value.trim(),category:$('category').value,author:$('author').value.trim()||'Redação Asscontal',date:post?.date||new Date().toISOString().slice(0,10),status:$('status').value,publishAt:$('status').value==='scheduled'?new Date($('publishAt').value).toISOString():'',cover,tags:$('tags').value.split(',').map(v=>v.trim()).filter(Boolean),content:$('content').innerHTML,seoTitle:$('seoTitle').value.trim(),seoDescription:$('seoDescription').value.trim(),seoKeyword:$('seoKeyword').value.trim(),seoImage:$('seoImage').value.trim()};
+          if(id)await call('/posts/'+encodeURIComponent(id),{method:'PUT',body:JSON.stringify(x)});else await call('/posts',{method:'POST',body:JSON.stringify(x)});
+          allowLeave=true;
+          clearLocalDraft();
+          setAutosaveStatus('Salvo no CMS','saved');
+          msg(x.status==='scheduled'?'Matéria agendada com sucesso!':'Matéria salva com sucesso!');
+          setTimeout(()=>location.href='index.html',800);
+        }catch(e){
+          msg(e.message,true);
+          saveLocalDraft();
+        }finally{b.disabled=false}
+      };
+
+      window.addEventListener('beforeunload',e=>{
+        if(allowLeave||!isDirty())return;
+        saveLocalDraft();
+        e.preventDefault();
+        e.returnValue='';
+      });
+
+      (async()=>{
+        try{
+          if(!await login())return;
+          const[posts,cats]=await Promise.all([call('/posts'),call('/categories')]);
+          adminUnlock();
+          post=posts.find(x=>String(x.id)===String(id));
+          const sel=post?.category||cats[0]||'Geral';
+          $('category').innerHTML=[...new Set([...cats,sel])].map(c=>`<option${c===sel?' selected':''}>${c}</option>`).join('');
+          if(post){
+            $('editorTitle').textContent='Editar matéria';
+            for(const k of ['title','summary','author','seoTitle','seoDescription','seoKeyword','seoImage'])if($(k))$(k).value=post[k]||'';
+            $('slug').value=post.slug||slugify(post.title);
+            $('slugPreview').textContent=$('slug').value;
+            slugTouched=true;
+            $('tags').value=(post.tags||[]).join(', ');
+            $('status').value=post.status||'draft';
+            $('content').innerHTML=post.content||'';
+            $('coverPreview').src='../'+(post.cover||'assets/img/placeholder.svg');
+            if(post.publishAt)$('publishAt').value=new Date(post.publishAt).toISOString().slice(0,16);
+          }
+          toggleSchedule();
+          serverState=captureState();
+          baseline=serializeState(serverState);
+          editorReady=true;
+          const recovered=recoverLocalDraft();
+          if(!recovered)setAutosaveStatus('Autosave local ativo','');
+          msg(recovered?'CMS conectado. Um rascunho local foi recuperado.':'CMS conectado. Sessão administrativa protegida.');
+        }catch(e){msg(e.message,true)}
+      })();
+    </script>
+  </body>
+</html>
