@@ -4,7 +4,28 @@
   const MODAL_ID = 'admin-login-modal';
   const KEY = 'blog_admin_token';
   const CHANNEL = 'asscontal-admin-auth';
+  const CACHE_PARAM = '_v';
   let loginPromise = null;
+
+  function freshUrl(href){
+    try{
+      const url = new URL(href, location.href);
+      if(url.origin !== location.origin || !url.pathname.includes('/blog/admin/')) return href;
+      url.searchParams.set(CACHE_PARAM, Date.now().toString());
+      return url.pathname + url.search + url.hash;
+    }catch(e){ return href; }
+  }
+
+  function ensureFreshAdminPage(){
+    const url = new URL(location.href);
+    if(!url.pathname.includes('/blog/admin/')) return false;
+    if(url.searchParams.has(CACHE_PARAM)) return false;
+    url.searchParams.set(CACHE_PARAM, Date.now().toString());
+    location.replace(url.pathname + url.search + url.hash);
+    return true;
+  }
+
+  if(ensureFreshAdminPage()) return;
 
   const lockStyle = document.createElement('style');
   lockStyle.id = STYLE_ID;
@@ -67,6 +88,14 @@
 
   function clearAdminSession(){ sessionStorage.removeItem(KEY); }
   function closeLoginModal(){ document.getElementById(MODAL_ID)?.remove(); document.documentElement.style.removeProperty('overflow'); }
+
+  function refreshAdminAssets(){
+    document.querySelectorAll('link[rel="stylesheet"][href*="admin.css"]').forEach(link=>{
+      const url=new URL(link.getAttribute('href'),location.href);
+      url.searchParams.set(CACHE_PARAM,Date.now().toString());
+      link.href=url.pathname+url.search;
+    });
+  }
 
   function openLoginModal(){
     if(loginPromise) return loginPromise;
@@ -148,6 +177,7 @@
   function closeMobileNav(){ document.body.classList.remove('admin-nav-open'); }
 
   function setupNavigation(){
+    refreshAdminAssets();
     const layout=document.querySelector('.admin-layout');
     const sidebar=layout?.querySelector(':scope > aside');
     const nav=sidebar?.querySelector('nav');
@@ -163,7 +193,7 @@
       ['saude.html','saude.html','♡','Saúde do sistema']
     ];
 
-    nav.innerHTML=items.map(([file,href,icon,label])=>`<a href="${href}"${page===file?' class="active"':''}><span>${icon}</span><span>${label}</span></a>`).join('')+
+    nav.innerHTML=items.map(([file,href,icon,label])=>`<a href="${freshUrl(href)}"${page===file?' class="active"':''}><span>${icon}</span><span>${label}</span></a>`).join('')+
       '<a href="../" target="_blank" rel="noopener"><span>↗</span><span>Ver blog</span></a>';
 
     let logout=document.getElementById('logout');
@@ -196,17 +226,26 @@
       nav.addEventListener('click',e=>{if(e.target.closest('a')) closeMobileNav()});
       document.addEventListener('keydown',e=>{if(e.key==='Escape') closeMobileNav()});
     }
+
+    document.addEventListener('click',event=>{
+      const a=event.target.closest('a[href]');
+      if(!a||a.target==='_blank'||event.defaultPrevented||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+      const url=new URL(a.href,location.href);
+      if(url.origin!==location.origin||!url.pathname.includes('/blog/admin/'))return;
+      event.preventDefault();
+      location.href=freshUrl(url.href);
+    });
   }
 
   window.adminLogout=function(broadcast=true){
     clearAdminSession();
     if(broadcast&&authChannel) authChannel.postMessage({type:'logout'});
-    location.replace('./');
+    location.replace(freshUrl('./'));
   };
 
   if(authChannel){
     authChannel.addEventListener('message',event=>{
-      if(event.data?.type==='logout'){clearAdminSession();location.replace('./')}
+      if(event.data?.type==='logout'){clearAdminSession();location.replace(freshUrl('./'))}
     });
   }
 
