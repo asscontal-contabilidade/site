@@ -1,4 +1,11 @@
 (() => {
+  if(!document.querySelector('script[data-quality-score-loader]')){
+    const qualityScript=document.createElement('script');
+    qualityScript.src='quality-score.js';
+    qualityScript.dataset.qualityScoreLoader='1';
+    document.head.appendChild(qualityScript);
+  }
+
   const saveBtn=document.getElementById('save');
   const statusInput=document.getElementById('status');
   if(!saveBtn||!statusInput||document.getElementById('prepublishCheckStyle'))return;
