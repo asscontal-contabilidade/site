@@ -1,24 +1,5 @@
 [
   {
-    "title": "Teste Publicação agendada",
-    "slug": "teste-publicacao-agendada",
-    "summary": "",
-    "category": "Geral",
-    "author": "Redação Asscontal",
-    "date": "2026-08-18",
-    "status": "published",
-    "publishAt": "2026-08-18T11:25:00.000Z",
-    "cover": "assets/img/placeholder.svg",
-    "tags": [],
-    "content": "Teste de publicação agendada.",
-    "seoTitle": "",
-    "seoDescription": "",
-    "seoKeyword": "",
-    "seoImage": "",
-    "id": "19fbe34b-6325-4f83-81cb-cd09da9d0d9c",
-    "updatedAt": "2026-08-18T11:25:44.764Z"
-  },
-  {
     "title": "A EMPRESA É OBRIGADA A LIBERAR OS EMPREGADOS PARA ASSISTIREM AOS JOGOS DA COPA?",
     "slug": "a-empresa-e-obrigada-a-liberar-os-empregados-para-assistirem-aos-jogos-da-copa",
     "summary": "",
