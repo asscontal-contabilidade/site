@@ -1,4 +1,11 @@
 (() => {
+  if(!document.querySelector('script[data-version-history-loader]')){
+    const historyScript=document.createElement('script');
+    historyScript.src='version-history.js';
+    historyScript.dataset.versionHistoryLoader='1';
+    document.head.appendChild(historyScript);
+  }
+
   const seoInput=document.getElementById('seoImage');
   const coverPreview=document.getElementById('coverPreview');
   const coverInput=document.getElementById('coverFile');
