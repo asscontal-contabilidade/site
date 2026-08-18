@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "status": "pending",
-  "generatedAt": "",
+  "status": "complete",
+  "generatedAt": "2026-08-18T18:54:47.405Z",
   "site": "https://asscontal.com.br/blog/",
   "timeoutMs": 12000,
   "summary": {
@@ -13,11 +13,45 @@
     "external": 0
   },
   "posts": {
-    "total": 0,
+    "total": 3,
     "withLinks": 0,
     "withBroken": 0,
     "withWarnings": 0
   },
-  "byPost": {},
+  "byPost": {
+    "c7cea117-6c29-47d3-8657-c5776bd1d287": {
+      "id": "c7cea117-6c29-47d3-8657-c5776bd1d287",
+      "title": "Alerta aos Empresários: Golpes focados no Simples Nacional aumentam. Veja as principais fraudes e como evitá-las",
+      "status": "published",
+      "slug": "alerta-aos-empresarios-golpes-focados-no-simples-nacional-aumentam-veja-as-principais-fraudes-e-como",
+      "total": 0,
+      "ok": 0,
+      "broken": 0,
+      "warnings": 0,
+      "links": []
+    },
+    "f0203307-abe3-4cff-8876-41612503d0a1": {
+      "id": "f0203307-abe3-4cff-8876-41612503d0a1",
+      "title": "Classificação Fiscal de Mercadorias: NCM, CST, GTIN e o Impacto da Reforma Tributária",
+      "status": "published",
+      "slug": "classificacao-fiscal-de-mercadorias-ncm-cst-gtin-e-o-impacto-da-reforma-tributaria",
+      "total": 0,
+      "ok": 0,
+      "broken": 0,
+      "warnings": 0,
+      "links": []
+    },
+    "7cb99736-f4e9-4f92-8e5a-35d6fd444509": {
+      "id": "7cb99736-f4e9-4f92-8e5a-35d6fd444509",
+      "title": "A empresa é obrigada a liberar os empregados para assistirem aos jogos da Copa do Mundo de Futebol?",
+      "status": "published",
+      "slug": "a-empresa-e-obrigada-a-liberar-os-empregados-para-assistirem-aos-jogos-da-copa",
+      "total": 0,
+      "ok": 0,
+      "broken": 0,
+      "warnings": 0,
+      "links": []
+    }
+  },
   "problems": []
 }
