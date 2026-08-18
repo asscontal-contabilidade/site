@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "status": "pending",
+  "generatedAt": "",
+  "site": "https://asscontal.com.br/blog/",
+  "timeoutMs": 12000,
+  "summary": {
+    "total": 0,
+    "ok": 0,
+    "broken": 0,
+    "warnings": 0,
+    "internal": 0,
+    "external": 0
+  },
+  "posts": {
+    "total": 0,
+    "withLinks": 0,
+    "withBroken": 0,
+    "withWarnings": 0
+  },
+  "byPost": {},
+  "problems": []
+}
