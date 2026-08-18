@@ -1,7 +1,7 @@
 async function applyCategorySeo(){
   const params=new URLSearchParams(location.search);
   const category=String(params.get('cat')||'Geral').trim()||'Geral';
-  const canonical='https://asscontal.com.br/blog/categoria?cat='+encodeURIComponent(category);
+  const canonical='https://asscontal.com.br/blog/categoria.html?cat='+encodeURIComponent(category);
   const title=`${category} — Blog Asscontal`;
   const description=`Matérias, orientações e informações sobre ${category} no Blog Asscontal.`;
 
