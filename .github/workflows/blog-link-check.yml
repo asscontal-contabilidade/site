@@ -2,6 +2,11 @@ name: Blog link check
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'blog/data/materias.json'
+      - 'blog/tools/check-links.mjs'
+      - '.github/workflows/blog-link-check.yml'
   schedule:
     - cron: '17 10 * * 1'
 
