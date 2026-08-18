@@ -2,23 +2,18 @@
   function isPreview(){return new URLSearchParams(location.search).get('id')==='preview'}
   if(!isPreview())return;
 
-  function block(){
-    document.querySelectorAll('.share a,.article-share-bottom a,.article-share-bottom button').forEach(el=>{
-      if(el.dataset.previewShareBlocked==='1')return;
-      el.dataset.previewShareBlocked='1';
-      el.classList.add('preview-share-disabled');
-      el.title='Compartilhamento desativado durante a pré-visualização';
-      if(el.tagName==='BUTTON')el.disabled=true;
-      el.addEventListener('click',event=>{
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        alert('O compartilhamento está desativado na pré-visualização. Salve ou publique a matéria antes de compartilhar.');
-      },true);
-    });
+  function previewData(){
+    try{return JSON.parse(sessionStorage.getItem('preview')||'{}')||{}}catch(_){return{}}
   }
 
-  block();
-  const observer=new MutationObserver(block);
-  observer.observe(document.body,{childList:true,subtree:true});
-  window.addEventListener('load',()=>setTimeout(()=>observer.disconnect(),4000),{once:true});
-})();
+  function editorUrl(){
+    const data=previewData();
+    const sourceId=String(data.sourceId||'').trim();
+    return sourceId
+      ? `/blog/admin/editor.html?id=${encodeURIComponent(sourceId)}`
+      : '/blog/admin/editor.html';
+  }
+
+  function fixBackButton(){
+    const button=document.getElementById('previewBackBtn');
+    if(!button
