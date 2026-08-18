@@ -1,5 +1,24 @@
 [
   {
+    "title": "Teste Publicação agendada",
+    "slug": "teste-publicacao-agendada",
+    "summary": "",
+    "category": "Geral",
+    "author": "Redação Asscontal",
+    "date": "2026-08-18",
+    "status": "scheduled",
+    "publishAt": "2026-08-18T11:25:00.000Z",
+    "cover": "assets/img/placeholder.svg",
+    "tags": [],
+    "content": "Teste de publicação agendada.",
+    "seoTitle": "",
+    "seoDescription": "",
+    "seoKeyword": "",
+    "seoImage": "",
+    "id": "19fbe34b-6325-4f83-81cb-cd09da9d0d9c",
+    "updatedAt": "2026-08-18T11:23:50.647Z"
+  },
+  {
     "title": "Teste Telegram Blog Asscontal",
     "slug": "teste-telegram-blog-asscontal",
     "summary": "",
