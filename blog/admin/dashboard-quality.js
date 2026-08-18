@@ -119,4 +119,11 @@
   ensureHeader();
   setTimeout(()=>{if(typeof POSTS!=='undefined'&&POSTS.length)drawTable(LAST_STATS)},500);
   setTimeout(()=>{if(typeof POSTS!=='undefined'&&POSTS.length)drawTable(LAST_STATS)},1500);
+
+  if(!document.querySelector('script[data-dashboard-link-check-loader]')){
+    const linkScript=document.createElement('script');
+    linkScript.src='dashboard-link-check.js';
+    linkScript.dataset.dashboardLinkCheckLoader='1';
+    document.body.appendChild(linkScript);
+  }
 })();
