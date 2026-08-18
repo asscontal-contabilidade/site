@@ -24,6 +24,12 @@ function articleDescription(p,c){
   return String(c.seoDescription||'').trim();
 }
 
+function articleSeoImageValue(p,c){
+  const seo=String(p.seoImage||'').trim();
+  if(seo&&!/^data:/i.test(seo)&&!/^blob:/i.test(seo))return seo;
+  return p.cover||c.seoImageUrl||c.defaultImageUrl;
+}
+
 setSeo=function(c,p=null){
   baseSetSeo(c,p);
   if(!p)return;
@@ -31,7 +37,7 @@ setSeo=function(c,p=null){
   const SITE_ORIGIN='https://asscontal.com.br';
   const canonical=SITE_ORIGIN+postUrl(p);
   const img=new URL(
-    asset(p.seoImage||p.cover||c.seoImageUrl||c.defaultImageUrl),
+    asset(articleSeoImageValue(p,c)),
     SITE_ORIGIN
   ).href;
   const desc=articleDescription(p,c);
