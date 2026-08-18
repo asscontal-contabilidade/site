@@ -43,6 +43,18 @@
           <div><b id="viewedPosts">—</b><span>Matérias acessadas</span></div>
         </div>
 
+        <section class="panel telegram-panel" id="telegramPanel">
+          <div class="panel-title telegram-head">
+            <div><h2>Telegram</h2><small>Status do envio automático das matérias</small></div>
+            <span class="telegram-pill loading" id="telegramConfigured">Verificando...</span>
+          </div>
+          <div class="telegram-grid">
+            <div class="telegram-item"><span>Último envio</span><b id="telegramLastTitle">Carregando...</b><small id="telegramLastDate">—</small></div>
+            <div class="telegram-item"><span>Último erro</span><b id="telegramErrorTitle">Nenhum erro registrado</b><small id="telegramErrorDate">—</small></div>
+          </div>
+          <div class="telegram-note">Para reenviar uma matéria manualmente, use o botão <b>Telegram</b> na tabela abaixo. O reenvio está disponível somente para matérias publicadas.</div>
+        </section>
+
         <div class="dashboard-grid">
           <section class="panel chart-panel">
             <div class="panel-title"><div><h2>Acessos por dia</h2><small id="chartSubtitle">Últimos 30 dias</small></div></div>
@@ -69,15 +81,38 @@
     <script>
       const API='https://asscontal-blog-cms.asscontal.workers.dev',KEY='blog_admin_token';
       const $=id=>document.getElementById(id),st=$('apiStatus');
-      let POSTS=[],CATS=[],PERIOD='all',LAST_STATS={posts:[]};
+      let POSTS=[],CATS=[],PERIOD='all',LAST_STATS={posts:[]},TELEGRAM_STATUS=null;
 
       function status(m,e=false){st.textContent=m;st.classList.toggle('error',e)}
       async function call(p,o={}){const h={'content-type':'application/json'},t=sessionStorage.getItem(KEY);if(t)h.authorization='Bearer '+t;const r=await fetch(API+p,{...o,headers:h}),d=await r.json().catch(()=>({}));if(r.status===401&&t){sessionStorage.removeItem(KEY);throw new Error('Sua sessão expirou. Atualize a página e entre novamente.')}if(!r.ok)throw new Error(d.error||'Erro '+r.status);return d}
       async function login(){return await adminAuthenticate()}
-      function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+      function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]))}
       function statusLabel(x){if(x.status==='published')return'Publicado';if(x.status==='scheduled')return'Agendado';return'Rascunho'}
       function statusClass(x){if(x.status==='published')return'published';if(x.status==='scheduled')return'scheduled';return'draft'}
       function formatActivityDate(p){const raw=p.updatedAt||p.publishAt||p.date;if(!raw)return'Sem data';const d=new Date(String(raw).length<=10?raw+'T12:00:00':raw);return Number.isNaN(d.getTime())?String(raw):d.toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:String(raw).length>10?'2-digit':undefined,minute:String(raw).length>10?'2-digit':undefined})}
+      function formatTelegramDate(raw){if(!raw)return'—';const d=new Date(raw);return Number.isNaN(d.getTime())?String(raw):d.toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'})}
+
+      function drawTelegramStatus(data){
+        TELEGRAM_STATUS=data||{};
+        const configured=$('telegramConfigured');
+        configured.textContent=data?.configured?'Configurado':'Não configurado';
+        configured.className='telegram-pill '+(data?.configured?'ok':'error');
+        const last=data?.last||null,err=data?.lastError||null;
+        $('telegramLastTitle').textContent=last?.title||last?.postTitle||'Nenhum envio registrado';
+        $('telegramLastDate').textContent=formatTelegramDate(last?.at||last?.updatedAt);
+        $('telegramErrorTitle').textContent=err?.error||'Nenhum erro registrado';
+        $('telegramErrorDate').textContent=err?formatTelegramDate(err.at||err.updatedAt):'—';
+      }
+
+      async function loadTelegramStatus(){
+        try{drawTelegramStatus(await call('/telegram/status'))}
+        catch(e){
+          $('telegramConfigured').textContent='Falha ao consultar';
+          $('telegramConfigured').className='telegram-pill error';
+          $('telegramLastTitle').textContent='Não foi possível carregar o status';
+          $('telegramLastDate').textContent=e.message||'Erro desconhecido';
+        }
+      }
 
       function drawRecentActivity(){
         const recent=[...POSTS].sort((a,b)=>String(b.updatedAt||b.publishAt||b.date||'').localeCompare(String(a.updatedAt||a.publishAt||a.date||''))).slice(0,5);
@@ -102,7 +137,7 @@
         const vm=Object.fromEntries((stats.posts||[]).map(x=>[String(x.post_id),x.views])),q=$('filter').value.toLowerCase();
         const filtered=POSTS.filter(x=>(x.title||'').toLowerCase().includes(q)||(x.category||'').toLowerCase().includes(q)||statusLabel(x).toLowerCase().includes(q));
         $('postListSummary').textContent=`${filtered.length} de ${POSTS.length} matéria${POSTS.length===1?'':'s'}`;
-        $('table').innerHTML=filtered.map(x=>`<tr><td><b>${esc(x.title)}</b></td><td>${esc(x.category)}</td><td><span class="status-badge ${statusClass(x)}">${statusLabel(x)}</span></td><td>${esc(x.date||'')}</td><td><b>${Number(vm[String(x.id)]||0).toLocaleString('pt-BR')}</b></td><td><a class="btn small" href="editor.html?id=${encodeURIComponent(x.id)}">Editar</a> <button class="btn small danger" onclick="removePost('${x.id}')">Excluir</button></td></tr>`).join('')||'<tr><td colspan="6">Nenhuma matéria encontrada.</td></tr>'
+        $('table').innerHTML=filtered.map(x=>{const tg=x.status==='published'?` <button class="btn small telegram-btn" onclick="resendTelegram('${x.id}',this)">Telegram</button>`:'';return `<tr><td><b>${esc(x.title)}</b></td><td>${esc(x.category)}</td><td><span class="status-badge ${statusClass(x)}">${statusLabel(x)}</span></td><td>${esc(x.date||'')}</td><td><b>${Number(vm[String(x.id)]||0).toLocaleString('pt-BR')}</b></td><td><a class="btn small" href="editor.html?id=${encodeURIComponent(x.id)}">Editar</a>${tg} <button class="btn small danger" onclick="removePost('${x.id}')">Excluir</button></td></tr>`}).join('')||'<tr><td colspan="6">Nenhuma matéria encontrada.</td></tr>'
       }
 
       async function loadStats(){
@@ -128,18 +163,35 @@
           drawRecentActivity();
           $('filter').oninput=()=>drawTable(LAST_STATS);
           document.querySelectorAll('.periods button').forEach(b=>b.onclick=()=>{PERIOD=b.dataset.p;document.querySelectorAll('.periods button').forEach(x=>x.classList.toggle('active',x===b));loadStats()});
-          await loadStats()
+          await Promise.all([loadStats(),loadTelegramStatus()])
         }catch(e){status(e.message,true)}
       }
 
+      window.resendTelegram=async(id,button)=>{
+        const post=POSTS.find(x=>String(x.id)===String(id));
+        if(!post)return;
+        if(!confirm(`Reenviar "${post.title}" para o Telegram?`))return;
+        const old=button?.textContent;
+        if(button){button.disabled=true;button.textContent='Enviando...'}
+        try{
+          await call('/telegram/resend/'+encodeURIComponent(id),{method:'POST'});
+          status('Matéria reenviada ao Telegram com sucesso.');
+          await loadTelegramStatus();
+          if(button)button.textContent='Enviado ✓';
+          setTimeout(()=>{if(button){button.textContent=old||'Telegram';button.disabled=false}},1800)
+        }catch(e){
+          status(e.message,true);
+          if(button){button.textContent=old||'Telegram';button.disabled=false}
+        }
+      };
       window.removePost=async id=>{if(!confirm('Excluir esta matéria?'))return;try{await call('/posts/'+encodeURIComponent(id),{method:'DELETE'});location.reload()}catch(e){status(e.message,true)}};
       load();
     </script>
 
     <style>
-      .dash-status{margin:0 0 18px;padding:12px 14px;border-radius:10px;background:#dcfce7;color:#166534;font-weight:700}.dash-status.error{background:#fee2e2;color:#991b1b}.dashboard-top{margin-bottom:20px}.dashboard-top p{margin:6px 0 0;color:#64748b;font-size:14px}.quick-actions{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:24px}.quick-actions a{display:flex;align-items:center;gap:12px;min-width:0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;transition:.18s}.quick-actions a:hover{border-color:#b8d6e8;box-shadow:0 7px 22px rgba(11,37,69,.07);transform:translateY(-2px)}.quick-actions>a>span{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;background:#eef7fb;color:#0077b6;font-size:19px;font-weight:900;flex:0 0 38px}.quick-actions div{min-width:0}.quick-actions b,.quick-actions small{display:block}.quick-actions b{font-size:14px;color:var(--primary)}.quick-actions small{margin-top:2px;font-size:11px;line-height:1.35;color:#718096}.periods{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin:0 0 18px}.periods>span{font-size:12px;font-weight:800;color:#64748b;margin-right:4px}.periods button{border:1px solid #d8e0e8;background:#fff;padding:9px 15px;border-radius:9px;font-weight:700;cursor:pointer;color:#334155}.periods button.active{background:#0077b6;color:#fff;border-color:#0077b6}.dashboard-stats{grid-template-columns:repeat(7,1fr)}.dashboard-stats>div{position:relative;overflow:hidden}.dashboard-stats>div:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:#dcebf3}.dashboard-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(320px,.85fr);gap:22px;margin-bottom:22px}.chart-panel{margin:0}.chart-panel small,.recent-panel small,.dashboard-table-head small{color:#718096}.chart{height:205px;display:flex;align-items:flex-end;gap:5px;padding:20px 8px 0;border-bottom:1px solid #e5e7eb;overflow:hidden}.bar-col{height:180px;flex:1;min-width:8px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}.bar{width:min(28px,75%);background:#0077b6;border-radius:5px 5px 0 0;min-height:2px}.bar-value{font-size:11px;font-weight:700;color:#475569;margin-bottom:4px;height:14px}.bar-col span{height:22px;font-size:10px;color:#718096;margin-top:6px;white-space:nowrap}.activity-item{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:11px;padding:12px 2px;border-bottom:1px solid #edf0f3}.activity-item:last-child{border-bottom:0}.activity-item:hover b{color:#0077b6}.activity-item b,.activity-item small{display:block}.activity-item b{font-size:13px;line-height:1.35;color:var(--primary)}.activity-item small{margin-top:3px;font-size:11px;color:#718096;line-height:1.35}.activity-dot{width:9px;height:9px;border-radius:50%;background:#94a3b8}.activity-dot.published{background:#16a34a}.activity-dot.scheduled{background:#d97706}.activity-dot.draft{background:#64748b}.activity-arrow{color:#94a3b8;font-size:22px}.two-cols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:25px}.ranking-item{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #edf0f3}.ranking-item:last-child{border-bottom:0}.ranking-item>b{font-size:22px;color:#94a3b8;min-width:22px}.ranking-item strong,.ranking-item small{display:block}.ranking-item strong{font-size:13px;color:var(--primary)}.ranking-item small{margin-top:3px;font-size:11px;color:#718096}.category-stat{margin-bottom:14px}.category-stat>div:first-child{display:flex;justify-content:space-between;gap:12px;font-size:13px}.category-track{height:8px;background:#eef2f7;border-radius:999px;overflow:hidden;margin-top:6px}.category-track i{display:block;height:100%;background:#0077b6;border-radius:999px}.dashboard-empty{color:#718096;font-size:13px}.status-badge{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}.status-badge.published{background:#dcfce7;color:#166534}.status-badge.scheduled{background:#fef3c7;color:#92400e}.status-badge.draft{background:#e2e8f0;color:#475569}.dashboard-table-head small{display:block;margin-top:3px}.dashboard-table-head input{min-width:240px}
+      .dash-status{margin:0 0 18px;padding:12px 14px;border-radius:10px;background:#dcfce7;color:#166534;font-weight:700}.dash-status.error{background:#fee2e2;color:#991b1b}.dashboard-top{margin-bottom:20px}.dashboard-top p{margin:6px 0 0;color:#64748b;font-size:14px}.quick-actions{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:24px}.quick-actions a{display:flex;align-items:center;gap:12px;min-width:0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;transition:.18s}.quick-actions a:hover{border-color:#b8d6e8;box-shadow:0 7px 22px rgba(11,37,69,.07);transform:translateY(-2px)}.quick-actions>a>span{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;background:#eef7fb;color:#0077b6;font-size:19px;font-weight:900;flex:0 0 38px}.quick-actions div{min-width:0}.quick-actions b,.quick-actions small{display:block}.quick-actions b{font-size:14px;color:var(--primary)}.quick-actions small{margin-top:2px;font-size:11px;line-height:1.35;color:#718096}.periods{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin:0 0 18px}.periods>span{font-size:12px;font-weight:800;color:#64748b;margin-right:4px}.periods button{border:1px solid #d8e0e8;background:#fff;padding:9px 15px;border-radius:9px;font-weight:700;cursor:pointer;color:#334155}.periods button.active{background:#0077b6;color:#fff;border-color:#0077b6}.dashboard-stats{grid-template-columns:repeat(7,1fr)}.dashboard-stats>div{position:relative;overflow:hidden}.dashboard-stats>div:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:#dcebf3}.telegram-panel{margin:0 0 22px}.telegram-head{align-items:flex-start}.telegram-pill{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:800}.telegram-pill.loading{background:#e2e8f0;color:#475569}.telegram-pill.ok{background:#dcfce7;color:#166534}.telegram-pill.error{background:#fee2e2;color:#991b1b}.telegram-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.telegram-item{padding:14px;border:1px solid #e5e7eb;border-radius:12px;background:#fbfdff}.telegram-item span,.telegram-item b,.telegram-item small{display:block}.telegram-item span{font-size:11px;font-weight:800;color:#64748b;text-transform:uppercase;letter-spacing:.05em}.telegram-item b{margin-top:5px;color:var(--primary);font-size:14px;line-height:1.35}.telegram-item small{margin-top:4px;color:#718096;font-size:11px}.telegram-note{margin-top:12px;color:#64748b;font-size:12px;line-height:1.5}.telegram-btn{border-color:#9bd3ec!important;color:#0369a1!important;background:#f0f9ff!important}.telegram-btn:hover:not(:disabled){background:#e0f2fe!important}.telegram-btn:disabled{opacity:.65;cursor:wait}.dashboard-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(320px,.85fr);gap:22px;margin-bottom:22px}.chart-panel{margin:0}.chart-panel small,.recent-panel small,.dashboard-table-head small{color:#718096}.chart{height:205px;display:flex;align-items:flex-end;gap:5px;padding:20px 8px 0;border-bottom:1px solid #e5e7eb;overflow:hidden}.bar-col{height:180px;flex:1;min-width:8px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}.bar{width:min(28px,75%);background:#0077b6;border-radius:5px 5px 0 0;min-height:2px}.bar-value{font-size:11px;font-weight:700;color:#475569;margin-bottom:4px;height:14px}.bar-col span{height:22px;font-size:10px;color:#718096;margin-top:6px;white-space:nowrap}.activity-item{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:11px;padding:12px 2px;border-bottom:1px solid #edf0f3}.activity-item:last-child{border-bottom:0}.activity-item:hover b{color:#0077b6}.activity-item b,.activity-item small{display:block}.activity-item b{font-size:13px;line-height:1.35;color:var(--primary)}.activity-item small{margin-top:3px;font-size:11px;color:#718096;line-height:1.35}.activity-dot{width:9px;height:9px;border-radius:50%;background:#94a3b8}.activity-dot.published{background:#16a34a}.activity-dot.scheduled{background:#d97706}.activity-dot.draft{background:#64748b}.activity-arrow{color:#94a3b8;font-size:22px}.two-cols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:25px}.ranking-item{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #edf0f3}.ranking-item:last-child{border-bottom:0}.ranking-item>b{font-size:22px;color:#94a3b8;min-width:22px}.ranking-item strong,.ranking-item small{display:block}.ranking-item strong{font-size:13px;color:var(--primary)}.ranking-item small{margin-top:3px;font-size:11px;color:#718096}.category-stat{margin-bottom:14px}.category-stat>div:first-child{display:flex;justify-content:space-between;gap:12px;font-size:13px}.category-track{height:8px;background:#eef2f7;border-radius:999px;overflow:hidden;margin-top:6px}.category-track i{display:block;height:100%;background:#0077b6;border-radius:999px}.dashboard-empty{color:#718096;font-size:13px}.status-badge{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}.status-badge.published{background:#dcfce7;color:#166534}.status-badge.scheduled{background:#fef3c7;color:#92400e}.status-badge.draft{background:#e2e8f0;color:#475569}.dashboard-table-head small{display:block;margin-top:3px}.dashboard-table-head input{min-width:240px}
       @media(max-width:1250px){.quick-actions{grid-template-columns:repeat(3,1fr)}.dashboard-stats{grid-template-columns:repeat(4,1fr)}}
-      @media(max-width:1000px){.dashboard-grid{grid-template-columns:1fr}.two-cols{grid-template-columns:1fr}}
+      @media(max-width:1000px){.dashboard-grid{grid-template-columns:1fr}.two-cols{grid-template-columns:1fr}.telegram-grid{grid-template-columns:1fr}}
       @media(max-width:800px){.quick-actions{grid-template-columns:1fr 1fr}.dashboard-stats{grid-template-columns:repeat(2,1fr)!important}.periods{justify-content:flex-start;flex-wrap:wrap}.periods>span{width:100%}.chart{overflow-x:auto}.bar-col{min-width:25px}.dashboard-table-head{align-items:flex-start;flex-direction:column}.dashboard-table-head input{width:100%;min-width:0}}
       @media(max-width:520px){.quick-actions{grid-template-columns:1fr}}
     </style>
