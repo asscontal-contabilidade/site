@@ -79,7 +79,7 @@
 
     if(!document.querySelector('script[data-dashboard-whatsapp-loader]')){
       const waScript=document.createElement('script');
-      waScript.src='dashboard-whatsapp-analytics.js';
+      waScript.src='dashboard-whatsapp-analytics.js?v=20260819-2';
       waScript.dataset.dashboardWhatsappLoader='1';
       document.body.appendChild(waScript);
     }
