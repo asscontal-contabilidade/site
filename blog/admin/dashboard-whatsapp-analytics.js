@@ -5,7 +5,7 @@
   const style=document.createElement('style');
   style.id='whatsappAnalyticsStyle';
   style.textContent=`
-    .wa-analytics-panel{margin:0 0 22px}.wa-analytics-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.wa-analytics-pill{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:800;background:#ecfdf5;color:#166534}.wa-analytics-pill.waiting{background:#f1f5f9;color:#64748b}.wa-analytics-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:14px}.wa-analytics-card{padding:14px;border:1px solid #e5e7eb;border-radius:12px;background:#fbfdff}.wa-analytics-card span,.wa-analytics-card b,.wa-analytics-card small{display:block}.wa-analytics-card span{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#64748b}.wa-analytics-card b{margin-top:5px;color:#0b2545;font-size:23px}.wa-analytics-card small{margin-top:3px;color:#718096;font-size:10px;line-height:1.35}.wa-analytics-list{margin-top:16px;border-top:1px solid #edf2f7;padding-top:12px}.wa-analytics-row{display:grid;grid-template-columns:minmax(0,1fr) 90px 90px 90px;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #f1f5f9}.wa-analytics-row:last-child{border-bottom:0}.wa-analytics-row b{font-size:12px;color:#0b2545}.wa-analytics-row span{font-size:11px;color:#64748b;text-align:right}.wa-analytics-empty{color:#718096;font-size:12px;margin:12px 0 0}.wa-analytics-note{margin-top:12px;padding:10px 12px;border-radius:10px;background:#f8fafc;color:#64748b;border:1px solid #e5e7eb;font-size:11px;line-height:1.45}.wa-analytics-note[hidden]{display:none}@media(max-width:1250px){.wa-analytics-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:900px){.wa-analytics-grid{grid-template-columns:1fr 1fr}.wa-analytics-row{grid-template-columns:minmax(0,1fr) 70px 70px}.wa-analytics-row span:last-child{grid-column:2/4}}@media(max-width:560px){.wa-analytics-grid{grid-template-columns:1fr}.wa-analytics-row{grid-template-columns:1fr 1fr}.wa-analytics-row b{grid-column:1/-1}.wa-analytics-row span{text-align:left}}
+    .wa-analytics-panel{margin:0 0 22px}.wa-analytics-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.wa-analytics-pill{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:800;background:#ecfdf5;color:#166534}.wa-analytics-pill.waiting{background:#f1f5f9;color:#64748b}.wa-analytics-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:14px}.wa-analytics-card{padding:14px;border:1px solid #e5e7eb;border-radius:12px;background:#fbfdff}.wa-analytics-card span,.wa-analytics-card b,.wa-analytics-card small{display:block}.wa-analytics-card span{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#64748b}.wa-analytics-card b{margin-top:5px;color:#0b2545;font-size:23px}.wa-analytics-card small{margin-top:3px;color:#718096;font-size:10px;line-height:1.35}.wa-analytics-list{margin-top:16px;border-top:1px solid #edf2f7;padding-top:12px}.wa-analytics-list h3{margin:0 0 8px;color:#0b2545;font-size:13px}.wa-analytics-row{display:grid;grid-template-columns:minmax(0,1fr) 90px 90px 90px;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #f1f5f9}.wa-analytics-row:last-child{border-bottom:0}.wa-analytics-row b{font-size:12px;color:#0b2545}.wa-analytics-row span{font-size:11px;color:#64748b;text-align:right}.wa-source-row{display:grid;grid-template-columns:minmax(0,1fr) 90px;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9}.wa-source-row:last-child{border-bottom:0}.wa-source-row b{font-size:12px;color:#0b2545}.wa-source-row span{text-align:right;color:#64748b;font-size:11px}.wa-analytics-empty{color:#718096;font-size:12px;margin:12px 0 0}.wa-analytics-note{margin-top:12px;padding:10px 12px;border-radius:10px;background:#f8fafc;color:#64748b;border:1px solid #e5e7eb;font-size:11px;line-height:1.45}.wa-analytics-note[hidden]{display:none}@media(max-width:1250px){.wa-analytics-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:900px){.wa-analytics-grid{grid-template-columns:1fr 1fr}.wa-analytics-row{grid-template-columns:minmax(0,1fr) 70px 70px}.wa-analytics-row span:last-child{grid-column:2/4}}@media(max-width:560px){.wa-analytics-grid{grid-template-columns:1fr}.wa-analytics-row{grid-template-columns:1fr 1fr}.wa-analytics-row b{grid-column:1/-1}.wa-analytics-row span{text-align:left}}
   `;
   document.head.appendChild(style);
 
@@ -28,7 +28,8 @@
       <div class="wa-analytics-card"><span>Ícone</span><b id="waFloatClicks">—</b><small>Botão flutuante nas matérias</small></div>
     </div>
     <div id="waAnalyticsNote" class="wa-analytics-note" hidden></div>
-    <div id="waAnalyticsList" class="wa-analytics-list"><p class="wa-analytics-empty">Nenhum dado carregado.</p></div>
+    <div id="waAnalyticsSources" class="wa-analytics-list"><h3>Origem dos contatos</h3><p class="wa-analytics-empty">Aguardando dados de origem.</p></div>
+    <div id="waAnalyticsList" class="wa-analytics-list"><h3>Matérias que geraram contatos</h3><p class="wa-analytics-empty">Nenhum dado carregado.</p></div>
   `;
   telegram.insertAdjacentElement('afterend',panel);
 
@@ -51,15 +52,17 @@
       document.getElementById('waConversion').textContent=pct(articleClicks,views);
       document.getElementById('waBarClicks').textContent=Number(data.barClicks||0).toLocaleString('pt-BR');
       document.getElementById('waFloatClicks').textContent=Number(data.floatClicks||0).toLocaleString('pt-BR');
-      if(otherClicks>0){
-        note.hidden=false;
-        note.innerHTML=`<b>${otherClicks.toLocaleString('pt-BR')}</b> clique${otherClicks===1?'':'s'} vieram de outras páginas do blog e não entram no cálculo de conversão das matérias.`;
-      }else{
-        note.hidden=true;
-        note.textContent='';
-      }
+      if(otherClicks>0){note.hidden=false;note.innerHTML=`<b>${otherClicks.toLocaleString('pt-BR')}</b> clique${otherClicks===1?'':'s'} vieram de outras páginas do blog e não entram no cálculo de conversão das matérias.`}else{note.hidden=true;note.textContent=''}
+
+      const sources=Array.isArray(data.sources)?data.sources:[];
+      document.getElementById('waAnalyticsSources').innerHTML='<h3>Origem dos contatos</h3>'+(
+        sources.length?sources.slice(0,10).map(row=>`<div class="wa-source-row"><b>${esc(row.source||'Não identificada')}</b><span>${Number(row.clicks||0).toLocaleString('pt-BR')} clique${Number(row.clicks||0)===1?'':'s'}</span></div>`).join(''):'<p class="wa-analytics-empty">Os novos dados de origem aparecerão aqui após a atualização do Worker.</p>'
+      );
+
       const rows=Array.isArray(data.posts)?data.posts:[];
-      document.getElementById('waAnalyticsList').innerHTML=rows.length?rows.slice(0,8).map(row=>`<div class="wa-analytics-row"><b>${esc(row.title||row.post_id||'Sem título')}</b><span>${Number(row.views||0).toLocaleString('pt-BR')} views</span><span>${Number(row.clicks||0).toLocaleString('pt-BR')} cliques</span><span>${pct(row.clicks,row.views)}</span></div>`).join(''):'<p class="wa-analytics-empty">Nenhum clique vinculado a uma matéria neste período.</p>';
+      document.getElementById('waAnalyticsList').innerHTML='<h3>Matérias que geraram contatos</h3>'+(
+        rows.length?rows.slice(0,8).map(row=>`<div class="wa-analytics-row"><b>${esc(row.title||row.post_id||'Sem título')}</b><span>${Number(row.views||0).toLocaleString('pt-BR')} views</span><span>${Number(row.clicks||0).toLocaleString('pt-BR')} cliques</span><span>${pct(row.clicks,row.views)}</span></div>`).join(''):'<p class="wa-analytics-empty">Nenhum clique vinculado a uma matéria neste período.</p>'
+      );
       status.textContent='Ativo';status.className='wa-analytics-pill';
     }catch(e){status.textContent='Indisponível';status.className='wa-analytics-pill waiting'}
   }
@@ -67,6 +70,5 @@
   window.AsscontalWhatsappAnalytics={load};
   const current=()=>typeof PERIOD!=='undefined'?PERIOD:'all';
   setTimeout(()=>load(current()),900);
-
   document.querySelectorAll('.periods button').forEach(button=>button.addEventListener('click',()=>setTimeout(()=>load(button.dataset.p||current()),80)));
 })();
