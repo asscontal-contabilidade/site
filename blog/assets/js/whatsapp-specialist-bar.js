@@ -4,6 +4,7 @@
 
   const PHONE='552737273600';
   const CLOSED_KEY='asscontal_whatsapp_specialist_closed';
+  const TRAFFIC_KEY='asscontal_blog_traffic_source_v1';
   const CMS_API='https://asscontal-blog-cms.asscontal.workers.dev';
 
   function currentArticleTitle(){
@@ -40,6 +41,93 @@
     return'home';
   }
 
+  function sourceLabel(value){
+    const raw=String(value||'').trim();
+    const key=raw.toLowerCase();
+    if(!key)return'';
+    if(key==='google'||key.includes('google'))return'Google';
+    if(key==='bing'||key.includes('bing'))return'Bing';
+    if(['facebook','fb','meta'].includes(key)||key.includes('facebook'))return'Facebook';
+    if(['instagram','ig'].includes(key)||key.includes('instagram'))return'Instagram';
+    if(['linkedin','linked-in'].includes(key)||key.includes('linkedin'))return'LinkedIn';
+    if(['whatsapp','wa'].includes(key)||key.includes('whatsapp'))return'WhatsApp';
+    if(key==='youtube'||key.includes('youtube'))return'YouTube';
+    if(key==='tiktok'||key.includes('tiktok'))return'TikTok';
+    if(['twitter','x'].includes(key)||key.includes('twitter'))return'X';
+    if(['email','e-mail','newsletter'].includes(key))return'E-mail';
+    return raw.slice(0,80);
+  }
+
+  function sourceFromHost(host){
+    const h=String(host||'').toLowerCase().replace(/^www\./,'');
+    if(!h)return'';
+    if(/(^|\.)google\./.test(h))return'Google';
+    if(h==='bing.com'||h.endsWith('.bing.com'))return'Bing';
+    if(h.includes('facebook.com')||h.includes('fb.com'))return'Facebook';
+    if(h.includes('instagram.com'))return'Instagram';
+    if(h.includes('linkedin.com'))return'LinkedIn';
+    if(h.includes('youtube.com')||h.includes('youtu.be'))return'YouTube';
+    if(h.includes('tiktok.com'))return'TikTok';
+    if(h==='t.co'||h.includes('twitter.com')||h==='x.com'||h.endsWith('.x.com'))return'X';
+    return h.slice(0,80);
+  }
+
+  function inferMedium(source,medium,external){
+    const explicit=String(medium||'').trim();
+    if(explicit)return explicit.slice(0,80);
+    if(source==='Google'||source==='Bing')return'organic';
+    if(['Facebook','Instagram','LinkedIn','WhatsApp','YouTube','TikTok','X'].includes(source))return'social';
+    if(source==='E-mail')return'email';
+    if(source==='Direto')return'direct';
+    return external?'referral':'';
+  }
+
+  function captureTrafficSource(){
+    const qs=new URLSearchParams(location.search);
+    const utmSource=qs.get('utm_source');
+    const utmMedium=qs.get('utm_medium');
+    const utmCampaign=qs.get('utm_campaign');
+    const referrer=String(document.referrer||'').slice(0,500);
+    let stored=null;
+    try{stored=JSON.parse(sessionStorage.getItem(TRAFFIC_KEY)||'null')}catch(e){}
+
+    let external=false;
+    let refSource='';
+    if(referrer){
+      try{
+        const refUrl=new URL(referrer);
+        external=refUrl.origin!==location.origin;
+        if(external)refSource=sourceFromHost(refUrl.hostname);
+      }catch(e){}
+    }
+
+    if(utmSource){
+      const source=sourceLabel(utmSource)||'Campanha';
+      const traffic={
+        source,
+        medium:inferMedium(source,utmMedium,external),
+        campaign:String(utmCampaign||'').trim().slice(0,120),
+        referrer:external?referrer:''
+      };
+      try{sessionStorage.setItem(TRAFFIC_KEY,JSON.stringify(traffic))}catch(e){}
+      return traffic;
+    }
+
+    if(external&&refSource){
+      const traffic={source:refSource,medium:inferMedium(refSource,'',true),campaign:'',referrer};
+      try{sessionStorage.setItem(TRAFFIC_KEY,JSON.stringify(traffic))}catch(e){}
+      return traffic;
+    }
+
+    if(stored&&stored.source)return stored;
+
+    const traffic={source:'Direto',medium:'direct',campaign:'',referrer:''};
+    try{sessionStorage.setItem(TRAFFIC_KEY,JSON.stringify(traffic))}catch(e){}
+    return traffic;
+  }
+
+  const TRAFFIC=captureTrafficSource();
+
   function trackClick(source){
     const post=currentArticle();
     const payload={
@@ -48,7 +136,11 @@
       postId:post?String(post.id||''):'',
       postTitle:post?.title||currentArticleTitle()||'',
       category:post?.category||'',
-      pageUrl:location.pathname+location.search
+      pageUrl:location.pathname+location.search,
+      trafficSource:String(TRAFFIC.source||'Direto'),
+      trafficMedium:String(TRAFFIC.medium||''),
+      trafficCampaign:String(TRAFFIC.campaign||''),
+      referrer:String(TRAFFIC.referrer||'')
     };
 
     // Envio simples e sem preflight CORS. A resposta não é necessária para abrir o WhatsApp.
