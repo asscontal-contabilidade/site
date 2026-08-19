@@ -76,5 +76,12 @@
       linkScript.dataset.dashboardLinkCheckLoader='1';
       document.body.appendChild(linkScript);
     }
+
+    if(!document.querySelector('script[data-dashboard-whatsapp-loader]')){
+      const waScript=document.createElement('script');
+      waScript.src='dashboard-whatsapp-analytics.js';
+      waScript.dataset.dashboardWhatsappLoader='1';
+      document.body.appendChild(waScript);
+    }
   });
 })();
