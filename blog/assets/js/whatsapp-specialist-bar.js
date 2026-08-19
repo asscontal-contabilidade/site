@@ -14,8 +14,9 @@
     const qs=new URLSearchParams(location.search);
     const id=qs.get('id');
     const slug=qs.get('slug');
+    const title=currentArticleTitle();
     if(typeof POSTS!=='undefined'&&Array.isArray(POSTS)){
-      const post=POSTS.find(p=>(id&&String(p.id)===String(id))||(!id&&slug&&String(p.slug||'')===slug));
+      const post=POSTS.find(p=>(id&&String(p.id)===String(id))||(!id&&slug&&String(p.slug||'')===slug)||(title&&String(p.title||'').trim()===title));
       if(post)return post;
     }
     return null;
@@ -49,9 +50,12 @@
       category:post?.category||'',
       pageUrl:location.pathname+location.search
     };
+
+    // Envio simples e sem preflight CORS. A resposta não é necessária para abrir o WhatsApp.
     fetch(`${CMS_API}/whatsapp/click`,{
       method:'POST',
-      headers:{'content-type':'application/json'},
+      mode:'no-cors',
+      headers:{'content-type':'text/plain;charset=UTF-8'},
       body:JSON.stringify(payload),
       keepalive:true
     }).catch(()=>{});
