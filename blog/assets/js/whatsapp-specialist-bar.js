@@ -4,9 +4,21 @@
 
   const PHONE='552737273600';
   const CLOSED_KEY='asscontal_whatsapp_specialist_closed';
+  const CMS_API='https://asscontal-blog-cms.asscontal.workers.dev';
 
   function currentArticleTitle(){
     return document.querySelector('.article-top h1')?.textContent?.trim()||'';
+  }
+
+  function currentArticle(){
+    const qs=new URLSearchParams(location.search);
+    const id=qs.get('id');
+    const slug=qs.get('slug');
+    if(typeof POSTS!=='undefined'&&Array.isArray(POSTS)){
+      const post=POSTS.find(p=>(id&&String(p.id)===String(id))||(!id&&slug&&String(p.slug||'')===slug));
+      if(post)return post;
+    }
+    return null;
   }
 
   function message(){
@@ -18,6 +30,31 @@
 
   function whatsappUrl(){
     return `https://wa.me/${PHONE}?text=${encodeURIComponent(message())}`;
+  }
+
+  function pageType(){
+    if(currentArticleTitle())return'article';
+    if(/\/categoria\.html$/i.test(location.pathname))return'category';
+    if(/\/busca\.html$/i.test(location.pathname))return'search';
+    return'home';
+  }
+
+  function trackClick(source){
+    const post=currentArticle();
+    const payload={
+      source,
+      pageType:pageType(),
+      postId:post?String(post.id||''):'',
+      postTitle:post?.title||currentArticleTitle()||'',
+      category:post?.category||'',
+      pageUrl:location.pathname+location.search
+    };
+    fetch(`${CMS_API}/whatsapp/click`,{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify(payload),
+      keepalive:true
+    }).catch(()=>{});
   }
 
   const icon='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.08 0C5.54 0 .22 5.32.22 11.86c0 2.09.55 4.13 1.6 5.92L.12 24l6.37-1.67a11.82 11.82 0 0 0 5.58 1.42h.01c6.53 0 11.86-5.32 11.86-11.86 0-3.17-1.22-6.15-3.44-8.39Zm-8.42 18.25h-.01a9.8 9.8 0 0 1-4.99-1.37l-.36-.21-3.78.99 1.01-3.68-.23-.38a9.82 9.82 0 0 1-1.5-5.24c0-5.43 4.42-9.86 9.87-9.86a9.8 9.8 0 0 1 6.98 2.9 9.79 9.79 0 0 1 2.89 6.98c-.01 5.44-4.44 9.87-9.88 9.87Zm5.41-7.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.09 4.49.71.31 1.27.49 1.7.63.71.23 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Z"/></svg>';
@@ -50,7 +87,7 @@
     a.title='Falar com a Asscontal pelo WhatsApp';
     a.setAttribute('aria-label','Falar com a Asscontal pelo WhatsApp');
     a.innerHTML=icon;
-    a.addEventListener('click',()=>{a.href=whatsappUrl()});
+    a.addEventListener('click',()=>{a.href=whatsappUrl();trackClick('float')});
     document.body.appendChild(a);
   }
 
@@ -61,7 +98,7 @@
     bar.innerHTML=`<div class="whatsapp-specialist-inner"><div class="whatsapp-specialist-icon">${icon}</div><div class="whatsapp-specialist-copy"><strong>Entre em contato com a gente.</strong><span>Fale com um especialista da Asscontal pelo WhatsApp.</span></div><a id="whatsappSpecialistAction" class="whatsapp-specialist-action" href="${whatsappUrl()}" target="_blank" rel="noopener noreferrer">Falar com um especialista</a><button id="whatsappSpecialistClose" class="whatsapp-specialist-close" type="button" aria-label="Fechar barra do WhatsApp" title="Fechar">×</button></div>`;
     document.body.appendChild(bar);
     document.body.classList.add('whatsapp-specialist-space');
-    document.getElementById('whatsappSpecialistAction').addEventListener('click',e=>{e.currentTarget.href=whatsappUrl()});
+    document.getElementById('whatsappSpecialistAction').addEventListener('click',e=>{e.currentTarget.href=whatsappUrl();trackClick('bar')});
     document.getElementById('whatsappSpecialistClose').addEventListener('click',()=>{
       sessionStorage.setItem(CLOSED_KEY,'1');
       bar.remove();
