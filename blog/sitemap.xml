@@ -2,7 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://asscontal.com.br/blog/</loc>
-    <lastmod>2026-08-18T19:25:33.924Z</lastmod>
+    <lastmod>2026-08-26T16:04:12.749Z</lastmod>
+  </url>
+  <url>
+    <loc>https://asscontal.com.br/blog/categoria.html?cat=Geral</loc>
+    <lastmod>2026-08-26T16:04:12.749Z</lastmod>
   </url>
   <url>
     <loc>https://asscontal.com.br/blog/categoria.html?cat=Departamento%20Fiscal</loc>
@@ -11,6 +15,10 @@
   <url>
     <loc>https://asscontal.com.br/blog/categoria.html?cat=Departamento%20Pessoal</loc>
     <lastmod>2026-08-18T18:51:10.613Z</lastmod>
+  </url>
+  <url>
+    <loc>https://asscontal.com.br/blog/materia?slug=prazo-para-solicitacao-pelo-simples-nacional-sera-em-setembro-de-2026</loc>
+    <lastmod>2026-08-26T16:04:12.749Z</lastmod>
   </url>
   <url>
     <loc>https://asscontal.com.br/blog/materia?slug=alerta-aos-empresarios-golpes-focados-no-simples-nacional-aumentam-veja-as-principais-fraudes-e-como</loc>
