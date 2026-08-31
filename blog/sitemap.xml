@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://asscontal.com.br/blog/</loc>
-    <lastmod>2026-08-27T13:32:14.376Z</lastmod>
+    <lastmod>2026-08-31T11:31:16.602Z</lastmod>
   </url>
   <url>
     <loc>https://asscontal.com.br/blog/categoria.html?cat=Departamento%20Fiscal</loc>
-    <lastmod>2026-08-27T13:32:14.376Z</lastmod>
+    <lastmod>2026-08-31T11:31:16.602Z</lastmod>
   </url>
   <url>
     <loc>https://asscontal.com.br/blog/categoria.html?cat=Geral</loc>
@@ -15,6 +15,10 @@
   <url>
     <loc>https://asscontal.com.br/blog/categoria.html?cat=Departamento%20Pessoal</loc>
     <lastmod>2026-08-18T18:51:10.613Z</lastmod>
+  </url>
+  <url>
+    <loc>https://asscontal.com.br/blog/materia?slug=calendario-tributario-de-setembro-de-2026-no-espirito-santo</loc>
+    <lastmod>2026-08-31T11:31:16.602Z</lastmod>
   </url>
   <url>
     <loc>https://asscontal.com.br/blog/materia?slug=guia-pratico-como-emitir-a-nova-nfs-e-no-portal-nacional-passo-a-passo</loc>
