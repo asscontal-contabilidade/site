@@ -1,3 +1,12 @@
+/*
+ * Calculadora DIFAL ES
+ * Asscontal Assessoria Contábil
+ */
+
+/* =========================================================
+   PADRONIZAÇÃO DOS NAVEGADORES
+   ========================================================= */
+
 *,
 *::before,
 *::after {
@@ -8,6 +17,7 @@ html {
     width: 100%;
     min-height: 100%;
     background-color: #f8fafc;
+
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
 }
@@ -15,14 +25,450 @@ html {
 body {
     width: 100%;
     min-height: 100vh;
+    min-height: 100dvh;
+
     margin: 0;
     padding: 20px;
-    font-family: Arial, Helvetica, sans-serif;
+
     color: #1e293b;
     background-color: #f8fafc;
+
+    font-family: Arial, Helvetica, sans-serif;
+
     display: flex;
     justify-content: center;
     align-items: flex-start;
 }
 
-/* Continue aqui com o restante do CSS */
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+   ========================================================= */
+
+.calculator-container {
+    width: 100%;
+    max-width: 650px;
+    margin: auto 0;
+
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 25px -5px rgba(15, 23, 42, 0.08),
+        0 8px 10px -6px rgba(15, 23, 42, 0.04);
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================================
+   LOGOMARCA E TÍTULO
+   ========================================================= */
+
+.logo-section {
+    width: 100%;
+    padding: 30px 20px 10px;
+
+    background-color: #fcfcfc;
+    text-align: center;
+}
+
+.logo-section img {
+    display: block;
+
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 105px;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+}
+
+.logo-section h1 {
+    margin: 15px 0 0;
+
+    color: #1e293b;
+
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* =========================================================
+   CAMPOS DE PREENCHIMENTO
+   ========================================================= */
+
+.controls-section {
+    width: 100%;
+    padding: 20px 30px 30px;
+
+    background-color: #fcfcfc;
+    border-bottom: 1px solid #e2e8f0;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.form-group {
+    flex: 1 1 170px;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #64748b;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.form-group input,
+.form-group select {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+    height: 46px;
+
+    margin: 0;
+    padding: 10px 14px;
+
+    color: #1e293b;
+    background-color: #ffffff;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+
+    font-size: 16px;
+    line-height: 1.2;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.form-group input {
+    text-align: right;
+}
+
+.form-group select {
+    padding-right: 42px;
+
+    text-align: left;
+    cursor: pointer;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background-image:
+        linear-gradient(
+            45deg,
+            transparent 50%,
+            #64748b 50%
+        ),
+        linear-gradient(
+            135deg,
+            #64748b 50%,
+            transparent 50%
+        );
+
+    background-position:
+        calc(100% - 20px) 19px,
+        calc(100% - 14px) 19px;
+
+    background-size:
+        6px 6px,
+        6px 6px;
+
+    background-repeat: no-repeat;
+}
+
+.form-group input:hover,
+.form-group select:hover {
+    border-color: #94a3b8;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #0284c7;
+
+    box-shadow:
+        0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+/* Remove as setas dos campos numéricos no Chrome e Safari */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+
+/* Remove as setas dos campos numéricos no Firefox */
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* =========================================================
+   RESULTADO
+   ========================================================= */
+
+.result-section {
+    width: 100%;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.table-header {
+    width: 100%;
+    padding: 16px;
+
+    color: #334155;
+    background-color: #f1f5f9;
+
+    border: 1px solid #e2e8f0;
+    border-bottom: 0;
+    border-radius: 12px 12px 0 0;
+
+    text-align: center;
+
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.table-container {
+    width: 100%;
+    max-width: 100%;
+
+    overflow-x: auto;
+    border-radius: 0 0 12px 12px;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.difal-table {
+    width: 100%;
+    min-width: 430px;
+
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+
+    text-align: center;
+    font-size: 20px;
+}
+
+.difal-table td {
+    width: 33.333%;
+    padding: 16px 8px;
+
+    color: #1e293b;
+    background-color: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+/* =========================================================
+   CORES DA TABELA
+   ========================================================= */
+
+.bg-green {
+    color: #ffffff !important;
+    background-color: #22c55e !important;
+
+    font-weight: 600;
+}
+
+.bg-red {
+    color: #fef08a !important;
+    background-color: #ef4444 !important;
+
+    font-weight: 700;
+}
+
+.bg-yellow {
+    color: #b91c1c !important;
+    background-color: #fde047 !important;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.bg-gray {
+    color: #475569 !important;
+    background-color: #f8fafc !important;
+
+    font-weight: 600;
+}
+
+/* =========================================================
+   MENSAGEM DE ERRO
+   ========================================================= */
+
+.validation-message {
+    width: 100%;
+    margin: 15px 0 0;
+    padding: 12px 14px;
+
+    color: #991b1b;
+    background-color: #fef2f2;
+
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.validation-message[hidden] {
+    display: none;
+}
+
+/* =========================================================
+   RODAPÉ
+   ========================================================= */
+
+.calculator-footer {
+    width: 100%;
+    padding: 0 30px 25px;
+
+    color: #64748b;
+    background-color: #ffffff;
+
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.calculator-footer p {
+    margin: 0;
+}
+
+/* =========================================================
+   CELULAR E TABLET
+   ========================================================= */
+
+@media screen and (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .calculator-container {
+        margin: 0;
+        border-radius: 12px;
+    }
+
+    .logo-section {
+        padding: 22px 15px 8px;
+    }
+
+    .logo-section img {
+        max-height: 90px;
+    }
+
+    .logo-section h1 {
+        font-size: 20px;
+    }
+
+    .controls-section {
+        padding: 18px 15px 20px;
+        gap: 15px;
+    }
+
+    .form-group {
+        flex-basis: 100%;
+    }
+
+    .result-section {
+        padding: 20px 15px;
+    }
+
+    .table-header {
+        padding: 12px;
+
+        font-size: 20px;
+    }
+
+    .difal-table {
+        font-size: 16px;
+    }
+
+    .difal-table td {
+        padding: 12px 6px;
+    }
+
+    .bg-yellow {
+        font-size: 18px;
+    }
+
+    .calculator-footer {
+        padding: 0 15px 20px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .difal-table {
+        min-width: 390px;
+    }
+}
+
+/* =========================================================
+   IMPRESSÃO
+   ========================================================= */
+
+@media print {
+    body {
+        min-height: auto;
+        padding: 0;
+
+        background-color: #ffffff;
+    }
+
+    .calculator-container {
+        max-width: 100%;
+
+        border: 0;
+        box-shadow: none;
+    }
+
+    .controls-section {
+        break-inside: avoid;
+    }
+
+    .result-section {
+        break-inside: avoid;
+    }
+
+    .calculator-footer {
+        display: none;
+    }
+}
