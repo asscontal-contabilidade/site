@@ -1,14 +1,31 @@
 (function () {
     "use strict";
 
-    var valorOpInput = document.getElementById("valorOp");
-    var aliqInterSelect = document.getElementById("aliqInter");
-    var aliqIntraInput = document.getElementById("aliqIntra");
+    var valorOpInput =
+        document.getElementById("valorOp");
+
+    var aliqInterSelect =
+        document.getElementById("aliqInter");
+
+    var aliqIntraInput =
+        document.getElementById("aliqIntra");
+
     var validationMessage =
         document.getElementById("validationMessage");
 
+    if (
+        !valorOpInput ||
+        !aliqInterSelect ||
+        !aliqIntraInput
+    ) {
+        return;
+    }
+
     function parseNumeroBR(valor) {
-        if (valor === null || valor === undefined) {
+        if (
+            valor === null ||
+            valor === undefined
+        ) {
             return 0;
         }
 
@@ -21,14 +38,21 @@
 
         var numero = Number(texto);
 
-        return Number.isFinite(numero) ? numero : 0;
+        if (!Number.isFinite(numero)) {
+            return 0;
+        }
+
+        return numero;
     }
 
     function formatarNumeroBR(numero) {
-        return Number(numero).toLocaleString("pt-BR", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        });
+        return Number(numero).toLocaleString(
+            "pt-BR",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
     }
 
     function formatarPercentual(numero) {
@@ -44,9 +68,11 @@
             return;
         }
 
-        elemento.value = formatarNumeroBR(
-            Number(somenteNumeros) / 100
-        );
+        var numero =
+            Number(somenteNumeros) / 100;
+
+        elemento.value =
+            formatarNumeroBR(numero);
     }
 
     function limparCampoPercentual(elemento) {
@@ -57,7 +83,10 @@
         var partes = valor.split(",");
 
         if (partes.length > 2) {
-            valor = partes.shift() + "," + partes.join("");
+            valor =
+                partes.shift() +
+                "," +
+                partes.join("");
         }
 
         elemento.value = valor;
@@ -82,7 +111,8 @@
     }
 
     function atualizarCelula(id, valor) {
-        var elemento = document.getElementById(id);
+        var elemento =
+            document.getElementById(id);
 
         if (elemento) {
             elemento.textContent = valor;
@@ -90,9 +120,12 @@
     }
 
     function calcularDIFAL() {
-        var valorOp = parseNumeroBR(valorOpInput.value);
+        var valorOp =
+            parseNumeroBR(valorOpInput.value);
+
         var aliqInter =
             Number(aliqInterSelect.value) || 0;
+
         var aliqIntra =
             parseNumeroBR(aliqIntraInput.value);
 
@@ -102,13 +135,40 @@
             mostrarErro(
                 "Informe um valor de operação maior que zero."
             );
+
             return;
         }
 
-        if (aliqIntra <= 0 || aliqIntra >= 100) {
+        if (
+            aliqInter < 0 ||
+            aliqInter >= 100
+        ) {
+            mostrarErro(
+                "A alíquota interestadual informada é inválida."
+            );
+
+            return;
+        }
+
+        if (
+            aliqIntra <= 0 ||
+            aliqIntra >= 100
+        ) {
             mostrarErro(
                 "Informe uma alíquota interna entre 0 e 100%."
             );
+
+            return;
+        }
+
+        var fatorDivisor =
+            1 - (aliqIntra / 100);
+
+        if (fatorDivisor <= 0) {
+            mostrarErro(
+                "Não foi possível calcular o fator divisor."
+            );
+
             return;
         }
 
@@ -118,22 +178,28 @@
         var valorSemIcms =
             valorOp - icmsOrigem;
 
-        var fatorDivisor =
-            1 - (aliqIntra / 100);
-
         var baseCalculoDupla =
             valorSemIcms / fatorDivisor;
 
         var icmsDestino =
-            baseCalculoDupla * (aliqIntra / 100);
+            baseCalculoDupla *
+            (aliqIntra / 100);
 
         var difal =
             icmsDestino - icmsOrigem;
 
-        document.getElementById("tituloTabela").textContent =
-            "DIFAL ES - " +
-            formatarNumeroBR(aliqInter) +
-            "%";
+        var tituloTabela =
+            document.getElementById(
+                "tituloTabela"
+            );
+
+        if (tituloTabela) {
+            tituloTabela.textContent =
+                "DIFAL ES - " +
+                formatarPercentual(
+                    aliqInter
+                );
+        }
 
         atualizarCelula(
             "r1c1",
@@ -162,40 +228,55 @@
 
         atualizarCelula(
             "r3c2",
-            fatorDivisor.toLocaleString("pt-BR", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            })
+            fatorDivisor.toLocaleString(
+                "pt-BR",
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            )
         );
 
         atualizarCelula(
             "r3c3",
-            formatarNumeroBR(baseCalculoDupla)
+            formatarNumeroBR(
+                baseCalculoDupla
+            )
         );
 
         atualizarCelula(
             "r4c1",
-            formatarNumeroBR(baseCalculoDupla)
+            formatarNumeroBR(
+                baseCalculoDupla
+            )
         );
 
         atualizarCelula(
             "r4c2",
-            formatarPercentual(aliqIntra)
+            formatarPercentual(
+                aliqIntra
+            )
         );
 
         atualizarCelula(
             "r4c3",
-            formatarNumeroBR(icmsDestino)
+            formatarNumeroBR(
+                icmsDestino
+            )
         );
 
         atualizarCelula(
             "r5c1",
-            formatarNumeroBR(icmsDestino)
+            formatarNumeroBR(
+                icmsDestino
+            )
         );
 
         atualizarCelula(
             "r5c2",
-            formatarNumeroBR(icmsOrigem)
+            formatarNumeroBR(
+                icmsOrigem
+            )
         );
 
         atualizarCelula(
@@ -204,10 +285,16 @@
         );
     }
 
-    valorOpInput.addEventListener("input", function () {
-        formatarCampoMoeda(valorOpInput);
-        calcularDIFAL();
-    });
+    valorOpInput.addEventListener(
+        "input",
+        function () {
+            formatarCampoMoeda(
+                valorOpInput
+            );
+
+            calcularDIFAL();
+        }
+    );
 
     aliqInterSelect.addEventListener(
         "change",
@@ -217,7 +304,10 @@
     aliqIntraInput.addEventListener(
         "input",
         function () {
-            limparCampoPercentual(aliqIntraInput);
+            limparCampoPercentual(
+                aliqIntraInput
+            );
+
             calcularDIFAL();
         }
     );
@@ -226,11 +316,18 @@
         "blur",
         function () {
             var percentual =
-                parseNumeroBR(aliqIntraInput.value);
+                parseNumeroBR(
+                    aliqIntraInput.value
+                );
 
-            if (percentual > 0 && percentual < 100) {
+            if (
+                percentual > 0 &&
+                percentual < 100
+            ) {
                 aliqIntraInput.value =
-                    formatarNumeroBR(percentual);
+                    formatarNumeroBR(
+                        percentual
+                    );
             }
 
             calcularDIFAL();
