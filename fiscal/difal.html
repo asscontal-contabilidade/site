@@ -13,8 +13,6 @@
         content="Calculadora de DIFAL para operações destinadas ao Estado do Espírito Santo."
     >
 
-    <meta name="theme-color" content="#f8fafc">
-
     <title>Calculadora DIFAL ES - Asscontal</title>
 
     <link
@@ -39,35 +37,27 @@
             >
 
             <h1>Calculadora DIFAL</h1>
-
-            <p class="subtitle">
-                Diferencial de Alíquota – Espírito Santo
-            </p>
         </header>
 
         <section
             class="controls-section"
-            aria-label="Informações para o cálculo do DIFAL"
+            aria-label="Informações para cálculo do DIFAL"
         >
-            <div class="form-group form-group-large">
+            <div class="form-group">
                 <label for="valorOp">
-                    Valor da Operação
+                    Valor da Operação (R$)
                 </label>
 
-                <div class="input-prefix">
-                    <span aria-hidden="true">R$</span>
-
-                    <input
-                        type="text"
-                        id="valorOp"
-                        name="valorOp"
-                        value="990,00"
-                        inputmode="decimal"
-                        autocomplete="off"
-                        spellcheck="false"
-                        aria-label="Valor da operação em reais"
-                    >
-                </div>
+                <input
+                    type="text"
+                    id="valorOp"
+                    name="valorOp"
+                    value="990,00"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-label="Valor da operação em reais"
+                >
             </div>
 
             <div class="form-group">
@@ -88,49 +78,32 @@
 
             <div class="form-group">
                 <label for="aliqIntra">
-                    Alíquota Interna ES
+                    Alíquota Interna ES (%)
                 </label>
 
-                <div class="input-suffix">
-                    <input
-                        type="text"
-                        id="aliqIntra"
-                        name="aliqIntra"
-                        value="17,00"
-                        inputmode="decimal"
-                        autocomplete="off"
-                        spellcheck="false"
-                        aria-label="Alíquota interna do Espírito Santo"
-                    >
-
-                    <span aria-hidden="true">%</span>
-                </div>
+                <input
+                    type="text"
+                    id="aliqIntra"
+                    name="aliqIntra"
+                    value="17,00"
+                    inputmode="decimal"
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-label="Alíquota interna do Espírito Santo"
+                >
             </div>
         </section>
 
         <section
             class="result-section"
-            aria-label="Resultado do cálculo"
+            aria-label="Resultado do cálculo do DIFAL"
             aria-live="polite"
         >
-            <div class="result-title">
-                <div>
-                    <span class="result-label">
-                        Resultado
-                    </span>
-
-                    <h2 id="tituloTabela">
-                        DIFAL ES – 12,00%
-                    </h2>
-                </div>
-
-                <div class="result-total">
-                    <span>DIFAL devido</span>
-
-                    <strong id="resultadoPrincipal">
-                        R$ 59,64
-                    </strong>
-                </div>
+            <div
+                class="table-header"
+                id="tituloTabela"
+            >
+                DIFAL ES - 12,00%
             </div>
 
             <div class="table-container">
@@ -138,146 +111,83 @@
                     class="difal-table"
                     aria-label="Memória de cálculo do DIFAL"
                 >
-                    <thead>
-                        <tr>
-                            <th scope="col">Descrição</th>
-                            <th scope="col">Alíquota/Fator</th>
-                            <th scope="col">Valor</th>
-                        </tr>
-                    </thead>
-
                     <tbody>
                         <tr>
-                            <td>Valor da operação</td>
+                            <td
+                                class="bg-green"
+                                id="r1c1"
+                            >
+                                990,00
+                            </td>
 
                             <td
-                                class="table-rate"
+                                class="bg-red"
                                 id="r1c2"
                             >
                                 12,00%
                             </td>
 
-                            <td
-                                class="table-value"
-                                id="r1c1"
-                            >
-                                R$ 990,00
+                            <td id="r1c3">
+                                118,80
                             </td>
                         </tr>
 
                         <tr>
-                            <td>ICMS de origem</td>
-
                             <td
-                                class="table-rate"
-                                id="r2c2"
-                            >
-                                12,00%
-                            </td>
-
-                            <td
-                                class="table-value"
-                                id="r1c3"
-                            >
-                                R$ 118,80
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Valor sem ICMS</td>
-
-                            <td class="table-rate">—</td>
-
-                            <td
-                                class="table-value"
+                                colspan="3"
+                                class="bg-gray"
                                 id="r2c1"
                             >
-                                R$ 871,20
+                                871,20
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Base de cálculo por dentro</td>
+                            <td id="r3c1">
+                                871,20
+                            </td>
 
-                            <td
-                                class="table-rate"
-                                id="r3c2"
-                            >
+                            <td id="r3c2">
                                 0,83
                             </td>
 
-                            <td
-                                class="table-value"
-                                id="r3c3"
-                            >
-                                R$ 1.049,64
+                            <td id="r3c3">
+                                1.049,64
                             </td>
                         </tr>
 
                         <tr>
-                            <td>ICMS do destino</td>
+                            <td id="r4c1">
+                                1.049,64
+                            </td>
 
-                            <td
-                                class="table-rate"
-                                id="r4c2"
-                            >
+                            <td id="r4c2">
                                 17,00%
                             </td>
 
-                            <td
-                                class="table-value"
-                                id="r4c3"
-                            >
-                                R$ 178,44
+                            <td id="r4c3">
+                                178,44
                             </td>
                         </tr>
 
-                        <tr class="difal-total-row">
-                            <td>DIFAL devido ao ES</td>
+                        <tr>
+                            <td id="r5c1">
+                                178,44
+                            </td>
 
-                            <td class="table-rate">
-                                Destino − origem
+                            <td id="r5c2">
+                                118,80
                             </td>
 
                             <td
-                                class="table-value"
+                                class="bg-yellow"
                                 id="r5c3"
                             >
-                                R$ 59,64
+                                59,64
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-
-            <div class="calculation-summary">
-                <div>
-                    <span>ICMS destino</span>
-
-                    <strong id="r5c1">
-                        R$ 178,44
-                    </strong>
-                </div>
-
-                <span class="summary-symbol">−</span>
-
-                <div>
-                    <span>ICMS origem</span>
-
-                    <strong id="r5c2">
-                        R$ 118,80
-                    </strong>
-                </div>
-
-                <span class="summary-symbol">=</span>
-
-                <div class="summary-highlight">
-                    <span>DIFAL</span>
-
-                    <strong id="resultadoResumo">
-                        R$ 59,64
-                    </strong>
-                </div>
             </div>
 
             <p
@@ -290,19 +200,15 @@
 
         <footer class="calculator-footer">
             <p>
-                Esta ferramenta é uma simulação. Confirme a operação,
-                a legislação aplicável e os valores antes do recolhimento.
-            </p>
-
-            <p>
-                Asscontal Assessoria Contábil
+                Ferramenta de simulação. Confirme os valores antes do
+                recolhimento.
             </p>
         </footer>
     </main>
 
     <noscript>
         <div class="noscript-message">
-            Ative o JavaScript do navegador para utilizar a calculadora.
+            Esta calculadora precisa do JavaScript habilitado para funcionar.
         </div>
     </noscript>
 </body>
