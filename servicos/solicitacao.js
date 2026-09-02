@@ -59,4 +59,3 @@
     setInitialDate();
     updateCounter();
 })();
-
