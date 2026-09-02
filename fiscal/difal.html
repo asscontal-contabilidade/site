@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de DIFAL ES</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            background-color: #f0f2f5;
+        }
+        .controls {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-between;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            min-width: 150px;
+        }
+        .form-group label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-group input, .form-group select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: right;
+        }
+        .difal-container {
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #d9d9d9;
+            text-align: center;
+            font-size: 38px;
+            padding: 15px;
+            border: 1px solid #000;
+            border-bottom: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 36px;
+            background-color: #fff;
+        }
+        td {
+            border: 1px solid #000;
+            padding: 12px 5px;
+            width: 33.33%;
+        }
+        .bg-green { background-color: #3aa853; color: #000; }
+        .bg-red { background-color: #ff0000; color: #ffff00; font-weight: bold; }
+        .bg-yellow { background-color: #ffff00; color: #ff0000; font-weight: bold; }
+        
+        @media (max-width: 600px) {
+            table { font-size: 24px; }
+            .header { font-size: 28px; }
+            .form-group { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Campos de Entrada -->
+    <div class="controls">
+        <div class="form-group">
+            <label for="valorOp">Valor da Operação (R$)</label>
+            <input type="text" id="valorOp" value="990,00" oninput="formatarMoeda(this); calcularDIFAL();">
+        </div>
+        <div class="form-group">
+            <label for="aliqInter">Alíq. Interestadual (%)</label>
+            <select id="aliqInter" onchange="calcularDIFAL()">
+                <option value="4">4%</option>
+                <option value="7">7%</option>
+                <option value="12" selected>12%</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="aliqIntra">Alíq. Interna ES (%)</label>
+            <input type="number" id="aliqIntra" value="17" step="0.1" oninput="calcularDIFAL()">
+        </div>
+    </div>
+
+    <!-- Tabela de Resultados -->
+    <div class="difal-container">
+        <div class="header" id="tituloTabela">DIFAL ES - 12%</div>
+        <table>
+            <tr>
+                <td class="bg-green" id="r1c1">990,00</td>
+                <td class="bg-red" id="r1c2">12,00%</td>
+                <td id="r1c3">118,80</td>
+            </tr>
+            <tr>
+                <td colspan="3" id="r2c1">871,20</td>
+            </tr>
+            <tr>
+                <td id="r3c1">871,20</td>
+                <td id="r3c2">0,83</td>
+                <td id="r3c3">1.049,64</td>
+            </tr>
+            <tr>
+                <td id="r4c1">1.049,64</td>
+                <td id="r4c2">17,00%</td>
+                <td id="r4c3">178,44</td>
+            </tr>
+            <tr>
+                <td id="r5c1">178,44</td>
+                <td id="r5c2">118,80</td>
+                <td class="bg-yellow" id="r5c3">59,64</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        // Formatar campo de moeda ao digitar
+        function formatarMoeda(elemento) {
+            let valor = elemento.value.replace(/\D/g, "");
+            valor = (valor / 100).toFixed(2) + "";
+            valor = valor.replace(".", ",");
+            valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+            elemento.value = valor;
+        }
+
+        // Converter string de moeda (ex: "1.049,64") para número
+        function parseBRL(val) {
+            if (!val) return 0;
+            return parseFloat(val.replace(/\./g, "").replace(",", ".")) || 0;
+        }
+
+        // Converter número para string de moeda pt-BR
+        function formatBRL(num) {
+            return num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        // Lógica Principal de Cálculo do DIFAL
+        function calcularDIFAL() {
+            let valorOp = parseBRL(document.getElementById('valorOp').value);
+            let aliqInter = parseFloat(document.getElementById('aliqInter').value) || 0;
+            let aliqIntra = parseFloat(document.getElementById('aliqIntra').value) || 0;
+
+            if (valorOp === 0) return;
+
+            // Fórmulas reproduzidas da planilha
+            let icmsOrigem = valorOp * (aliqInter / 100);
+            let valorSemIcms = valorOp - icmsOrigem;
+            
+            let fatorDivisor = 1 - (aliqIntra / 100);
+            let baseCalculoDupla = valorSemIcms / fatorDivisor;
+            
+            let icmsDestino = baseCalculoDupla * (aliqIntra / 100);
+            let difal = icmsDestino - icmsOrigem;
+
+            // Atualizar os Textos na Tabela
+            document.getElementById('tituloTabela').innerText = `DIFAL ES - ${aliqInter}%`;
+
+            // Linha 1
+            document.getElementById('r1c1').innerText = formatBRL(valorOp);
+            document.getElementById('r1c2').innerText = formatBRL(aliqInter) + "%";
+            document.getElementById('r1c3').innerText = formatBRL(icmsOrigem);
+
+            // Linha 2
+            document.getElementById('r2c1').innerText = formatBRL(valorSemIcms);
+
+            // Linha 3
+            document.getElementById('r3c1').innerText = formatBRL(valorSemIcms);
+            document.getElementById('r3c2').innerText = fatorDivisor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('r3c3').innerText = formatBRL(baseCalculoDupla);
+
+            // Linha 4
+            document.getElementById('r4c1').innerText = formatBRL(baseCalculoDupla);
+            document.getElementById('r4c2').innerText = formatBRL(aliqIntra) + "%";
+            document.getElementById('r4c3').innerText = formatBRL(icmsDestino);
+
+            // Linha 5
+            document.getElementById('r5c1').innerText = formatBRL(icmsDestino);
+            document.getElementById('r5c2').innerText = formatBRL(icmsOrigem);
+            document.getElementById('r5c3').innerText = formatBRL(difal);
+        }
+
+        // Calcula automaticamente ao carregar a página
+        calcularDIFAL();
+    </script>
+</body>
+</html>
