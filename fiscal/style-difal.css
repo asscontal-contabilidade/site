@@ -1,1 +1,12 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
+:root {
+    --color-primary: #079dcc;
+    --color-primary-dark: #047fa8;
+    --color-primary-light: #e5f7fc;
+
+    --color-text: #1e293
