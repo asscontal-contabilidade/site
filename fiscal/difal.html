@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asscontal Assessoria Contábil - Calculadora de DIFAL ES</title>
+    <title>Calculadora de DIFAL ES - Asscontal</title>
     <!-- Fonte moderna do Google -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -50,7 +50,7 @@
             flex-direction: column;
         }
 
-        /* Seção da Logomarca */
+        /* Seção da Logomarca e Título */
         .logo-section {
             width: 100%;
             text-align: center;
@@ -59,9 +59,16 @@
         }
 
         .logo-section img {
-            max-height: 70px;
+            max-height: 105px;
             max-width: 100%;
             object-fit: contain;
+        }
+
+        .logo-section h2 {
+            margin-top: 15px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
         }
 
         /* Seção de Controles */
@@ -178,6 +185,9 @@
             .logo-section {
                 padding: 20px 15px 5px 15px;
             }
+            .logo-section h2 {
+                font-size: 1.25rem;
+            }
             .controls-section, .result-section {
                 padding: 20px 15px;
             }
@@ -201,10 +211,10 @@
 
     <div class="calculator-container">
         
-        <!-- Área da Logomarca -->
+        <!-- Área da Logomarca e Título -->
         <div class="logo-section">
-            <!-- Para funcionar corretamente, certifique-se de ter um arquivo chamado logo.png na mesma pasta que este HTML -->
             <img src="https://asscontal.com.br/images/logo-2019-190x105.png" alt="Logomarca Asscontal">
+            <h2>Calculadora DIFAL</h2>
         </div>
 
         <!-- Controles de Entrada -->
