@@ -13,44 +13,61 @@
         content="Calculadora de DIFAL para operações destinadas ao Estado do Espírito Santo."
     >
 
+    <meta name="theme-color" content="#f8fafc">
+
     <title>Calculadora DIFAL ES - Asscontal</title>
 
-    <!-- Arquivo CSS localizado na mesma pasta do difal.html -->
-    <link rel="stylesheet" href="./style-difal.css?v=1.0">
+    <link
+        rel="stylesheet"
+        href="/fiscal/style-difal.css?v=20260902"
+    >
+
+    <script
+        src="/fiscal/difal.js?v=20260902"
+        defer
+    ></script>
 </head>
 
 <body>
     <main class="calculator-container">
         <header class="logo-section">
             <img
-                src="https://asscontal.com.br/images/logo-2019-190x105.png"
+                src="/images/logo-2019-190x105.png"
                 alt="Asscontal Assessoria Contábil"
                 width="190"
                 height="105"
             >
 
             <h1>Calculadora DIFAL</h1>
+
+            <p class="subtitle">
+                Diferencial de Alíquota – Espírito Santo
+            </p>
         </header>
 
         <section
             class="controls-section"
             aria-label="Informações para o cálculo do DIFAL"
         >
-            <div class="form-group">
+            <div class="form-group form-group-large">
                 <label for="valorOp">
-                    Valor da Operação (R$)
+                    Valor da Operação
                 </label>
 
-                <input
-                    type="text"
-                    id="valorOp"
-                    name="valorOp"
-                    value="990,00"
-                    inputmode="decimal"
-                    autocomplete="off"
-                    spellcheck="false"
-                    aria-label="Valor da operação em reais"
-                >
+                <div class="input-prefix">
+                    <span aria-hidden="true">R$</span>
+
+                    <input
+                        type="text"
+                        id="valorOp"
+                        name="valorOp"
+                        value="990,00"
+                        inputmode="decimal"
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-label="Valor da operação em reais"
+                    >
+                </div>
             </div>
 
             <div class="form-group">
@@ -71,19 +88,23 @@
 
             <div class="form-group">
                 <label for="aliqIntra">
-                    Alíquota Interna ES (%)
+                    Alíquota Interna ES
                 </label>
 
-                <input
-                    type="text"
-                    id="aliqIntra"
-                    name="aliqIntra"
-                    value="17,00"
-                    inputmode="decimal"
-                    autocomplete="off"
-                    spellcheck="false"
-                    aria-label="Alíquota interna do Espírito Santo"
-                >
+                <div class="input-suffix">
+                    <input
+                        type="text"
+                        id="aliqIntra"
+                        name="aliqIntra"
+                        value="17,00"
+                        inputmode="decimal"
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-label="Alíquota interna do Espírito Santo"
+                    >
+
+                    <span aria-hidden="true">%</span>
+                </div>
             </div>
         </section>
 
@@ -92,8 +113,24 @@
             aria-label="Resultado do cálculo"
             aria-live="polite"
         >
-            <div class="table-header" id="tituloTabela">
-                DIFAL ES - 12%
+            <div class="result-title">
+                <div>
+                    <span class="result-label">
+                        Resultado
+                    </span>
+
+                    <h2 id="tituloTabela">
+                        DIFAL ES – 12,00%
+                    </h2>
+                </div>
+
+                <div class="result-total">
+                    <span>DIFAL devido</span>
+
+                    <strong id="resultadoPrincipal">
+                        R$ 59,64
+                    </strong>
+                </div>
             </div>
 
             <div class="table-container">
@@ -101,74 +138,146 @@
                     class="difal-table"
                     aria-label="Memória de cálculo do DIFAL"
                 >
+                    <thead>
+                        <tr>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Alíquota/Fator</th>
+                            <th scope="col">Valor</th>
+                        </tr>
+                    </thead>
+
                     <tbody>
                         <tr>
-                            <td class="bg-green" id="r1c1">
-                                990,00
-                            </td>
+                            <td>Valor da operação</td>
 
-                            <td class="bg-red" id="r1c2">
+                            <td
+                                class="table-rate"
+                                id="r1c2"
+                            >
                                 12,00%
                             </td>
 
-                            <td id="r1c3">
-                                118,80
+                            <td
+                                class="table-value"
+                                id="r1c1"
+                            >
+                                R$ 990,00
                             </td>
                         </tr>
 
                         <tr>
+                            <td>ICMS de origem</td>
+
                             <td
-                                colspan="3"
-                                class="bg-gray"
+                                class="table-rate"
+                                id="r2c2"
+                            >
+                                12,00%
+                            </td>
+
+                            <td
+                                class="table-value"
+                                id="r1c3"
+                            >
+                                R$ 118,80
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Valor sem ICMS</td>
+
+                            <td class="table-rate">—</td>
+
+                            <td
+                                class="table-value"
                                 id="r2c1"
                             >
-                                871,20
+                                R$ 871,20
                             </td>
                         </tr>
 
                         <tr>
-                            <td id="r3c1">
-                                871,20
-                            </td>
+                            <td>Base de cálculo por dentro</td>
 
-                            <td id="r3c2">
+                            <td
+                                class="table-rate"
+                                id="r3c2"
+                            >
                                 0,83
                             </td>
 
-                            <td id="r3c3">
-                                1.049,64
+                            <td
+                                class="table-value"
+                                id="r3c3"
+                            >
+                                R$ 1.049,64
                             </td>
                         </tr>
 
                         <tr>
-                            <td id="r4c1">
-                                1.049,64
-                            </td>
+                            <td>ICMS do destino</td>
 
-                            <td id="r4c2">
+                            <td
+                                class="table-rate"
+                                id="r4c2"
+                            >
                                 17,00%
                             </td>
 
-                            <td id="r4c3">
-                                178,44
+                            <td
+                                class="table-value"
+                                id="r4c3"
+                            >
+                                R$ 178,44
                             </td>
                         </tr>
 
-                        <tr>
-                            <td id="r5c1">
-                                178,44
+                        <tr class="difal-total-row">
+                            <td>DIFAL devido ao ES</td>
+
+                            <td class="table-rate">
+                                Destino − origem
                             </td>
 
-                            <td id="r5c2">
-                                118,80
-                            </td>
-
-                            <td class="bg-yellow" id="r5c3">
-                                59,64
+                            <td
+                                class="table-value"
+                                id="r5c3"
+                            >
+                                R$ 59,64
                             </td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <div class="calculation-summary">
+                <div>
+                    <span>ICMS destino</span>
+
+                    <strong id="r5c1">
+                        R$ 178,44
+                    </strong>
+                </div>
+
+                <span class="summary-symbol">−</span>
+
+                <div>
+                    <span>ICMS origem</span>
+
+                    <strong id="r5c2">
+                        R$ 118,80
+                    </strong>
+                </div>
+
+                <span class="summary-symbol">=</span>
+
+                <div class="summary-highlight">
+                    <span>DIFAL</span>
+
+                    <strong id="resultadoResumo">
+                        R$ 59,64
+                    </strong>
+                </div>
             </div>
 
             <p
@@ -181,328 +290,20 @@
 
         <footer class="calculator-footer">
             <p>
-                Ferramenta de simulação. Confirme os valores antes do
-                recolhimento.
+                Esta ferramenta é uma simulação. Confirme a operação,
+                a legislação aplicável e os valores antes do recolhimento.
+            </p>
+
+            <p>
+                Asscontal Assessoria Contábil
             </p>
         </footer>
     </main>
 
-    <script>
-        (function () {
-            "use strict";
-
-            var valorOpInput =
-                document.getElementById("valorOp");
-
-            var aliqInterSelect =
-                document.getElementById("aliqInter");
-
-            var aliqIntraInput =
-                document.getElementById("aliqIntra");
-
-            var validationMessage =
-                document.getElementById("validationMessage");
-
-            /**
-             * Converte um número no formato brasileiro para Number.
-             * Exemplos:
-             * 1.250,50 -> 1250.50
-             * 17,00    -> 17
-             */
-            function parseNumeroBR(valor) {
-                if (valor === null || valor === undefined) {
-                    return 0;
-                }
-
-                var texto = String(valor)
-                    .trim()
-                    .replace(/\s/g, "")
-                    .replace(/\./g, "")
-                    .replace(",", ".")
-                    .replace(/[^\d.-]/g, "");
-
-                var numero = Number(texto);
-
-                if (!Number.isFinite(numero)) {
-                    return 0;
-                }
-
-                return numero;
-            }
-
-            /**
-             * Formata um número com duas casas decimais no padrão brasileiro.
-             */
-            function formatarNumeroBR(numero) {
-                return Number(numero).toLocaleString("pt-BR", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
-            }
-
-            /**
-             * Formata o percentual no padrão brasileiro.
-             */
-            function formatarPercentual(numero) {
-                return formatarNumeroBR(numero) + "%";
-            }
-
-            /**
-             * Formata o valor da operação enquanto o usuário digita.
-             */
-            function formatarCampoMoeda(elemento) {
-                var somenteNumeros =
-                    elemento.value.replace(/\D/g, "");
-
-                if (somenteNumeros === "") {
-                    elemento.value = "";
-                    return;
-                }
-
-                var numero = Number(somenteNumeros) / 100;
-
-                elemento.value = formatarNumeroBR(numero);
-            }
-
-            /**
-             * Permite somente números, vírgula e ponto no percentual.
-             */
-            function limparCampoPercentual(elemento) {
-                var valor = elemento.value
-                    .replace(/[^\d,.]/g, "")
-                    .replace(/\./g, ",");
-
-                var partes = valor.split(",");
-
-                if (partes.length > 2) {
-                    valor =
-                        partes.shift() + "," + partes.join("");
-                }
-
-                elemento.value = valor;
-            }
-
-            /**
-             * Exibe uma mensagem de validação.
-             */
-            function mostrarErro(mensagem) {
-                validationMessage.textContent = mensagem;
-                validationMessage.hidden = false;
-            }
-
-            /**
-             * Esconde a mensagem de validação.
-             */
-            function esconderErro() {
-                validationMessage.textContent = "";
-                validationMessage.hidden = true;
-            }
-
-            /**
-             * Atualiza uma célula pelo ID.
-             */
-            function atualizarCelula(id, valor) {
-                var elemento = document.getElementById(id);
-
-                if (elemento) {
-                    elemento.textContent = valor;
-                }
-            }
-
-            /**
-             * Executa o cálculo do DIFAL.
-             */
-            function calcularDIFAL() {
-                var valorOp =
-                    parseNumeroBR(valorOpInput.value);
-
-                var aliqInter =
-                    Number(aliqInterSelect.value) || 0;
-
-                var aliqIntra =
-                    parseNumeroBR(aliqIntraInput.value);
-
-                esconderErro();
-
-                if (valorOp <= 0) {
-                    mostrarErro(
-                        "Informe um valor de operação maior que zero."
-                    );
-
-                    return;
-                }
-
-                if (aliqInter < 0 || aliqInter >= 100) {
-                    mostrarErro(
-                        "A alíquota interestadual informada é inválida."
-                    );
-
-                    return;
-                }
-
-                if (aliqIntra <= 0 || aliqIntra >= 100) {
-                    mostrarErro(
-                        "Informe uma alíquota interna entre 0 e 100%."
-                    );
-
-                    return;
-                }
-
-                var fatorDivisor =
-                    1 - (aliqIntra / 100);
-
-                if (fatorDivisor <= 0) {
-                    mostrarErro(
-                        "Não foi possível calcular o fator divisor."
-                    );
-
-                    return;
-                }
-
-                /*
-                 * ICMS destacado na origem.
-                 */
-                var icmsOrigem =
-                    valorOp * (aliqInter / 100);
-
-                /*
-                 * Retira o ICMS da operação.
-                 */
-                var valorSemIcms =
-                    valorOp - icmsOrigem;
-
-                /*
-                 * Base de cálculo por dentro.
-                 */
-                var baseCalculoDupla =
-                    valorSemIcms / fatorDivisor;
-
-                /*
-                 * ICMS devido no destino.
-                 */
-                var icmsDestino =
-                    baseCalculoDupla * (aliqIntra / 100);
-
-                /*
-                 * Diferença de alíquota.
-                 */
-                var difal =
-                    icmsDestino - icmsOrigem;
-
-                document
-                    .getElementById("tituloTabela")
-                    .textContent =
-                        "DIFAL ES - " +
-                        formatarNumeroBR(aliqInter) +
-                        "%";
-
-                atualizarCelula(
-                    "r1c1",
-                    formatarNumeroBR(valorOp)
-                );
-
-                atualizarCelula(
-                    "r1c2",
-                    formatarPercentual(aliqInter)
-                );
-
-                atualizarCelula(
-                    "r1c3",
-                    formatarNumeroBR(icmsOrigem)
-                );
-
-                atualizarCelula(
-                    "r2c1",
-                    formatarNumeroBR(valorSemIcms)
-                );
-
-                atualizarCelula(
-                    "r3c1",
-                    formatarNumeroBR(valorSemIcms)
-                );
-
-                atualizarCelula(
-                    "r3c2",
-                    fatorDivisor.toLocaleString("pt-BR", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    })
-                );
-
-                atualizarCelula(
-                    "r3c3",
-                    formatarNumeroBR(baseCalculoDupla)
-                );
-
-                atualizarCelula(
-                    "r4c1",
-                    formatarNumeroBR(baseCalculoDupla)
-                );
-
-                atualizarCelula(
-                    "r4c2",
-                    formatarPercentual(aliqIntra)
-                );
-
-                atualizarCelula(
-                    "r4c3",
-                    formatarNumeroBR(icmsDestino)
-                );
-
-                atualizarCelula(
-                    "r5c1",
-                    formatarNumeroBR(icmsDestino)
-                );
-
-                atualizarCelula(
-                    "r5c2",
-                    formatarNumeroBR(icmsOrigem)
-                );
-
-                atualizarCelula(
-                    "r5c3",
-                    formatarNumeroBR(difal)
-                );
-            }
-
-            valorOpInput.addEventListener(
-                "input",
-                function () {
-                    formatarCampoMoeda(valorOpInput);
-                    calcularDIFAL();
-                }
-            );
-
-            aliqInterSelect.addEventListener(
-                "change",
-                calcularDIFAL
-            );
-
-            aliqIntraInput.addEventListener(
-                "input",
-                function () {
-                    limparCampoPercentual(aliqIntraInput);
-                    calcularDIFAL();
-                }
-            );
-
-            aliqIntraInput.addEventListener(
-                "blur",
-                function () {
-                    var percentual =
-                        parseNumeroBR(aliqIntraInput.value);
-
-                    if (percentual > 0 && percentual < 100) {
-                        aliqIntraInput.value =
-                            formatarNumeroBR(percentual);
-                    }
-
-                    calcularDIFAL();
-                }
-            );
-
-            calcularDIFAL();
-        })();
-    </script>
+    <noscript>
+        <div class="noscript-message">
+            Ative o JavaScript do navegador para utilizar a calculadora.
+        </div>
+    </noscript>
 </body>
 </html>
