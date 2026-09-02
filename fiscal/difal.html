@@ -1,399 +1,9 @@
-<HTML>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculo de DIFAL ES - 12%</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            padding: 40px;
-            background-color: #f0f2f5;
-        }
-        .difal-container {
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombrinha leve ao redor */
-        }
-        .header {
-            background-color: #d9d9d9; /* Cinza do cabeçalho */
-            text-align: center;
-            font-size: 38px;
-            padding: 15px;
-            border: 1px solid #000;
-            border-bottom: none;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: center;
-            font-size: 36px;
-            background-color: #fff;
-        }
-        td {
-            border: 1px solid #000;
-            padding: 12px 5px;
-            width: 33.33%;
-        }
-        
-        /* Classes de Cores baseadas na imagem */
-        .bg-green { 
-            background-color: #3aa853; 
-            color: #000; 
-        }
-        .bg-red { 
-            background-color: #ff0000; 
-            color: #ffff00; 
-            font-weight: bold; 
-        }
-        .bg-yellow { 
-            background-color: #ffff00; 
-            color: #ff0000; 
-        }
-    </style>
-</head>
-<body>
-
-    <div class="difal-container">
-        <div class="header">DIFAL ES - 12%</div>
-        <table>
-            <!-- Linha 1 -->
-            <tr>
-                <td class="bg-green">990,00</td>
-                <td class="bg-red">12,00%</td>
-                <td>118,80</td>
-            </tr>
-            <!-- Linha 2 -->
-            <tr>
-                <td colspan="3">871,20</td>
-            </tr>
-            <!-- Linha 3 -->
-            <tr>
-                <td>871,20</td>
-                <td>0,83</td>
-                <td>1.049,64</td>
-            </tr>
-            <!-- Linha 4 -->
-            <tr>
-                <td>1.049,64</td>
-                <td>17,00%</td>
-                <td>178,44</td>
-            </tr>
-            <!-- Linha 5 -->
-            <tr>
-                <td>178,44</td>
-                <td>118,80</td>
-                <td class="bg-yellow">59,64</td>
-            </tr>
-        </table>
-    </div>
-
-</body>
-</html>
-Detalhes do Layout
-A tag <td colspan="3"> na segunda linha faz com que a célula ocupe as 3 colunas, assim como na planilha.
-
-Criei as classes de estilo (bg-green, bg-red, bg-yellow) separadas no <style>, o que facilita bastante caso você queira transformar esse HTML em um sistema dinâmico/calculadora com JavaScript (JS) no futuro.
-
-Se ei te enviar o link da planilha consegue fazer o script ficar funcional com todas as formulas ?
-
-Sim! Se você enviar o link da planilha (ou detalhar as células e as fórmulas que ela utiliza), posso analisar a estrutura e montar o script completo e funcional.
-
-Você tem duas opções principais para esse projeto:
-
-1. Tudo no HTML / JavaScript (Calculadora Automática)
-As fórmulas da planilha são convertidas diretamente para código JavaScript dentro da página HTML.
-
-Como funciona: Quando o usuário digita um valor no HTML, todos os campos (como a base de cálculo, o ICMS de origem, a alíquota interna e o resultado final do DIFAL) são recalculados instantaneamente na tela, sem precisar depender da planilha estar aberta.
-
-2. HTML Integrado ao Google Sheets (Google Apps Script Web App)
-O HTML conversa diretamente com a sua planilha do Google através do Apps Script.
-
-Como funciona: O script lê os valores da planilha em tempo real ou grava os resultados gerados pelo HTML de volta nas linhas e colunas da planilha.
-
-Como podemos prosseguir:
-Você pode compartilhar o link da planilha aqui ou colar as fórmulas de cada célula. A partir disso, farei a conversão das regras para o código (JavaScript/Apps Script) e atualizarei a estrutura HTML para que tudo funcione dinamicamente!
-
-https://docs.google.com/spreadsheets/d/1wZMojb2BiP9io6Yu-zB4r5FWuuFNeGj03ANsPnAbDbA/edit?usp=sharing
-
-Analisei a sua planilha! Ela usa a regra de Base Dupla para calcular o DIFAL do Espírito Santo, fazendo os seguintes passos:  
-DIFAL - Base Dupla
-
-Calcula o ICMS Origem: Valor da Operação * Alíquota Interestadual.  
-DIFAL - Base Dupla
-
-Exclui o ICMS da Base: Valor da Operação - ICMS Origem.  
-DIFAL - Base Dupla
-
-Acha o Divisor Interno: 1 - Alíquota Interna (ex: 1 - 0,17 = 0,83).  
-DIFAL - Base Dupla
-
-Calcula a Base Dupla (com ICMS interno): Valor sem ICMS / Divisor Interno.  
-DIFAL - Base Dupla
-
-Calcula o ICMS Destino: Base Dupla * Alíquota Interna.  
-DIFAL - Base Dupla
-
-Encontra o DIFAL final: ICMS Destino - ICMS Origem.  
-DIFAL - Base Dupla
-
-Eu criei um HTML interativo contendo toda essa lógica. Ele tem pequenos campos no topo para você digitar os valores e ele monta a tabela instantaneamente na mesma formatação.  
-DIFAL - Base Dupla
-
-Ícone do app HTML
-calculadora_difal_es_dinamica
- HTML 
-Para utilizar ou hospedar em uma página (como no GitHub Pages, igual você costuma fazer para seus blogs), você pode copiar o código completo abaixo:
-
-HTML
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de DIFAL ES</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px;
-            background-color: #f0f2f5;
-        }
-        .controls {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 600px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: space-between;
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            width: 30%;
-            min-width: 150px;
-        }
-        .form-group label {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #333;
-        }
-        .form-group input, .form-group select {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            text-align: right;
-        }
-        .difal-container {
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .header {
-            background-color: #d9d9d9;
-            text-align: center;
-            font-size: 38px;
-            padding: 15px;
-            border: 1px solid #000;
-            border-bottom: none;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: center;
-            font-size: 36px;
-            background-color: #fff;
-        }
-        td {
-            border: 1px solid #000;
-            padding: 12px 5px;
-            width: 33.33%;
-        }
-        .bg-green { background-color: #3aa853; color: #000; }
-        .bg-red { background-color: #ff0000; color: #ffff00; font-weight: bold; }
-        .bg-yellow { background-color: #ffff00; color: #ff0000; font-weight: bold; }
-        
-        @media (max-width: 600px) {
-            table { font-size: 24px; }
-            .header { font-size: 28px; }
-            .form-group { width: 100%; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Campos de Entrada -->
-    <div class="controls">
-        <div class="form-group">
-            <label for="valorOp">Valor da Operação (R$)</label>
-            <input type="text" id="valorOp" value="990,00" oninput="formatarMoeda(this); calcularDIFAL();">
-        </div>
-        <div class="form-group">
-            <label for="aliqInter">Alíq. Interestadual (%)</label>
-            <select id="aliqInter" onchange="calcularDIFAL()">
-                <option value="4">4%</option>
-                <option value="7">7%</option>
-                <option value="12" selected>12%</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="aliqIntra">Alíq. Interna ES (%)</label>
-            <input type="number" id="aliqIntra" value="17" step="0.1" oninput="calcularDIFAL()">
-        </div>
-    </div>
-
-    <!-- Tabela de Resultados -->
-    <div class="difal-container">
-        <div class="header" id="tituloTabela">DIFAL ES - 12%</div>
-        <table>
-            <tr>
-                <td class="bg-green" id="r1c1">990,00</td>
-                <td class="bg-red" id="r1c2">12,00%</td>
-                <td id="r1c3">118,80</td>
-            </tr>
-            <tr>
-                <td colspan="3" id="r2c1">871,20</td>
-            </tr>
-            <tr>
-                <td id="r3c1">871,20</td>
-                <td id="r3c2">0,83</td>
-                <td id="r3c3">1.049,64</td>
-            </tr>
-            <tr>
-                <td id="r4c1">1.049,64</td>
-                <td id="r4c2">17,00%</td>
-                <td id="r4c3">178,44</td>
-            </tr>
-            <tr>
-                <td id="r5c1">178,44</td>
-                <td id="r5c2">118,80</td>
-                <td class="bg-yellow" id="r5c3">59,64</td>
-            </tr>
-        </table>
-    </div>
-
-    <script>
-        // Formatar campo de moeda ao digitar
-        function formatarMoeda(elemento) {
-            let valor = elemento.value.replace(/\D/g, "");
-            valor = (valor / 100).toFixed(2) + "";
-            valor = valor.replace(".", ",");
-            valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-            elemento.value = valor;
-        }
-
-        // Converter string de moeda (ex: "1.049,64") para número
-        function parseBRL(val) {
-            if (!val) return 0;
-            return parseFloat(val.replace(/\./g, "").replace(",", ".")) || 0;
-        }
-
-        // Converter número para string de moeda pt-BR
-        function formatBRL(num) {
-            return num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-
-        // Lógica Principal de Cálculo do DIFAL
-        function calcularDIFAL() {
-            let valorOp = parseBRL(document.getElementById('valorOp').value);
-            let aliqInter = parseFloat(document.getElementById('aliqInter').value) || 0;
-            let aliqIntra = parseFloat(document.getElementById('aliqIntra').value) || 0;
-
-            if (valorOp === 0) return;
-
-            // Fórmulas reproduzidas da planilha
-            let icmsOrigem = valorOp * (aliqInter / 100);
-            let valorSemIcms = valorOp - icmsOrigem;
-            
-            let fatorDivisor = 1 - (aliqIntra / 100);
-            let baseCalculoDupla = valorSemIcms / fatorDivisor;
-            
-            let icmsDestino = baseCalculoDupla * (aliqIntra / 100);
-            let difal = icmsDestino - icmsOrigem;
-
-            // Atualizar os Textos na Tabela
-            document.getElementById('tituloTabela').innerText = `DIFAL ES - ${aliqInter}%`;
-
-            // Linha 1
-            document.getElementById('r1c1').innerText = formatBRL(valorOp);
-            document.getElementById('r1c2').innerText = formatBRL(aliqInter) + "%";
-            document.getElementById('r1c3').innerText = formatBRL(icmsOrigem);
-
-            // Linha 2
-            document.getElementById('r2c1').innerText = formatBRL(valorSemIcms);
-
-            // Linha 3
-            document.getElementById('r3c1').innerText = formatBRL(valorSemIcms);
-            document.getElementById('r3c2').innerText = fatorDivisor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            document.getElementById('r3c3').innerText = formatBRL(baseCalculoDupla);
-
-            // Linha 4
-            document.getElementById('r4c1').innerText = formatBRL(baseCalculoDupla);
-            document.getElementById('r4c2').innerText = formatBRL(aliqIntra) + "%";
-            document.getElementById('r4c3').innerText = formatBRL(icmsDestino);
-
-            // Linha 5
-            document.getElementById('r5c1').innerText = formatBRL(icmsDestino);
-            document.getElementById('r5c2').innerText = formatBRL(icmsOrigem);
-            document.getElementById('r5c3').innerText = formatBRL(difal);
-        }
-
-        // Calcula automaticamente ao carregar a página
-        calcularDIFAL();
-    </script>
-</body>
-</html>
-poderia deixar com um visual mais moderno e responsivo
-
-Com certeza! Eu refiz o visual utilizando as melhores práticas modernas de Design e Responsividade (UI/UX).
-
-O seu novo arquivo está pronto:
-
-Ícone do app HTML
-calculadora_difal_es_moderna
- HTML 
-O que foi melhorado nesta versão:
-
-Tipografia Moderna: Adicionei a fonte Inter (padrão de mercado atual) em vez da fonte básica do sistema.
-
-Visual em "Cartão" (Card): O layout agora fica centralizado em um bloco branco com cantos arredondados e uma sombra bem suave (box-shadow), dando cara de sistema web (SaaS).
-
-Cores Suavizadas:
-
-Mantive as células funcionais verde, vermelho e amarelo como você pediu, mas troquei por tons modernos e agradáveis aos olhos (nada de cores fluorescentes que cansam a vista).
-
-O amarelo no final agora tem uma letra vermelha mais escura para dar um excelente contraste.
-
-Campos de Entrada (Inputs): Os campos onde você digita os números agora têm um visual elegante, bordas finas e um anel de destaque azul (focus ring) quando você clica neles.
-
-Responsividade Mobile: Adicionei display: grid e regras flexíveis. Se você abrir o HTML pelo celular, os campos de digitar se empilham perfeitamente um em cima do outro. A fonte da tabela reduz proporcionalmente para caber na tela sem "quebrar" ou "vazar" os números pra fora.
-
-Você pode copiar o código completo abaixo, ou utilizar o arquivo gerado acima para subir para o seu GitHub Pages ou hospedar onde desejar!
-
-
-
-
-O Gemini é uma IA e pode cometer erros.
-
-Modernizing Visuals
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de DIFAL ES - Moderna</title>
+    <title>Calculadora de DIFAL ES - Asscontal</title>
     <!-- Fonte moderna do Google -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -405,7 +15,7 @@ Modernizing Visuals
             --border-color: #e2e8f0;
             --input-focus: #3b82f6;
             
-            /* Cores da tabela baseadas na imagem, mas levemente suavizadas para um visual moderno */
+            /* Cores da tabela */
             --cell-green: #22c55e;
             --cell-red: #ef4444;
             --cell-yellow: #fde047;
@@ -440,9 +50,23 @@ Modernizing Visuals
             flex-direction: column;
         }
 
+        /* Seção da Logomarca */
+        .logo-section {
+            width: 100%;
+            text-align: center;
+            padding: 30px 20px 10px 20px;
+            background-color: #fcfcfc;
+        }
+
+        .logo-section img {
+            max-height: 70px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
         /* Seção de Controles */
         .controls-section {
-            padding: 30px;
+            padding: 20px 30px 30px 30px;
             border-bottom: 1px solid var(--border-color);
             background-color: #fcfcfc;
         }
@@ -478,7 +102,6 @@ Modernizing Visuals
             text-align: right;
         }
         
-        /* O select precisa ficar com texto à esquerda ou centro para melhor UX, mas mantive à direita para padronizar */
         .form-group select {
             text-align: left;
             cursor: pointer;
@@ -512,15 +135,15 @@ Modernizing Visuals
 
         .table-container {
             width: 100%;
-            overflow-x: auto; /* Permite scroll no mobile se necessário */
+            overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             text-align: center;
-            font-size: 1.25rem; /* Menor que o original para ser elegante, mas legível */
-            font-variant-numeric: tabular-nums; /* Números alinhados perfeitamente */
+            font-size: 1.25rem;
+            font-variant-numeric: tabular-nums; 
         }
 
         td {
@@ -531,10 +154,6 @@ Modernizing Visuals
             color: var(--text-main);
             transition: all 0.3s ease;
         }
-
-        /* Arredondamento do fundo da tabela */
-        tr:last-child td:first-child { border-bottom-left-radius: 12px; }
-        tr:last-child td:last-child { border-bottom-right-radius: 12px; }
 
         /* Estilos de Cor Modernizados */
         .bg-green { 
@@ -549,13 +168,16 @@ Modernizing Visuals
         }
         .bg-yellow { 
             background-color: var(--cell-yellow); 
-            color: #b91c1c; /* Vermelho escuro para contraste no amarelo */
+            color: #b91c1c; 
             font-weight: 700;
             font-size: 1.4rem;
         }
 
         /* Responsividade */
         @media (max-width: 600px) {
+            .logo-section {
+                padding: 20px 15px 5px 15px;
+            }
             .controls-section, .result-section {
                 padding: 20px 15px;
             }
@@ -579,7 +201,13 @@ Modernizing Visuals
 
     <div class="calculator-container">
         
-        <!-- Área de Inputs (Controles) -->
+        <!-- Área da Logomarca -->
+        <div class="logo-section">
+            <!-- Caso queira usar um arquivo salvo na sua pasta, troque o src para "sua-logo.png" ou similar -->
+            <img src="https://logo.clearbit.com/asscontal.com.br" alt="Logomarca Asscontal" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<h2 style=\'color:#1e293b; font-weight:700;\'>ASSCONTAL</h2>');">
+        </div>
+
+        <!-- Controles de Entrada -->
         <div class="controls-section">
             <div class="controls-grid">
                 <div class="form-group">
@@ -595,13 +223,13 @@ Modernizing Visuals
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="aliqIntra">Alíquota Interna ES (%)</label>
+                    <label for="aliqIntra">Alíq. Interna ES (%)</label>
                     <input type="number" id="aliqIntra" value="17" step="0.1" oninput="calcularDIFAL()">
                 </div>
             </div>
         </div>
 
-        <!-- Área da Tabela -->
+        <!-- Tabela -->
         <div class="result-section">
             <div class="table-header" id="tituloTabela">DIFAL ES - 12%</div>
             <div class="table-container">
@@ -635,8 +263,8 @@ Modernizing Visuals
 
     </div>
 
+    <!-- Script com a Inteligência das Fórmulas -->
     <script>
-        // Formatar campo de moeda ao digitar
         function formatarMoeda(elemento) {
             let valor = elemento.value.replace(/\D/g, "");
             valor = (valor / 100).toFixed(2) + "";
@@ -645,18 +273,15 @@ Modernizing Visuals
             elemento.value = valor;
         }
 
-        // Converter string de moeda (ex: "1.049,64") para número
         function parseBRL(val) {
             if (!val) return 0;
             return parseFloat(val.replace(/\./g, "").replace(",", ".")) || 0;
         }
 
-        // Converter número para string pt-BR
         function formatBRL(num) {
             return num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        // Lógica de Cálculo do DIFAL
         function calcularDIFAL() {
             let valorOp = parseBRL(document.getElementById('valorOp').value);
             let aliqInter = parseFloat(document.getElementById('aliqInter').value) || 0;
@@ -673,7 +298,6 @@ Modernizing Visuals
             let icmsDestino = baseCalculoDupla * (aliqIntra / 100);
             let difal = icmsDestino - icmsOrigem;
 
-            // Atualizar UI
             document.getElementById('tituloTabela').innerText = `DIFAL ES - ${aliqInter}%`;
 
             document.getElementById('r1c1').innerText = formatBRL(valorOp);
@@ -695,7 +319,7 @@ Modernizing Visuals
             document.getElementById('r5c3').innerText = formatBRL(difal);
         }
 
-        // Init
+        // Inicia o cálculo automático ao abrir a página
         calcularDIFAL();
     </script>
 </body>
