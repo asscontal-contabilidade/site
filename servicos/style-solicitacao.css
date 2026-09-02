@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Formulário de solicitação de serviços da Asscontal Assessoria Contábil.">
+    <meta name="theme-color" content="#08a6d8">
 
+    <title>Asscontal - Solicitação de Serviços</title>
+
+    <link rel="icon" type="image/png" sizes="128x128" href="/images/fundo-azul-128x128.png">
+    <link rel="shortcut icon" type="image/png" href="/images/fundo-azul-128x128.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/images/fundo-azul-128x128.png">
+
+    <link rel="stylesheet" href="/servicos/style-solicitacao.css?v=20260902">
+    <script src="/servicos/solicitacao.js?v=20260902" defer></script>
+</head>
+
+<body>
+    <main class="page-shell">
+        <section class="intro" aria-labelledby="pageTitle">
+            <div>
+                <p class="eyebrow">Asscontal Assessoria Contábil</p>
+                <h1 id="pageTitle">Solicitação de Serviços</h1>
+                <p class="intro-text">Preencha os dados abaixo e imprima a solicitação.</p>
+            </div>
+
+            <div class="actions" aria-label="Ações do formulário">
+                <button class="button button-secondary" id="clearButton" type="button">
+                    Limpar
+                </button>
+                <button class="button button-primary" id="printButton" type="button">
+                    Imprimir solicitação
+                </button>
+            </div>
+        </section>
+
+        <form class="request-card" id="requestForm" autocomplete="off">
+            <header class="document-header">
+                <img
+                    class="brand-logo"
+                    src="/images/logo-2019-190x105.png"
+                    alt="Asscontal Assessoria Contábil"
+                    width="190"
+                    height="105"
+                >
+
+                <div class="document-title">
+                    <span>Formulário interno</span>
+                    <h2>Solicitação de Serviços</h2>
+                </div>
+            </header>
+
+            <div class="document-body">
+                <div class="field field-recipient">
+                    <label for="recipient">Para</label>
+                    <input
+                        id="recipient"
+                        name="recipient"
+                        type="text"
+                        maxlength="100"
+                        placeholder="Informe o destinatário ou setor"
+                        required
+                    >
+                </div>
+
+                <div class="field field-description">
+                    <div class="label-row">
+                        <label for="description">Descrição da solicitação</label>
+                        <span id="characterCounter" aria-live="polite">0/1200</span>
+                    </div>
+                    <textarea
+                        id="description"
+                        name="description"
+                        maxlength="1200"
+                        placeholder="Descreva com clareza o serviço solicitado, prazos e demais informações necessárias."
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="signature-grid">
+                    <div class="field">
+                        <label for="requester">Solicitante</label>
+                        <input
+                            id="requester"
+                            name="requester"
+                            type="text"
+                            maxlength="100"
+                            placeholder="Nome do solicitante"
+                            required
+                        >
+                    </div>
+
+                    <div class="field field-date">
+                        <label for="requestDate">Data</label>
+                        <input
+                            id="requestDate"
+                            name="requestDate"
+                            type="date"
+                            required
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <footer class="document-footer">
+                <p>Tradição, inovação e responsabilidade desde 1971.</p>
+                <span>Documento interno</span>
+            </footer>
+        </form>
+
+        <p class="privacy-note">
+            As informações digitadas permanecem somente neste navegador e não são enviadas para a internet.
+        </p>
+    </main>
+
+    <noscript>
+        <div class="noscript-message">
+            Ative o JavaScript para usar os botões de impressão e limpeza.
+        </div>
+    </noscript>
+</body>
+</html>
