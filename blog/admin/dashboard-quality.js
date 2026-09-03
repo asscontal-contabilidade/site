@@ -83,5 +83,12 @@
       waScript.dataset.dashboardWhatsappLoader='1';
       document.body.appendChild(waScript);
     }
+
+    if(!document.querySelector('script[data-dashboard-instagram-loader]')){
+      const igScript=document.createElement('script');
+      igScript.src='dashboard-instagram-status.js?v=20260903-1';
+      igScript.dataset.dashboardInstagramLoader='1';
+      document.body.appendChild(igScript);
+    }
   });
 })();
