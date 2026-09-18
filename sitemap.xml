@@ -13,5 +13,9 @@
   <loc>https://www.asscontal.com.br/contato.html</loc>
   <priority>0.80</priority>
 </url>
+<url>
+  <loc>https://www.asscontal.com.br/admissao.html</loc>
+  <priority>0.50</priority>
+</url>
 
 </urlset>
