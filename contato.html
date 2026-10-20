@@ -20,6 +20,14 @@
   <meta property="twitter:description" content="Entre em contato com a Asscontal Assessoria Contábil. Telefone, e-mail, endereço e horário de atendimento.">
   <meta property="twitter:image" content="https://www.asscontal.com.br/images/logo-2019-190x105.png">
 
+  <!-- Theme Color & Mobile Manifest -->
+  <meta name="theme-color" content="#0b2545">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Preconnect Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <!-- Canonical -->
   <link rel="canonical" href="https://www.asscontal.com.br/contato.html" />
 
@@ -87,7 +95,7 @@
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
       <a class="navbar-brand" href="index.html">
-        <img src="images/logo-2019-190x105.png" alt="Asscontal Assessoria Contábil">
+        <img src="images/logo-2019-190x105.png" alt="Asscontal Assessoria Contábil" width="190" height="105">
       </a>
 
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Alternar navegação">
@@ -287,10 +295,10 @@
                 </div>
 
                 <div class="col-12 pt-2 d-flex flex-wrap gap-2">
-                  <button type="button" class="btn-whatsapp-submit flex-grow-1" onclick="enviarWhatsApp()">
+                  <button type="button" id="btnSendWhatsApp" class="btn-whatsapp-submit flex-grow-1">
                     <i class="fa-brands fa-whatsapp fs-5"></i> Enviar pelo WhatsApp
                   </button>
-                  <button type="button" class="btn btn-outline-primary rounded-pill px-4" onclick="enviarEmail()">
+                  <button type="button" id="btnSendEmail" class="btn btn-outline-primary rounded-pill px-4">
                     <i class="fa-solid fa-envelope me-1"></i> Enviar por E-mail
                   </button>
                 </div>
@@ -345,47 +353,14 @@
     <span>Fale no WhatsApp</span>
   </a>
 
-  <!-- Script Formulário de Contato -->
-  <script>
-    function getFormData() {
-      const nome = document.getElementById('formNome').value.trim();
-      const telefone = document.getElementById('formTelefone').value.trim();
-      const email = document.getElementById('formEmail').value.trim();
-      const assunto = document.getElementById('formAssunto').value;
-      const mensagem = document.getElementById('formMensagem').value.trim();
-      return { nome, telefone, email, assunto, mensagem };
-    }
-
-    function enviarWhatsApp() {
-      const { nome, telefone, email, assunto, mensagem } = getFormData();
-      if (!nome || !telefone || !mensagem) {
-        alert('Por favor, preencha pelo menos Nome, Telefone e Mensagem antes de enviar.');
-        return;
-      }
-      let texto = `*Contato via Site Asscontal*\n\n`;
-      texto += `*Nome:* ${nome}\n`;
-      texto += `*Telefone:* ${telefone}\n`;
-      if (email) texto += `*E-mail:* ${email}\n`;
-      texto += `*Assunto:* ${assunto}\n`;
-      texto += `*Mensagem:* ${mensagem}`;
-
-      const url = `https://wa.me/552737273600?text=${encodeURIComponent(texto)}`;
-      window.open(url, '_blank');
-    }
-
-    function enviarEmail() {
-      const { nome, telefone, email, assunto, mensagem } = getFormData();
-      if (!nome || !mensagem) {
-        alert('Por favor, preencha seu Nome e a Mensagem antes de enviar.');
-        return;
-      }
-      const subject = `[Site Asscontal] ${assunto} - ${nome}`;
-      let body = `Nome: ${nome}\nTelefone: ${telefone}\nE-mail: ${email}\nAssunto: ${assunto}\n\nMensagem:\n${mensagem}`;
-      window.location.href = `mailto:asscontal@asscontal.com.br?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    }
-  </script>
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="back-to-top" type="button" aria-label="Voltar ao topo" title="Voltar ao topo">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
 
   <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <!-- Application JS (Cookie Consent & Interactions) -->
+  <script src="app.js" defer></script>
 </body>
 </html>

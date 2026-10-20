@@ -1,0 +1,24 @@
+{
+  "name": "Asscontal Assessoria Contábil",
+  "short_name": "Asscontal",
+  "description": "Tradição, inovação e responsabilidade desde 1971. Assessoria Contábil completa para sua empresa.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b2545",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "images/fundo-azul-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/fundo-azul-816x816.png",
+      "sizes": "816x816",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
