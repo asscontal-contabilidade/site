@@ -76,8 +76,8 @@ A personalização do site é simples e centralizada:
 
 ##  Desenvolvimento
 
-O desenvolvimento deste site foi realizado em conjunto
-- **Asscontal Acessoria Contável**: Libério Lorenoni
+O desenvolvimento deste site foi realizado em conjunto:
+- **Asscontal Assessoria Contábil**: Libério Lourenzon
 - **CompuCenter Tecnologia**: Frédney R. Moronari
 
 ---

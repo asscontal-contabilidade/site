@@ -26,6 +26,52 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="images/fundo-azul-128x128.png" type="image/x-icon">
 
+  <!-- Schema.org LocalBusiness / AccountingService -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AccountingService",
+    "name": "Asscontal Assessoria Contábil",
+    "image": "https://www.asscontal.com.br/images/logo-2019-190x105.png",
+    "@id": "https://www.asscontal.com.br",
+    "url": "https://www.asscontal.com.br/contato.html",
+    "telephone": "+55-27-3727-3600",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Avenida Graciano Neves, 38, 1º andar, Centro",
+      "addressLocality": "São Gabriel da Palha",
+      "addressRegion": "ES",
+      "postalCode": "29780-000",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -19.016305,
+      "longitude": -40.539282
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+        "opens": "08:00",
+        "closes": "17:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Friday",
+        "opens": "08:00",
+        "closes": "17:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/asscontal",
+      "https://www.instagram.com/asscontal/",
+      "https://www.linkedin.com/in/asscontal-assessoria-cont%C3%A1bil-41a57b123/"
+    ]
+  }
+  </script>
+
   <!-- Bootstrap 5 CSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <!-- Font Awesome Icons -->
@@ -53,6 +99,9 @@
           <li class="nav-item">
             <a class="nav-link" href="index.html">Principal</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#sobre">Sobre Nós</a>
+          </li>
 
           <!-- Dropdown Serviços -->
           <li class="nav-item dropdown">
@@ -61,8 +110,10 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="servicosDropdown">
               <li><a class="dropdown-item" href="https://online.asscontal.com.br/intranet/rdnae.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-user-plus me-2 text-primary"></i>Admissão de Empregados</a></li>
-              <li><a class="dropdown-item" href="https://sal.rfb.gov.br/PortalSalInternet/faces/pages/index.xhtml" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-calculator me-2 text-primary"></i>Cálculo de INSS</a></li>
-              <li><a class="dropdown-item" href="https://online.asscontal.com.br/intranet/nfse/index.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-invoice me-2 text-primary"></i>NF de Prestação de Serviços</a></li>
+              <li><a class="dropdown-item" href="fiscal/difal.html"><i class="fa-solid fa-calculator me-2 text-primary"></i>Calculadora DIFAL</a></li>
+              <li><a class="dropdown-item" href="servicos/solicitacao.html"><i class="fa-solid fa-file-lines me-2 text-primary"></i>Solicitação de Serviços</a></li>
+              <li><a class="dropdown-item" href="https://online.asscontal.com.br/intranet/nfse/nfse.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-invoice me-2 text-primary"></i>NF de Prestação de Serviços</a></li>
+              <li><a class="dropdown-item" href="https://sal.rfb.gov.br/PortalSalInternet/faces/pages/index.xhtml" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-percent me-2 text-primary"></i>Cálculo de INSS</a></li>
               <li><a class="dropdown-item" href="https://sicalc.receita.economia.gov.br/sicalc/principal" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe me-2 text-primary"></i>Sicalc Online</a></li>
               <li><a class="dropdown-item" href="http://www.sintegra.gov.br/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-network-wired me-2 text-primary"></i>Sintegra</a></li>
             </ul>
@@ -75,10 +126,10 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="consultasDropdown">
               <li><a class="dropdown-item" href="https://concla.ibge.gov.br/estrutura/ocupacao-estrutura" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-user-tie me-2 text-primary"></i>CBO (Ocupações)</a></li>
-              <li><a class="dropdown-item" href="https://online.asscontal.com.br:3600/intranet/certidoes/index.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-circle-check me-2 text-primary"></i>Certidões Negativas (CND)</a></li>
+              <li><a class="dropdown-item" href="https://online.asscontal.com.br/intranet/certidoes/index.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-circle-check me-2 text-primary"></i>Certidões Negativas (CND)</a></li>
               <li><a class="dropdown-item" href="https://www.freenfe.com.br/busca-de-cfop/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-magnifying-glass-dollar me-2 text-primary"></i>Busca de CFOP</a></li>
               <li><a class="dropdown-item" href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book me-2 text-primary"></i>CLT (Legislação Trabalhista)</a></li>
-              <li><a class="dropdown-item" href="https://online.asscontal.com.br/index.php/s/rCxA2r7tczjkJSj" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-handshake me-2 text-primary"></i>Convenções Coletivas</a></li>
+              <li><a class="dropdown-item" href="https://online.asscontal.com.br/index.php/s/ntteMYNAm6BG78z" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-handshake me-2 text-primary"></i>Convenções Coletivas</a></li>
               <li><a class="dropdown-item" href="https://www.planalto.gov.br/ccivil_03/leis/l8078.htm" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-shield-halved me-2 text-primary"></i>Código Defesa do Consumidor</a></li>
               <li><a class="dropdown-item" href="https://servicos.receita.fazenda.gov.br/Servicos/CPF/ConsultaSituacao/ConsultaPublica.asp" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-id-card me-2 text-primary"></i>Consulta Situação CPF</a></li>
               <li><a class="dropdown-item" href="http://www4.planalto.gov.br/legislacao/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-gavel me-2 text-primary"></i>Legislação Brasileira</a></li>
@@ -95,10 +146,14 @@
               Downloads
             </a>
             <ul class="dropdown-menu" aria-labelledby="downloadsDropdown">
-              <li><a class="dropdown-item" href="https://online.asscontal.com.br/index.php/s/6B5A2xfFD4jxgZk" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf me-2 text-primary"></i>Cartazes Informativos</a></li>
+              <li><a class="dropdown-item" href="https://online.asscontal.com.br/index.php/s/3fYRDtgnMySQF5c" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf me-2 text-primary"></i>Cartazes Informativos</a></li>
               <li><a class="dropdown-item" href="https://anydesk.com/pt/downloads/windows?os=win" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-desktop me-2 text-primary"></i>AnyDesk (Suporte Remoto)</a></li>
               <li><a class="dropdown-item" href="https://sebrae.com.br/sites/PortalSebrae/produtoseservicos/emissornfe" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-receipt me-2 text-primary"></i>Emissor de NFe Gratuito</a></li>
             </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="https://blog.asscontal.com.br/" target="_blank" rel="noopener noreferrer">Blog</a>
           </li>
 
           <li class="nav-item">
@@ -114,74 +169,135 @@
   <section class="contact-hero">
     <div class="container">
       <h1>Fale Conosco</h1>
-      <p>Estamos à disposição para atender você e sua empresa com rapidez e eficiência.</p>
+      <p>Estamos à disposição para atender você e sua empresa com rapidez, precisão e eficiência.</p>
     </div>
   </section>
 
-  <!-- CONTACT CARDS SECTION -->
+  <!-- CONTACT & FORM SECTION -->
   <section class="contact-section">
     <div class="container">
-      <div class="row g-4">
+      <div class="row g-4 align-items-start">
         
-        <!-- Telefone / WhatsApp -->
-        <div class="col-12 col-md-6">
-          <div class="contact-card">
-            <div class="contact-icon">
-              <i class="fa-solid fa-phone"></i>
+        <!-- Contact Information Cards (Coluna Esquerda) -->
+        <div class="col-12 col-lg-5">
+          <div class="row g-3">
+            
+            <!-- Telefone / WhatsApp -->
+            <div class="col-12">
+              <div class="contact-card">
+                <div class="contact-icon">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div>
+                  <h3 class="contact-card-title">Telefone & WhatsApp</h3>
+                  <p class="contact-card-text">
+                    <a href="https://wa.me/552737273600?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20Asscontal." target="_blank" rel="noopener noreferrer">
+                      <i class="fa-brands fa-whatsapp me-1 text-success"></i> +55 (27) 3727-3600
+                    </a>
+                  </p>
+                </div>
+              </div>
             </div>
-            <div>
-              <h3 class="contact-card-title">Telefone & WhatsApp</h3>
-              <p class="contact-card-text">
-                <a href="https://wa.me/552737273600" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp me-1 text-success"></i> +55 27 3727-3600</a>
-              </p>
+
+            <!-- E-mail -->
+            <div class="col-12">
+              <div class="contact-card">
+                <div class="contact-icon">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div>
+                  <h3 class="contact-card-title">E-mail</h3>
+                  <p class="contact-card-text">
+                    <a href="mailto:asscontal@asscontal.com.br">asscontal@asscontal.com.br</a>
+                  </p>
+                </div>
+              </div>
             </div>
+
+            <!-- Endereço -->
+            <div class="col-12">
+              <div class="contact-card">
+                <div class="contact-icon">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <h3 class="contact-card-title">Endereço</h3>
+                  <p class="contact-card-text">
+                    Avenida Graciano Neves, 38, 1º andar, Centro<br>
+                    São Gabriel da Palha - ES, CEP 29780-000
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Horário de Atendimento -->
+            <div class="col-12">
+              <div class="contact-card">
+                <div class="contact-icon">
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                  <h3 class="contact-card-title">Horário de Atendimento</h3>
+                  <p class="contact-card-text">
+                    <strong>Segunda a Quinta:</strong> 08:00 às 11:30 - 13:00 às 17:30<br>
+                    <strong>Sexta-feira:</strong> 08:00 às 11:30 - 13:00 às 17:00
+                  </p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <!-- E-mail -->
-        <div class="col-12 col-md-6">
-          <div class="contact-card">
-            <div class="contact-icon">
-              <i class="fa-solid fa-envelope"></i>
-            </div>
-            <div>
-              <h3 class="contact-card-title">E-mail</h3>
-              <p class="contact-card-text">
-                <a href="mailto:asscontal@asscontal.com.br">asscontal@asscontal.com.br</a>
-              </p>
-            </div>
-          </div>
-        </div>
+        <!-- Interactive Contact Form (Coluna Direita) -->
+        <div class="col-12 col-lg-7">
+          <div class="contact-form-card">
+            <h3 class="fw-bold mb-2 text-primary" style="font-size: 1.5rem;">Envie sua Mensagem</h3>
+            <p class="text-muted mb-4" style="font-size: 0.95rem;">Preencha os campos abaixo para conversar diretamente conosco via WhatsApp ou e-mail.</p>
+            
+            <form id="contactForm" onsubmit="event.preventDefault();">
+              <div class="row g-3">
+                <div class="col-12 col-sm-6">
+                  <label for="formNome" class="form-label">Nome Completo *</label>
+                  <input type="text" id="formNome" class="form-control" placeholder="Seu nome" required>
+                </div>
 
-        <!-- Endereço -->
-        <div class="col-12 col-md-6">
-          <div class="contact-card">
-            <div class="contact-icon">
-              <i class="fa-solid fa-location-dot"></i>
-            </div>
-            <div>
-              <h3 class="contact-card-title">Endereço</h3>
-              <p class="contact-card-text">
-                Avenida Graciano Neves, 38, 1º andar, Centro<br>
-                São Gabriel da Palha - ES, Brasil
-              </p>
-            </div>
-          </div>
-        </div>
+                <div class="col-12 col-sm-6">
+                  <label for="formTelefone" class="form-label">Telefone / WhatsApp *</label>
+                  <input type="tel" id="formTelefone" class="form-control" placeholder="(27) 99999-9999" required>
+                </div>
 
-        <!-- Horário de Atendimento -->
-        <div class="col-12 col-md-6">
-          <div class="contact-card">
-            <div class="contact-icon">
-              <i class="fa-solid fa-clock"></i>
-            </div>
-            <div>
-              <h3 class="contact-card-title">Horário de Atendimento</h3>
-              <p class="contact-card-text">
-                <strong>Segunda a Quinta:</strong> 08:00 às 11:30 - 13:00 às 17:30<br>
-                <strong>Sexta-feira:</strong> 08:00 às 11:30 - 13:00 às 17:00
-              </p>
-            </div>
+                <div class="col-12 col-sm-6">
+                  <label for="formEmail" class="form-label">E-mail</label>
+                  <input type="email" id="formEmail" class="form-control" placeholder="seuemail@exemplo.com">
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <label for="formAssunto" class="form-label">Assunto de Interesse</label>
+                  <select id="formAssunto" class="form-select">
+                    <option value="Abertura de Empresa">Abertura de Nova Empresa</option>
+                    <option value="Migração de Contabilidade">Migrar de Contabilidade</option>
+                    <option value="Assessoria Fiscal e Tributária">Assessoria Fiscal / Tributária</option>
+                    <option value="Departamento Pessoal">Departamento Pessoal / eSocial</option>
+                    <option value="Dúvidas Gerais">Dúvidas Gerais / Outros</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label for="formMensagem" class="form-label">Mensagem *</label>
+                  <textarea id="formMensagem" rows="4" class="form-control" placeholder="Conte brevemente como podemos ajudar..." required></textarea>
+                </div>
+
+                <div class="col-12 pt-2 d-flex flex-wrap gap-2">
+                  <button type="button" class="btn-whatsapp-submit flex-grow-1" onclick="enviarWhatsApp()">
+                    <i class="fa-brands fa-whatsapp fs-5"></i> Enviar pelo WhatsApp
+                  </button>
+                  <button type="button" class="btn btn-outline-primary rounded-pill px-4" onclick="enviarEmail()">
+                    <i class="fa-solid fa-envelope me-1"></i> Enviar por E-mail
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
 
@@ -219,6 +335,52 @@
       <p class="copyright mb-0">&copy; Asscontal Assessoria Contábil - Desde 1971. Todos os direitos reservados.</p>
     </div>
   </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/552737273600?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20os%20servi%C3%A7os%20da%20Asscontal." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp" title="Fale conosco pelo WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span>Fale no WhatsApp</span>
+  </a>
+
+  <!-- Script Formulário de Contato -->
+  <script>
+    function getFormData() {
+      const nome = document.getElementById('formNome').value.trim();
+      const telefone = document.getElementById('formTelefone').value.trim();
+      const email = document.getElementById('formEmail').value.trim();
+      const assunto = document.getElementById('formAssunto').value;
+      const mensagem = document.getElementById('formMensagem').value.trim();
+      return { nome, telefone, email, assunto, mensagem };
+    }
+
+    function enviarWhatsApp() {
+      const { nome, telefone, email, assunto, mensagem } = getFormData();
+      if (!nome || !telefone || !mensagem) {
+        alert('Por favor, preencha pelo menos Nome, Telefone e Mensagem antes de enviar.');
+        return;
+      }
+      let texto = `*Contato via Site Asscontal*\n\n`;
+      texto += `*Nome:* ${nome}\n`;
+      texto += `*Telefone:* ${telefone}\n`;
+      if (email) texto += `*E-mail:* ${email}\n`;
+      texto += `*Assunto:* ${assunto}\n`;
+      texto += `*Mensagem:* ${mensagem}`;
+
+      const url = `https://wa.me/552737273600?text=${encodeURIComponent(texto)}`;
+      window.open(url, '_blank');
+    }
+
+    function enviarEmail() {
+      const { nome, telefone, email, assunto, mensagem } = getFormData();
+      if (!nome || !mensagem) {
+        alert('Por favor, preencha seu Nome e a Mensagem antes de enviar.');
+        return;
+      }
+      const subject = `[Site Asscontal] ${assunto} - ${nome}`;
+      let body = `Nome: ${nome}\nTelefone: ${telefone}\nE-mail: ${email}\nAssunto: ${assunto}\n\nMensagem:\n${mensagem}`;
+      window.location.href = `mailto:asscontal@asscontal.com.br?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+  </script>
 
   <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

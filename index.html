@@ -26,6 +26,52 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="images/fundo-azul-128x128.png" type="image/x-icon">
 
+  <!-- Schema.org LocalBusiness / AccountingService -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AccountingService",
+    "name": "Asscontal Assessoria Contábil",
+    "image": "https://www.asscontal.com.br/images/logo-2019-190x105.png",
+    "@id": "https://www.asscontal.com.br",
+    "url": "https://www.asscontal.com.br",
+    "telephone": "+55-27-3727-3600",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Avenida Graciano Neves, 38, 1º andar, Centro",
+      "addressLocality": "São Gabriel da Palha",
+      "addressRegion": "ES",
+      "postalCode": "29780-000",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -19.016305,
+      "longitude": -40.539282
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+        "opens": "08:00",
+        "closes": "17:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Friday",
+        "opens": "08:00",
+        "closes": "17:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/asscontal",
+      "https://www.instagram.com/asscontal/",
+      "https://www.linkedin.com/in/asscontal-assessoria-cont%C3%A1bil-41a57b123/"
+    ]
+  }
+  </script>
+
   <!-- Bootstrap 5 CSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <!-- Font Awesome Icons -->
@@ -53,6 +99,9 @@
           <li class="nav-item">
             <a class="nav-link active" href="index.html">Principal</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#sobre">Sobre Nós</a>
+          </li>
 
           <!-- Dropdown Serviços -->
           <li class="nav-item dropdown">
@@ -61,8 +110,10 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="servicosDropdown">
               <li><a class="dropdown-item" href="https://online.asscontal.com.br/intranet/rdnae.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-user-plus me-2 text-primary"></i>Admissão de Empregados</a></li>
-              <li><a class="dropdown-item" href="https://sal.rfb.gov.br/PortalSalInternet/faces/pages/index.xhtml" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-calculator me-2 text-primary"></i>Cálculo de INSS</a></li>
+              <li><a class="dropdown-item" href="fiscal/difal.html"><i class="fa-solid fa-calculator me-2 text-primary"></i>Calculadora DIFAL</a></li>
+              <li><a class="dropdown-item" href="servicos/solicitacao.html"><i class="fa-solid fa-file-lines me-2 text-primary"></i>Solicitação de Serviços</a></li>
               <li><a class="dropdown-item" href="https://online.asscontal.com.br/intranet/nfse/nfse.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-invoice me-2 text-primary"></i>NF de Prestação de Serviços</a></li>
+              <li><a class="dropdown-item" href="https://sal.rfb.gov.br/PortalSalInternet/faces/pages/index.xhtml" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-percent me-2 text-primary"></i>Cálculo de INSS</a></li>
               <li><a class="dropdown-item" href="https://sicalc.receita.economia.gov.br/sicalc/principal" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe me-2 text-primary"></i>Sicalc Online</a></li>
               <li><a class="dropdown-item" href="http://www.sintegra.gov.br/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-network-wired me-2 text-primary"></i>Sintegra</a></li>
             </ul>
@@ -99,6 +150,10 @@
               <li><a class="dropdown-item" href="https://anydesk.com/pt/downloads/windows?os=win" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-desktop me-2 text-primary"></i>AnyDesk (Suporte Remoto)</a></li>
               <li><a class="dropdown-item" href="https://sebrae.com.br/sites/PortalSebrae/produtoseservicos/emissornfe" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-receipt me-2 text-primary"></i>Emissor de NFe Gratuito</a></li>
             </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="https://blog.asscontal.com.br/" target="_blank" rel="noopener noreferrer">Blog</a>
           </li>
 
           <li class="nav-item">
@@ -217,11 +272,63 @@
   <!-- CTA BANNER -->
   <section class="hero-banner text-center">
     <div class="container position-relative" style="z-index: 2;">
-      <h2 class="hero-title mb-3">Procurando soluções para sua empresa?</h2>
-      <p class="hero-subtitle mb-4">Podemos te ajudar! Tradição, inovação e responsabilidade técnica a seu serviço.</p>
-      <a href="https://linkme.bio/asscontal/" class="btn btn-hero" target="_blank" rel="noopener noreferrer">
-        <i class="fa-solid fa-comments me-2"></i> Fale com Nossos Especialistas
+      <span class="badge bg-white text-primary px-3 py-2 rounded-pill fw-bold mb-3 shadow-sm">
+        <i class="fa-solid fa-award me-1 text-warning"></i> Tradição Desde 1971 • Mais de 50 Anos de Confiança
+      </span>
+      <h2 class="hero-title mb-3">Procurando soluções contábeis e estratégicas para sua empresa?</h2>
+      <p class="hero-subtitle mb-4">Podemos te ajudar! Tradição, inovação contínua e responsabilidade técnica a serviço do seu crescimento.</p>
+      <a href="https://wa.me/552737273600?text=Ol%C3%A1!%20Gostaria%20de%20conversar%20com%20um%20especialista%20da%20Asscontal." class="btn btn-hero" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp me-2 text-success"></i> Fale com Nossos Especialistas
       </a>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION (SOBRE NÓS) -->
+  <section class="about-section" id="sobre">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-12 col-lg-6">
+          <span class="about-badge">
+            <i class="fa-solid fa-landmark"></i> Tradição e Modernidade
+          </span>
+          <h2 class="about-title">Mais de 5 décadas impulsionando negócios com precisão e inovação</h2>
+          <p class="about-lead">
+            Fundada em 1971, a <strong>Asscontal Assessoria Contábil</strong> consolidou-se como referência em São Gabriel da Palha e no Espírito Santo pela sua integridade, excelência técnica e proximidade com o cliente.
+          </p>
+          <p class="about-text">
+            Aliamos a solidez da nossa trajetória às mais modernas soluções digitais: automação fiscal, portais de autoatendimento, segurança de dados e planejamento tributário customizado. Mais do que atender às exigências legais, apoiamos empreendedores em cada decisão estratégica.
+          </p>
+          <div class="pt-2">
+            <a href="contato.html" class="btn btn-primary rounded-pill px-4 py-2 me-3">
+              <i class="fa-solid fa-envelope me-2"></i> Entre em Contato
+            </a>
+            <a href="https://wa.me/552737273600" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary rounded-pill px-4 py-2">
+              <i class="fa-brands fa-whatsapp me-2"></i> Fale no WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="stat-number">+50</div>
+              <p class="stat-label">Anos de História</p>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">100%</div>
+              <p class="stat-label">Consultivo & Digital</p>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">Ágil</div>
+              <p class="stat-label">Suporte Personalizado</p>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">Segurança</div>
+              <p class="stat-label">Conformidade e Sigilo</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -239,14 +346,24 @@
         <div class="col-12 col-md-6 col-lg-4">
           <div class="specialty-card">
             <svg viewBox="0 0 400 220" class="specialty-img" loading="lazy" decoding="async">
+              <defs>
+                <linearGradient id="gradConf" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0b2545"/>
+                  <stop offset="100%" stop-color="#0077b6"/>
+                </linearGradient>
+              </defs>
               <rect width="400" height="220" fill="#f1f5f9"/>
-              <rect x="140" y="40" width="120" height="140" rx="8" fill="#0b2545" opacity="0.8"/>
-              <path d="M170 80 L230 80 M170 110 L230 110 M170 140 L210 140" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+              <rect x="130" y="35" width="140" height="150" rx="12" fill="url(#gradConf)"/>
+              <circle cx="165" cy="70" r="12" fill="#ffffff" opacity="0.9"/>
+              <circle cx="200" cy="70" r="12" fill="#00b4d8"/>
+              <circle cx="235" cy="70" r="12" fill="#ffffff" opacity="0.9"/>
+              <path d="M160 110 L240 110 M160 135 L240 135 M160 160 L210 160" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
             </svg>
             <div class="specialty-body">
+              <span class="specialty-badge"><i class="fa-solid fa-shirt me-1"></i> Setor Têxtil</span>
               <h3 class="specialty-title">Contabilidade para Confecções</h3>
-              <p class="specialty-text">Dedique-se ao seu processo produtivo e deixe a burocracia fiscal e contábil conosco.</p>
-              <a href="https://linkme.bio/asscontal/" target="_blank" rel="noopener noreferrer" class="text-primary font-weight-bold text-decoration-none">
+              <p class="specialty-text">Dedique-se ao seu processo produtivo e deixe a burocracia fiscal, apuração de estoque e benefícios tributários conosco.</p>
+              <a href="https://wa.me/552737273600?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20contabilidade%20para%20confec%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" class="text-primary font-weight-bold text-decoration-none">
                 Saiba mais <i class="fa-solid fa-chevron-right ms-1 text-xs"></i>
               </a>
             </div>
@@ -257,13 +374,22 @@
         <div class="col-12 col-md-6 col-lg-4">
           <div class="specialty-card">
             <svg viewBox="0 0 400 220" class="specialty-img" loading="lazy" decoding="async">
+              <defs>
+                <linearGradient id="gradCom" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#134074"/>
+                  <stop offset="100%" stop-color="#0096c7"/>
+                </linearGradient>
+              </defs>
               <rect width="400" height="220" fill="#f1f5f9"/>
-              <path d="M120 160 L160 80 L200 160 M200 160 L240 100 L280 160" stroke="#134074" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <circle cx="200" cy="110" r="55" fill="url(#gradCom)"/>
+              <path d="M175 125 L190 140 L225 100" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M165 95 L175 75 L225 75 L235 95" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             </svg>
             <div class="specialty-body">
+              <span class="specialty-badge"><i class="fa-solid fa-store me-1"></i> Varejo & Atacado</span>
               <h3 class="specialty-title">Contabilidade para Comércio</h3>
-              <p class="specialty-text">Ajudamos você a dar uma nova direção e máxima eficiência à gestão tributária do seu comércio.</p>
-              <a href="https://linkme.bio/asscontal/" target="_blank" rel="noopener noreferrer" class="text-primary font-weight-bold text-decoration-none">
+              <p class="specialty-text">Ajudamos você a dar uma nova direção e máxima eficiência à gestão tributária, ICMS, DIFAL e precificação do seu comércio.</p>
+              <a href="https://wa.me/552737273600?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20contabilidade%20para%20com%C3%A9rcio." target="_blank" rel="noopener noreferrer" class="text-primary font-weight-bold text-decoration-none">
                 Saiba mais <i class="fa-solid fa-chevron-right ms-1 text-xs"></i>
               </a>
             </div>
@@ -274,14 +400,21 @@
         <div class="col-12 col-md-6 col-lg-4">
           <div class="specialty-card">
             <svg viewBox="0 0 400 220" class="specialty-img" loading="lazy" decoding="async">
+              <defs>
+                <linearGradient id="gradSaude" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0077b6"/>
+                  <stop offset="100%" stop-color="#48cae4"/>
+                </linearGradient>
+              </defs>
               <rect width="400" height="220" fill="#f1f5f9"/>
-              <circle cx="200" cy="110" r="45" fill="#0077b6" opacity="0.15"/>
-              <path d="M200 80 L200 140 M170 110 L230 110" stroke="#0077b6" stroke-width="8" stroke-linecap="round"/>
+              <rect x="145" y="55" width="110" height="110" rx="20" fill="url(#gradSaude)"/>
+              <path d="M200 80 L200 140 M170 110 L230 110" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
             </svg>
             <div class="specialty-body">
+              <span class="specialty-badge"><i class="fa-solid fa-stethoscope me-1"></i> Área Médica & Saúde</span>
               <h3 class="specialty-title">Contabilidade para Consultórios</h3>
-              <p class="specialty-text">Cuidamos da gestão contábil da sua clínica para que você cuide dos seus pacientes com tranquilidade.</p>
-              <a href="https://linkme.bio/asscontal/" target="_blank" rel="noopener noreferrer" class="text-primary font-weight-bold text-decoration-none">
+              <p class="specialty-text">Cuidamos da gestão contábil da sua clínica ou consultório para que você atenda seus pacientes com tranquilidade e redução de carga tributária.</p>
+              <a href="https://wa.me/552737273600?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20contabilidade%20para%20consult%C3%B3rios%20e%20cl%C3%ADnicas." target="_blank" rel="noopener noreferrer" class="text-primary font-weight-bold text-decoration-none">
                 Saiba mais <i class="fa-solid fa-chevron-right ms-1 text-xs"></i>
               </a>
             </div>
@@ -292,14 +425,22 @@
         <div class="col-12 col-md-6 col-lg-4">
           <div class="specialty-card">
             <svg viewBox="0 0 400 220" class="specialty-img" loading="lazy" decoding="async">
+              <defs>
+                <linearGradient id="gradServ" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0b2545"/>
+                  <stop offset="100%" stop-color="#134074"/>
+                </linearGradient>
+              </defs>
               <rect width="400" height="220" fill="#f1f5f9"/>
-              <rect x="150" y="60" width="100" height="100" rx="10" fill="#0b2545" opacity="0.1"/>
-              <path d="M170 110 L190 130 L230 90" stroke="#0b2545" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <circle cx="200" cy="110" r="50" fill="url(#gradServ)"/>
+              <path d="M185 110 L195 120 L220 95" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <circle cx="200" cy="110" r="35" stroke="#00b4d8" stroke-width="2" fill="none"/>
             </svg>
             <div class="specialty-body">
+              <span class="specialty-badge"><i class="fa-solid fa-briefcase me-1"></i> Prestadores PJ</span>
               <h3 class="specialty-title">Prestadores de Serviço</h3>
-              <p class="specialty-text">Especialistas preparados para gerenciar impostos, faturamento e obrigações do seu negócio.</p>
-              <a href="https://linkme.bio/asscontal/" target="_blank" rel="noopener noreferrer" class="text-primary font-weight-bold text-decoration-none">
+              <p class="specialty-text">Especialistas preparados para emissão de NFSe, apuração de ISS, Simples Nacional, Lucro Presumido e gestão de faturamento.</p>
+              <a href="https://wa.me/552737273600?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20contabilidade%20para%20prestadores%20de%20servi%C3%A7o." target="_blank" rel="noopener noreferrer" class="text-primary font-weight-bold text-decoration-none">
                 Saiba mais <i class="fa-solid fa-chevron-right ms-1 text-xs"></i>
               </a>
             </div>
@@ -310,14 +451,22 @@
         <div class="col-12 col-md-6 col-lg-4">
           <div class="specialty-card">
             <svg viewBox="0 0 400 220" class="specialty-img" loading="lazy" decoding="async">
+              <defs>
+                <linearGradient id="gradCoop" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#134074"/>
+                  <stop offset="100%" stop-color="#0077b6"/>
+                </linearGradient>
+              </defs>
               <rect width="400" height="220" fill="#f1f5f9"/>
-              <circle cx="170" cy="110" r="30" fill="#134074" opacity="0.3"/>
-              <circle cx="230" cy="110" r="30" fill="#0077b6" opacity="0.3"/>
+              <circle cx="170" cy="110" r="38" fill="url(#gradCoop)" opacity="0.85"/>
+              <circle cx="230" cy="110" r="38" fill="#0096c7" opacity="0.75"/>
+              <path d="M195 95 L205 105 L215 95" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
             </svg>
             <div class="specialty-body">
+              <span class="specialty-badge"><i class="fa-solid fa-seedling me-1"></i> Cooperativismo & Agro</span>
               <h3 class="specialty-title">Contabilidade para Cooperativas</h3>
-              <p class="specialty-text">Extensa experiência e conhecimento técnico aprofundado no ramo cooperativista.</p>
-              <a href="https://linkme.bio/asscontal/" target="_blank" rel="noopener noreferrer" class="text-primary font-weight-bold text-decoration-none">
+              <p class="specialty-text">Extensa experiência e conhecimento técnico aprofundado na legislação cooperativista e do agronegócio regional.</p>
+              <a href="https://wa.me/552737273600?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20contabilidade%20para%20cooperativas." target="_blank" rel="noopener noreferrer" class="text-primary font-weight-bold text-decoration-none">
                 Saiba mais <i class="fa-solid fa-chevron-right ms-1 text-xs"></i>
               </a>
             </div>
@@ -328,14 +477,22 @@
         <div class="col-12 col-md-6 col-lg-4">
           <div class="specialty-card">
             <svg viewBox="0 0 400 220" class="specialty-img" loading="lazy" decoding="async">
+              <defs>
+                <linearGradient id="gradMei" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0077b6"/>
+                  <stop offset="100%" stop-color="#0b2545"/>
+                </linearGradient>
+              </defs>
               <rect width="400" height="220" fill="#f1f5f9"/>
-              <rect x="140" y="70" width="120" height="80" rx="8" fill="#0077b6" opacity="0.2"/>
-              <circle cx="200" cy="110" r="18" fill="#0077b6"/>
+              <rect x="140" y="65" width="120" height="90" rx="12" fill="url(#gradMei)"/>
+              <circle cx="200" cy="100" r="18" fill="#ffffff"/>
+              <path d="M185 130 Q200 120 215 130" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
             </svg>
             <div class="specialty-body">
-              <h3 class="specialty-title">Contabilidade para MEI</h3>
-              <p class="specialty-text">Ajudamos você a estruturar seu crescimento empresarial com suporte contábil especializado.</p>
-              <a href="https://linkme.bio/asscontal/" target="_blank" rel="noopener noreferrer" class="text-primary font-weight-bold text-decoration-none">
+              <span class="specialty-badge"><i class="fa-solid fa-user-gear me-1"></i> Empreendedorismo</span>
+              <h3 class="specialty-title">Contabilidade para MEI & PMEs</h3>
+              <p class="specialty-text">Orientação completa para migração de MEI para ME, emissão de guias DAS, declarações anuais e estruturação de crescimento.</p>
+              <a href="https://wa.me/552737273600?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20suporte%20a%20MEI%20e%20PMEs." target="_blank" rel="noopener noreferrer" class="text-primary font-weight-bold text-decoration-none">
                 Saiba mais <i class="fa-solid fa-chevron-right ms-1 text-xs"></i>
               </a>
             </div>
@@ -356,48 +513,53 @@
 
       <div class="row g-4 justify-content-center">
         
-        <div class="col-6 col-md-4 col-lg-2">
+        <div class="col-12 col-md-6 col-lg">
           <div class="service-box">
             <div class="service-icon">
               <i class="fa-solid fa-chart-line"></i>
             </div>
             <h4 class="service-title">Serviços Contábeis</h4>
+            <p class="service-description">Elaboração de balanços, DRE, demonstrações contábeis e relatórios de suporte à tomada de decisões estratégicas.</p>
           </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-2">
+        <div class="col-12 col-md-6 col-lg">
           <div class="service-box">
             <div class="service-icon">
               <i class="fa-solid fa-file-pen"></i>
             </div>
             <h4 class="service-title">Serviços Fiscais</h4>
+            <p class="service-description">Apuração rigorosa de tributos, cumprimento de obrigações acessórias, SPED, NF-e e planejamento fiscal preventivo.</p>
           </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-2">
+        <div class="col-12 col-md-6 col-lg">
           <div class="service-box">
             <div class="service-icon">
               <i class="fa-solid fa-users-gears"></i>
             </div>
             <h4 class="service-title">Departamento Pessoal</h4>
+            <p class="service-description">Gestão completa de folha de pagamento, eSocial, admissões, rescisões, férias e conformidade com a legislação trabalhista.</p>
           </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-2">
+        <div class="col-12 col-md-6 col-lg">
           <div class="service-box">
             <div class="service-icon">
               <i class="fa-solid fa-building-circle-check"></i>
             </div>
             <h4 class="service-title">Legalização Empresas</h4>
+            <p class="service-description">Abertura ágil de empresas, alterações contratuais, encerramentos, obtenção de certidões e regularização perante órgãos públicos.</p>
           </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-2">
+        <div class="col-12 col-md-6 col-lg">
           <div class="service-box">
             <div class="service-icon">
               <i class="fa-solid fa-lightbulb"></i>
             </div>
             <h4 class="service-title">Consultoria</h4>
+            <p class="service-description">Diagnóstico tributário inteligente, reorganização societária e consultoria especializada para alavancar a rentabilidade.</p>
           </div>
         </div>
 
@@ -424,6 +586,12 @@
       <p class="copyright mb-0">&copy; Asscontal Assessoria Contábil - Desde 1971. Todos os direitos reservados.</p>
     </div>
   </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/552737273600?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20os%20servi%C3%A7os%20da%20Asscontal." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp" title="Fale conosco pelo WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span>Fale no WhatsApp</span>
+  </a>
 
   <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

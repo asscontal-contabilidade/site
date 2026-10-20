@@ -444,7 +444,221 @@ footer {
 
 .service-title {
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   color: var(--primary-color);
+  margin-bottom: 0.6rem;
+}
+
+.service-description {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
   margin: 0;
 }
+
+/* About Section */
+.about-section {
+  padding: 5rem 0;
+  background: #ffffff;
+  position: relative;
+}
+
+.about-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 119, 182, 0.1);
+  color: var(--accent-color);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
+
+.about-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  line-height: 1.25;
+  margin-bottom: 1.5rem;
+}
+
+.about-lead {
+  font-size: 1.1rem;
+  color: var(--text-main);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.about-text {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.stat-card {
+  background: var(--bg-light);
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  transition: var(--transition-smooth);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow);
+  border-color: rgba(0, 119, 182, 0.2);
+  background: #ffffff;
+}
+
+.stat-number {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--accent-color);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* Specialty Badges */
+.specialty-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  background: rgba(0, 119, 182, 0.08);
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+  margin-bottom: 0.6rem;
+  width: fit-content;
+}
+
+/* Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  background-color: #25d366;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  border-radius: 50px;
+  padding: 12px 18px 12px 14px;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: var(--transition-smooth);
+  animation: floatBounce 3s ease-in-out infinite;
+}
+
+.whatsapp-float i {
+  font-size: 1.6rem;
+  margin-right: 8px;
+}
+
+.whatsapp-float:hover {
+  background-color: #1ebd56;
+  color: #ffffff;
+  transform: scale(1.06) translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.55);
+}
+
+@keyframes floatBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (max-width: 576px) {
+  .whatsapp-float span {
+    display: none;
+  }
+  .whatsapp-float {
+    width: 54px;
+    height: 54px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    bottom: 20px;
+    right: 20px;
+  }
+  .whatsapp-float i {
+    margin-right: 0;
+    font-size: 1.8rem;
+  }
+}
+
+/* Contact Form Styles */
+.contact-form-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2.5rem;
+  border: 1px solid #eef2f6;
+  box-shadow: var(--card-shadow);
+}
+
+.contact-form-card .form-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  margin-bottom: 0.4rem;
+}
+
+.contact-form-card .form-control,
+.contact-form-card .form-select {
+  border-radius: 10px;
+  border: 1px solid #dbe2ea;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  transition: var(--transition-smooth);
+}
+
+.contact-form-card .form-control:focus,
+.contact-form-card .form-select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.15);
+}
+
+.btn-whatsapp-submit {
+  background-color: #25d366;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-whatsapp-submit:hover {
+  background-color: #1ebd56;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+}

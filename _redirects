@@ -1,1 +1,2 @@
-/blog/materia/:slug /blog/materia?slug=:slug 200
+/blog/* https://blog.asscontal.com.br/:splat 301
+/blog https://blog.asscontal.com.br/ 301
