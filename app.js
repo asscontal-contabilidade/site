@@ -65,6 +65,9 @@ function initBackToTop() {
   const backToTopBtn = document.getElementById('backToTop');
   if (!backToTopBtn) return;
 
+  // Unhide from inline fallback once JS is initialized
+  backToTopBtn.style.display = 'flex';
+
   window.addEventListener('scroll', () => {
     if (window.scrollY > 350) {
       backToTopBtn.classList.add('show');
