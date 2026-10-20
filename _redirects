@@ -1,2 +1,4 @@
 /blog/* https://blog.asscontal.com.br/:splat 301
 /blog https://blog.asscontal.com.br/ 301
+/politica-de-privacidade /privacidade.html 301
+/politica-de-privacidade.html /privacidade.html 301
