@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notas Fiscais de Prestação de Serviços - Asscontal Assessoria Contábil</title>
+  <meta name="description" content="Links para os portais de emissão de Nota Fiscal de Serviços (NFS-e) das prefeituras.">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.asscontal.com.br/nfse.html">
+  <meta property="og:title" content="Notas Fiscais de Prestação de Serviços - Asscontal Assessoria Contábil">
+  <meta property="og:description" content="Links para os portais de emissão de Nota Fiscal de Serviços (NFS-e) das prefeituras.">
+  <meta property="og:image" content="https://www.asscontal.com.br/images/logo-2019-190x105.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.asscontal.com.br/nfse.html">
+  <meta property="twitter:title" content="Notas Fiscais de Prestação de Serviços - Asscontal Assessoria Contábil">
+  <meta property="twitter:description" content="Links para os portais de emissão de Nota Fiscal de Serviços (NFS-e) das prefeituras.">
+  <meta property="twitter:image" content="https://www.asscontal.com.br/images/logo-2019-190x105.png">
+
+  <!-- Theme Color & Mobile Manifest -->
+  <meta name="theme-color" content="#0b2545">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Preconnect Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.asscontal.com.br/nfse.html" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="images/fundo-azul-128x128.png" type="image/x-icon">
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Custom CSS with Cache Busting -->
+  <link rel="stylesheet" href="style.css?v=20261020b">
+  <!-- Critical CSS for Floating Actions -->
+  <style>
+    .whatsapp-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 1050;
+      display: flex;
+      align-items: center;
+      background-color: #25d366;
+      color: #ffffff !important;
+      text-decoration: none !important;
+      border-radius: 50px;
+      padding: 12px 18px 12px 14px;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 85px;
+      right: 25px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #0b2545;
+      border: 1px solid #dbe2ea;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      z-index: 1040;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    @media (max-width: 576px) {
+      .whatsapp-float span { display: none; }
+      .whatsapp-float { width: 54px; height: 54px; padding: 0; justify-content: center; border-radius: 50%; bottom: 20px; right: 20px; }
+      .back-to-top { bottom: 80px; right: 20px; width: 40px; height: 40px; }
+    }
+  </style>
+  <!-- Google Fonts (Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo-2019-190x105.png" alt="Asscontal Assessoria Contábil" width="190" height="105">
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Alternar navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Principal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html#sobre">Sobre Nós</a>
+          </li>
+
+          <!-- Dropdown Serviços -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="servicosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Serviços
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="servicosDropdown">
+              <li><a class="dropdown-item" href="https://online.asscontal.com.br/intranet/rdnae.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-user-plus me-2 text-primary"></i>Admissão de Empregados</a></li>
+              <li><a class="dropdown-item" href="/nfse.html"><i class="fa-solid fa-file-invoice me-2 text-primary"></i>NF de Prestação de Serviços</a></li>
+              <li><a class="dropdown-item" href="https://sal.rfb.gov.br/PortalSalInternet/faces/pages/index.xhtml" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-percent me-2 text-primary"></i>Cálculo de INSS</a></li>
+              <li><a class="dropdown-item" href="https://sicalc.receita.economia.gov.br/sicalc/principal" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe me-2 text-primary"></i>Sicalc Online</a></li>
+              <li><a class="dropdown-item" href="https://www.sintegra.gov.br/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-network-wired me-2 text-primary"></i>Sintegra</a></li>
+            </ul>
+          </li>
+
+          <!-- Dropdown Consultas -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="consultasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Consultas
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="consultasDropdown">
+              <li><a class="dropdown-item" href="https://concla.ibge.gov.br/estrutura/ocupacao-estrutura" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-user-tie me-2 text-primary"></i>CBO (Ocupações)</a></li>
+              <li><a class="dropdown-item" href="/certidoes.html"><i class="fa-solid fa-file-circle-check me-2 text-primary"></i>Certidões Negativas (CND)</a></li>
+              <li><a class="dropdown-item" href="https://www.freenfe.com.br/busca-de-cfop/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-magnifying-glass-dollar me-2 text-primary"></i>Busca de CFOP</a></li>
+              <li><a class="dropdown-item" href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del5452.htm" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book me-2 text-primary"></i>CLT (Legislação Trabalhista)</a></li>
+              <li><a class="dropdown-item" href="https://online.asscontal.com.br/s/XvpxUD8JwAZDKjTAtP2Y5zRPv5zbfgXr/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-handshake me-2 text-primary"></i>Convenções Coletivas</a></li>
+              <li><a class="dropdown-item" href="https://www.planalto.gov.br/ccivil_03/leis/l8078.htm" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-shield-halved me-2 text-primary"></i>Código Defesa do Consumidor</a></li>
+              <li><a class="dropdown-item" href="https://servicos.receita.fazenda.gov.br/Servicos/CPF/ConsultaSituacao/ConsultaPublica.asp" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-id-card me-2 text-primary"></i>Consulta Situação CPF</a></li>
+              <li><a class="dropdown-item" href="https://www4.planalto.gov.br/legislacao/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-gavel me-2 text-primary"></i>Legislação Brasileira</a></li>
+              <li><a class="dropdown-item" href="https://portalunico.siscomex.gov.br/classif/#/sumario?perfil=publico" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-barcode me-2 text-primary"></i>Consulta NCM</a></li>
+              <li><a class="dropdown-item" href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/formularios" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines me-2 text-primary"></i>Formulários Receita Federal</a></li>
+              <li><a class="dropdown-item" href="https://www.planalto.gov.br/ccivil_03/decreto/2002/D4544.htm" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-industry me-2 text-primary"></i>Regulamento IPI</a></li>
+              <li><a class="dropdown-item" href="https://www.gov.br/receitafederal/pt-br/acesso-a-informacao/legislacao/documentos-e-arquivos/tipi.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-table-list me-2 text-primary"></i>Tabela TIPI</a></li>
+            </ul>
+          </li>
+
+          <!-- Dropdown Downloads -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="downloadsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Downloads
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="downloadsDropdown">
+              <li><a class="dropdown-item" href="https://online.asscontal.com.br/s/8Eqo6w74QxE0LQWLQE0EY0DPWxzPaiSh/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf me-2 text-primary"></i>Cartazes Informativos</a></li>
+              <li><a class="dropdown-item" href="https://anydesk.com/pt/downloads/windows?os=win" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-desktop me-2 text-primary"></i>AnyDesk (Suporte Remoto)</a></li>
+              <li><a class="dropdown-item" href="https://sebrae.com.br/sites/PortalSebrae/produtoseservicos/emissornfe" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-receipt me-2 text-primary"></i>Emissor de NFe Gratuito</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="https://blog.asscontal.com.br/" target="_blank" rel="noopener noreferrer">Blog</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active ms-lg-2 btn btn-primary text-white px-3 rounded-pill" href="contato.html">Contato</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO BANNER -->
+  <main>
+  <section class="contact-hero">
+    <div class="container">
+      <h1>NF de Prestação de Serviços</h1>
+      <p>Acesse o portal de emissão de Nota Fiscal de Serviços da prefeitura da sua cidade.</p>
+    </div>
+  </section>
+
+  <!-- A página de NFS-e fica no Asscontal Online (a mesma que a equipe usa); aqui ela aparece dentro do site -->
+  <section class="py-4">
+    <div class="container">
+      <iframe src="https://online.asscontal.com.br/intranet/nfse/nfse.html" title="NF de Prestação de Serviços" loading="lazy" referrerpolicy="no-referrer"
+              style="width:100%; height:calc(100vh - 140px); min-height:720px; border:1px solid #e2e8f0; border-radius:16px; background:#f8fafc;"></iframe>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  </main>
+  <footer class="text-center">
+    <div class="container">
+      <h3 class="fw-bold mb-4">Siga-nos nas Redes Sociais</h3>
+      <div class="d-flex justify-content-center mb-4">
+        <a class="social-btn" href="https://www.facebook.com/asscontal" target="_blank" rel="noopener noreferrer" title="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a class="social-btn" href="https://www.linkedin.com/in/asscontal-assessoria-cont%C3%A1bil-41a57b123/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a class="social-btn" href="https://www.instagram.com/asscontal/" target="_blank" rel="noopener noreferrer" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+      <p class="copyright mb-0">
+        &copy; Asscontal Assessoria Contábil - Desde 1971. Todos os direitos reservados.
+        <br class="d-sm-none">
+        <span class="mx-2 d-none d-sm-inline">•</span>
+        <a href="privacidade.html" class="text-white-50 text-decoration-none">Política de Privacidade</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/552737273600?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20os%20servi%C3%A7os%20da%20Asscontal." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp" title="Fale conosco pelo WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span>Fale no WhatsApp</span>
+  </a>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="back-to-top" type="button" style="display: none;" aria-label="Voltar ao topo" title="Voltar ao topo">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <!-- Application JS (Cookie Consent & Interactions) -->
+  <script src="app.js?v=20261020b" defer></script>
+</body>
+</html>

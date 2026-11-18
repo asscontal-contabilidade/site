@@ -26,6 +26,10 @@
   <priority>0.60</priority>
 </url>
 <url>
+  <loc>https://www.asscontal.com.br/nfse.html</loc>
+  <priority>0.70</priority>
+</url>
+<url>
   <loc>https://www.asscontal.com.br/certidoes.html</loc>
   <priority>0.70</priority>
 </url>
