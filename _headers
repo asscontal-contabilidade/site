@@ -2,11 +2,11 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
-  Referrer-Policy: no-referrer-when-downgrade
+  Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: microphone=(), camera=(), geolocation=()
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.google.com;
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
 
 /images/*
   Cache-Control: public, max-age=31536000, immutable
@@ -19,3 +19,13 @@
 
 /manifest.json
   Cache-Control: public, max-age=86400
+
+# Assinaturas de e-mail e páginas de redirecionamento: não aparecem no Google
+/assinatura-email/*
+  X-Robots-Tag: noindex, nofollow
+
+/online/*
+  X-Robots-Tag: noindex
+
+/admissao.html
+  X-Robots-Tag: noindex

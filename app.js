@@ -95,6 +95,12 @@ function initContactForm() {
 
   if (!form) return;
 
+  // Enter no formulário não envia nada pela página (os dados não podem ir parar no endereço)
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    (btnWhatsApp || btnEmail)?.click();
+  });
+
   function getFormData() {
     const nome = (document.getElementById('formNome')?.value || '').trim();
     const telefone = (document.getElementById('formTelefone')?.value || '').trim();
